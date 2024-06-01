@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nicholas Griffo</title>
+  <style>
+          body {
+            font-family: 'Andale Mono', serif;
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+           background-color: black; /* Set background color to black */
+            color: white; /* Set text color to white for better contrast */
+            height: 100vh; /* Set body height to 100% of viewport height */
+        }
+
+
+        .centered {
+            text-align: center; /* Center aligned text */
+        }
+
+        .left-aligned {
+            text-align: left; /* Left aligned text */
+        }
+
+        .right-aligned {
+            text-align: right; /* Right aligned text */
+        }
+.footer-image {
+            position: fixed; /* Position the image fixed at the bottom center */
+            bottom: 0; /* Align the image to the bottom of the viewport */
+            left: 50%; /* Align the image horizontally to the center */
+            transform: translateX(-50%); /* Center the image horizontally */
+            z-index: 999; /* Ensure the image stays above other content */
+        }
+
+        .footer-image img {
+            width: 200px; /* Set the width of the image */
+            opacity: 0.5; /* Set the opacity of the image */
+            position: relative; /* Set position to relative for pseudo-element */
+        }
+
+        /* Create a pseudo-element for the image */
+        .footer-image img::after {
+            content: ''; /* Required for pseudo-elements */
+            position: absolute; /* Position the pseudo-element absolutely */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            box-shadow: 0 0 5px white; /* Add glowing effect to the pseudo-element */
+            z-index: -1; /* Move the pseudo-element behind the image */
+            border-radius: 100%; /* Make the pseudo-element round */
+        }
+    
+    </style>
+</head>
+<body>
+<h1 class="centered" style="font-size: 18px; text-shadow: 0 0 5px white;">This Site is Private</h1>
+ <br>
+ <br>
+	
+<h1 class="centered" style="font-size: 18px; text-shadow: 0 0 5px white;"">N G .com</h1>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+
+    
+	<p class="centered" style="font-size: 12px; text-shadow: 0 0 5px white;">THE WORLD IS MY FUSE</p>
+	<p class="centered" style="font-size: 12px; text-shadow: 0 0 5px white;">PATTERNS OF A CERTAIN SCIENTIFIC BIRD</p>
+	<p class="centered" style="font-size: 12px; text-shadow: 0 0 5px white;">BLOODY KNUCKLES</p>
+	<p class="centered" style="font-size: 12px; text-shadow: 0 0 5px white;">MAN'S CREATION</p>
+	<p class="centered" style="font-size: 12px; text-shadow: 0 0 5px white;">THE MAN DOES ABSOLUTELY NOTHING AND DIES
+</p>
+
+
+
+ <!-- Link to email -->
+    <div class="footer-image">
+        <a href="mailto:your.email@example.com">
+            <img src="signature.png" alt="Email link">
+        </a>
+    </div>
+
+
+</body>
+</html>
