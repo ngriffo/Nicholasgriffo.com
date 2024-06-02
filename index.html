@@ -69,7 +69,11 @@
             }
 
             .container {
-                display: none;
+                width: 100%; /* Set the container width to 100% to fit the screen width */
+                max-width: none; /* Remove max-width restriction */
+                left: 0; /* Start the container from the left edge */
+                transform: translateX(0); /* No translation needed */
+                position: static; /* Remove absolute positioning */         
             }
         }
     </style>
