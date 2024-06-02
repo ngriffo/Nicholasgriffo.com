@@ -20,10 +20,16 @@
            
             min-height: 100vh; 
             position: relative;
+            overflow: hidden; /* Hide any overflow from the body */
+
         }
 
         .container {
-            width:100%; /* Make the container take up 50% of the viewport width */
+            width:90%; /* Make the container take up 50% of the viewport width */
+            max-width: 1000px;
+            box-sizing: border-box;
+            overflow: auto; /* Ensure content doesn't overflow the container */
+
             position: absolute;
         left: 45%; /* Start the container at the halfway mark of the viewport */
             transform: translateX(0); /* Move the container 50% to the right */
