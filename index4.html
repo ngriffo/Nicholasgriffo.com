@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nicholas Griffo</title>
+    <style>
+        body {
+            font-family: '', serif;
+            margin: 0;
+            padding: 10px; /* Add padding for responsive spacing */
+            background-color: black;
+            color: white;
+            box-sizing: border-box;
+            border: 0.1in solid white;
+            display: flex;
+            flex-direction: column;
+            align-items: left;
+            justify-content: left;
+           
+            min-height: 100vh; 
+            position: relative;
+        }
+
+        .container {
+            width:100%; /* Make the container take up 50% of the viewport width */
+            position: absolute;
+        left: 45%; /* Start the container at the halfway mark of the viewport */
+            transform: translateX(0); /* Move the container 50% to the right */
+        }
+
+        .centered {
+            text-align: left; /* Align text to the left */
+            text-shadow: 0 0 5px white;
+            ements */
+            position: left;
+    
+        }
+
+        .stretched-text {
+            transform: scaleY(6); /* Adjust the text stretch to be less extreme */
+            display: block;
+            font-size: 1.m; /* Use relative font size */
+          
+    
+        }
+
+     
+
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px; /* Adjust padding for mobile */
+                border: none; /* Remove border for mobile for a cleaner look */
+            }
+
+            .stretched-text {
+                font-size: 1.5em; /* Adjust font size for mobile */
+                transform: scaleY(1.5); /* Adjust vertical stretch for better readability on mobile */
+            }
+
+            .container {
+                width: 100%; /* Make the container take up full width on mobile */
+                left: 0; /* Start at the left edge */
+                transform: translateX(0); /* No translation needed on mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="color: rgb(255, 238, 0); font-style: italic; text-align: ; font-size: 1.0rem;">This Site is Private</h1>
+        <br>
+    <br><br><br>
+    
+    <p class="centered stretched-text">THE WORLD IS MY FUSE</p>
+    <br>
+    <p class="centered stretched-text">PATTERNS OF A CERTAIN SCIENTIFIC BIRD</p>
+    <br>
+    <p class="centered stretched-text">BLOODY KNUCKLES</p>
+    <br>
+    <p class="centered stretched-text">MAN'S CREATION</p>
+</div>
+  
+</body>
+</html>
