@@ -2,103 +2,85 @@
 <html>
 <head>
     <meta charset="UTF-8">
-        <meta name="viewport" content="width=1024, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=.5, maximum-scale=1.0, user-scalable=no">
     <title>Nicholas Griffo</title>
     <style>
         body {
             font-family: '', serif;
             margin: 0;
-            padding: 10px; /* Add padding for responsive spacing */
+            padding: 10px;
             background-color: black;
             color: white;
             box-sizing: border-box;
             border: 0.1in solid white;
             display: flex;
             flex-direction: column;
-            align-items: left;
-            justify-content: left;
-           
-            min-height: 100vh; 
+            align-items: center; /* Center horizontally */
+            justify-content: center;
+            min-height: 100vh;
             position: relative;
-            overflow: hidden; /* Hide any overflow from the body */
+            overflow: hidden;
+            text-align: left;
 
         }
 
         .container {
-            width:90%; /* Make the container take up 50% of the viewport width */
             max-width: 1000px;
             box-sizing: border-box;
+            align-items: center; /* Center horizontally */
 
-            position: absolute;
-        left: 45%; /* Start the container at the halfway mark of the viewport */
-            transform: translateX(0); /* Move the container 50% to the right */
+           
         }
 
         .centered {
-            text-align: left; /* Align text to the left */
             text-shadow: 0 0 5px white;
-            ements */
-            position: left;
-    
         }
 
         .stretched-text {
-            transform: scaleY(6); /* Adjust the text stretch to be less extreme */
+            transform: scaleY(6);
             display: block;
-            font-size: 1.m; /* Use relative font size */
-          
-    
+            font-size: 1em;
         }
+
         a {
             color: rgb(255, 255, 255);
             text-decoration: none;
         }
-     
-
 
         @media (max-width: 600px) {
             body {
-                padding: 10px; /* Adjust padding for mobile */
-                border: none; /* Remove border for mobile for a cleaner look */
+                width: 100%;
+                max-width: none;
             }
 
             .stretched-text {
-                font-size: 1.5em; /* Adjust font size for mobile */
-                transform: scaleY(6); /* Adjust vertical stretch for better readability on mobile */
-            }
-
-            .container {
-                width: 100%; /* Set the container width to 100% to fit the screen width */
-                max-width: none; /* Remove max-width restriction */
-                left: 0; /* Start the container from the left edge */
-                transform: translateX(0); /* No translation needed */
-                position: static; /* Remove absolute positioning */         
+                font-size: 1em;
+                transform: scaleY(6);
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1 style="color: rgb(255, 238, 0); font-style: italic; text-align: ; font-size: 1.0rem;">Private Site. Click to Inquire.</h1>
+        <h1 style="color: rgb(255, 238, 0); font-style: italic; font-size: 1.0rem;">Private Site. Click to Inquire.</h1>
         <br>
-    <br><br><br>
-    
-    <a href="mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20The%20World%20is%20My%20Fuse&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27The%20World%20is%20My%20Fuse%27.">
-        <p class="centered stretched-text">THE WORLD IS MY FUSE</p>
-    </a>
-    <br>
-    <a href="mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20Patterns%20of%20a%20Certain%20Scientific%20Bird&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27Patterns%20of%20a%20Certain%20Scientific%20Bird%27%20when%20it%20is%20finished.">
-        <p class="centered stretched-text">PATTERNS OF A CERTAIN SCIENTIFIC BIRD</p>
-    </a>
-    <br>
-    <a href="mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20Bloody%20Knuckles&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27Bloody%20Knuckles%27%20when%20it%20is%20finished.">
-        <p class="centered stretched-text">BLOODY KNUCKLES</p>
-   </a>
-    <br>
-    <a href="mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20Man's%20Creation&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27Man's%20Creation%27%20when%20it%20is%20finished.">
-         <p class="centered stretched-text">MAN'S CREATION</p>
-   </a>
-</div>
-  
+        <br>
+        <br>
+        <a href="mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20The%20World%20is%20My%20Fuse&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27The%20World%20is%20My%20Fuse%27.">
+            <p class="centered stretched-text">THE WORLD IS MY FUSE</p>
+        </a>
+        <br>
+        <a href="mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20Patterns%20of%20a%20Certain%20Scientific%20Bird&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27Patterns%20of%20a%20Certain%20Scientific%20Bird%27%20when%20it%20is%20finished.">
+            <p class="centered stretched-text">PATTERNS OF A CERTAIN SCIENTIFIC BIRD</p>
+        </a>
+        <br>
+        <a href="mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20Bloody%20Knuckles&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27Bloody%20Knuckles%27%20when%20it%20is%20finished.">
+            <p class="centered stretched-text">BLOODY KNUCKLES</p>
+        </a>
+        <br>
+        <a href="mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20Man's%20Creation&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27Man's%20Creation%27%20when%20it%20is%20finished.">
+            <p class="centered stretched-text">MAN'S CREATION</p>
+        </a>
+    </div>
 </body>
 </html>
