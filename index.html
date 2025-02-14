@@ -11,24 +11,80 @@
         <title>Nicholas Griffo</title>
     
     
+        <link rel="stylesheet" href="https://use.typekit.net/jbi5gtg.css">
 
-    
         <!-- CSS Styles (either inline or linked externally) -->
         <style>
             .header {
-                text-align: center;
+                text-align: center; 
+                position: fixed;
+                top: 0;
+                width: 100%;
+                font-family: 'Caslon'; /* Optional: Style it to match */
+                z-index: 1000;
+                padding-top: 5.4%;
+                 display: flex;
+                 align-items: center;
+                  justify-content: center;
+                  animation: fadeOutShrink 5s forwards;
+                  /* animation-delay: 1s; */
+
+
+
             }
             .header p {
-                font-size: 0.7rem;
+                font-size: 0.76rem;
+                display: inline-block;
+                 width: 100%;
+                 transform: scaleY(6.5); /* Stretch text horizontally (you can adjust the scale) */
+               text-align: ;
+              letter-spacing: 1pc; /* Optional: Adds space between letters */
+                 /* font-weight: bold; Optional: Makes it bolder for impact */
             }
+            
+            .replacement {
+                font-size: 0.76rem;
+                display: inline-block;
+                text-align: center; 
+                position: fixed;
+                top: 0;
+                width: 100%;
+                font-family: 'Caslon'; /* Optional: Style it to match */
+                z-index: 1000;
+                letter-spacing: 1pc; /* Optional: Adds space between letters */
+                padding-top: 3%;
+                 align-items: center;
+                  justify-content: center;
+        opacity: 0;
+        animation: fadeIn 2s forwards;
+        animation-delay: 7s; /* 5s delay + 10s fade */
+    }
+    @keyframes fadeOutShrink {
+            0% { opacity: 1; transform: scale(5); }
+            100% { opacity: 0; transform: scale(0); visibility: hidden; }
+         
+    }
+    @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: .3; }
+    }
+            
         </style>
     </head>
+    <body>
     <section class="header">
-        <p>Screenplays by Nicholas Griffo</p>
+        <p>Screenplays<br>by<br>Nicholas Griffo</p>
+        </section>
+        <div class="replacement">
+            <p>Screenplays<br>by<br>Nicholas Griffo</p>
+        </div>
+    </body>
     </section>
+    
 
     <style>
         body {
+            /* font-family: 'adobe-caslon-pro', serif; */
             font-family: '', serif;
             margin: 0;
             padding: 10px;
@@ -92,6 +148,7 @@
         }
 
         .modal {
+            font-family: 'Caslon';
             display: none;
             position: fixed;
             bottom: 05%;
@@ -106,6 +163,7 @@
         .modal-content {
             padding: 20px;
             border-radius: 8px;
+            font-family: 'Caslon';
             text-align: center;
             font-style: monospace;
             font-size: 12px;
