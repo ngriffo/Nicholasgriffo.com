@@ -1,15 +1,32 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=.5, maximum-scale=1.0, user-scalable=no">
-    <title>Nicholas Griffo</title>
-     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-    <section class="header"style="text-align: right">
-        <p style="font-size: .7rem;"> Screenplays by Nicholas Griffo</p>
-        <!-- <p class="centered long-text">NICHOLAS GRIFFO</p> -->
-        
+    <head>
+        <!-- Character Encoding -->
+        <meta charset="UTF-8">
+    
+        <!-- Viewport settings for mobile responsiveness -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+        <!-- Title of the page -->
+        <title>Nicholas Griffo</title>
+    
+    
+
+    
+        <!-- CSS Styles (either inline or linked externally) -->
+        <style>
+            .header {
+                text-align: center;
+            }
+            .header p {
+                font-size: 0.7rem;
+            }
+        </style>
+    </head>
+    <section class="header">
+        <p>Screenplays by Nicholas Griffo</p>
     </section>
+
     <style>
         body {
             font-family: '', serif;
@@ -73,6 +90,48 @@
   transform: scaleX(6);
 }
         }
+
+        .modal {
+            display: none;
+            position: fixed;
+            bottom: 05%;
+            left: 0%;
+            width: 100%;
+            height: auto%;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .modal-content {
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-style: monospace;
+            font-size: 12px;
+            width: 100%;  /* Ensure the modal content is wide enough */
+            max-width: 500px;  /* You can adjust this based on your preference */
+            margin: 0 auto;
+            word-wrap: break-word;
+            white-space: normal;
+            
+        }
+
+      
+        .button-link {
+            display: none; /* Makes the link behave like a button */
+            color: rgb(0, 119, 204);
+            padding: 10px 20px;
+            text-decoration: none; /* Removes the underline */
+            font-size: 12px;
+        }
+
+        .button-link:hover {
+            text-decoration: none;
+        }
+
+       
+
     </style>
 </head>
 <body>
@@ -82,27 +141,94 @@
         <br>
         <br>
         <br>
-        <a href="mailto:film@nicholasgriffo.com?subject=Request%20-%20PENETRATION%20INGO%20SWANN&body=Please%20send%20me%20a%20copy%20of%20%27PENETRATION%20INGO%20SWANN%27.">
+        <a id="penetration" class="modal-link" href="#">
             <p class="centered stretched-text">PENETRATION INGO SWANN</p>
         </a>
         <br>
-        <a href="mailto:film@nicholasgriffo.com?subject=Request%20-%20The%20World%20is%20My%20Fuse&body=Please%20send%20me%20a%20copy%20of%20%27The%20World%20is%20My%20Fuse%27.">
+        <a id="fuse" class="modal-link" href="#">
             <p class="centered stretched-text">THE WORLD IS MY FUSE</p>
         </a>
         <br>
-        <a href="mailto:film@nicholasgriffo.com?subject=Request%20-%20Patterns%20of%20a%20Certain%20Scientific%20Bird&body=Please%20send%20me%20a%20copy%20of%20%27Patterns%20of%20a%20Certain%20Scientific%20Bird%27%20when%20it%20is%20finished.">
+        <a id="patterns" class="modal-link" href="#">
             <p class="centered stretched-text">PATTERNS OF A CERTAIN SCIENTIFIC BIRD</p>
         </a>
         <br>
-        <a href="mailto:film@nicholasgriffo.com?subject=Request%20-%20Bloody%20Knuckles&body=Please%20send%20me%20a%20copy%20of%20%27Bloody%20Knuckles%27%20when%20it%20is%20finished.">
+        <a id="bloody" class="modal-link" href="#">
             <p class="centered stretched-text">BLOODY KNUCKLES</p>
         </a>
         <br>
-        <a href="mailto:film@nicholasgriffo.com?subject=Request%20-%20Man's%20Creation&body=Please%20send%20me%20a%20copy%20of%20%27Man's%20Creation%27%20when%20it%20is%20finished.">
+        <a id="creation" class="modal-link" href="#">
             <p class="centered stretched-text">MAN'S CREATION</p>
         </a>
         <BR><BR><BR></BR></BR></BR>
         <!-- <h1 style="color: rgb(255, 255, 255); font-size: .5rem;"></h1>Click to Inquire.</h1> -->
+        <!-- Modal -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <p id="modal-text"></p>
+                <a id="email-link" class="button-link">Email</button>
+            </div>
+        </div>
     </div>
+    <script>
+        const modal = document.getElementById('myModal');
+        const modalText = document.getElementById('modal-text');
+        const openModalLinks = document.querySelectorAll('.modal-link');
+        const closeModalButton = document.querySelector('.close-btn');
+        const emailLink = document.getElementById('email-link');
+        let content = "";
+        let href = "";
+
+        // Loop over all modal links and set up click handlers
+        openModalLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const id = link.getAttribute('id');
+                console.log(id)
+                if (id == "penetration") {
+                    content = "Ingo Swann, CIA-funded psychic at the Stanford Research Institute, is contracted for his talents in the mid 70s by a military figure going by the name Axelrod for dangerous and experimental moon-spying.\n\nBased on the memoir within his 1998 book, 'Penetration: The Question of Extraterrestrial and Human Telepathy'"
+                   
+                    content = content.replace(/\n/g, '<br>');
+                    document.getElementById("modal-text").innerHTML = content;
+
+
+                    href = "mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20PENETRATION%20INGO%20SWANN&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27PENETRATION%20INGO%20SWANN%27."
+                    document.getElementById("myModal").style.display = "block"; // Show modal
+                } else if (id == "fuse") {
+                    content = "A former fraudster seeks investment from old colleagues, inadvertently putting his business in the crosshairs of a group he once betrayed- now, they want him dead broke and humiliated.\n\n A BAD MAN AGAINST WORSE"
+                    content = content.replace(/\n/g, '<br>');
+
+                    href = "mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20The%20World%20is%20My%20Fuse&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27The%20World%20is%20My%20Fuse%27."
+                } else if (id == "patterns") {
+                    content = "A young woman and her boyfriend visit his Ornithologist buddy at a firewatch tower in a beautiful national park. Before the trip she recognizes him as a summer lover from the past. He pressures her into cam work, boyfriend falls drunk from tower and she runs off with Ornithologist only to shortly return for help, they realized he was taken by a wealthy forest cult."
+                    href = "mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20Patterns%20of%20a%20Certain%20Scientific%20Bird&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27Patterns%20of%20a%20Certain%20Scientific%20Bird%27%20when%20it%20is%20finished."
+                } else if (id == "bloody") {
+                    content = "27 year old clean from coke and pills sets his life straight with a new job.\n\nOver-eagerness at work uncovers illegal relations with local government, memories of a pedophile his mother shot at a mall look-alike contest resurface"
+                    content = content.replace(/\n/g, '<br>');
+
+                    href = "mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20Bloody%20Knuckles&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27Bloody%20Knuckles%27%20when%20it%20is%20finished."
+                } else if (id == "creation") {
+                    content = "His aunt dies suddenly, shocking her twin, his mother, into a coma. He agrees to vist Oklahoma and go through her belongings and property in his mother's stead.\n\nHorny for some action he picks the hottest girl in town to pursue, inciting rage and revenge from her schizo brother who holds her secrets for malicious gain."
+                    content = content.replace(/\n/g, '<br>');
+
+                    href = "mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20Man's%20Creation&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27Man's%20Creation%27%20when%20it%20is%20finished."
+                }
+                modalText.innerHTML = content;
+                emailLink.href = href;
+                modal.style.display = 'flex';
+                emailLink.style.display = 'inline-block';
+            });
+        });
+
+      
+
+        // Optional: Close modal when clicking outside the content
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                emailLink.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
