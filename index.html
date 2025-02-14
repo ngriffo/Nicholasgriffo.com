@@ -18,31 +18,17 @@
             .header {
                 text-align: center; 
                 position: fixed;
-                top: 0;
                 width: 100%;
                 font-family: 'Caslon'; /* Optional: Style it to match */
                 z-index: 1000;
-                padding-top: 5.4%;
                  display: flex;
                  align-items: center;
                   justify-content: center;
-                  animation: fadeOutShrink 5s forwards;
-                  /* animation-delay: 1s; */
 
 
 
             }
             .header p {
-                font-size: 0.76rem;
-                display: inline-block;
-                 width: 100%;
-                 transform: scaleY(6.5); /* Stretch text horizontally (you can adjust the scale) */
-               text-align: ;
-              letter-spacing: 1pc; /* Optional: Adds space between letters */
-                 /* font-weight: bold; Optional: Makes it bolder for impact */
-            }
-            
-            .replacement {
                 font-size: 0.76rem;
                 display: inline-block;
                 text-align: center; 
@@ -51,33 +37,51 @@
                 width: 100%;
                 font-family: 'Caslon'; /* Optional: Style it to match */
                 z-index: 1000;
-                letter-spacing: 1pc; /* Optional: Adds space between letters */
+                letter-spacing: 6pc; /* Optional: Adds space between letters */
                 padding-top: 3%;
                  align-items: center;
                   justify-content: center;
-        opacity: 0;
+        opacity: 1;
         animation: fadeIn 2s forwards;
-        animation-delay: 7s; /* 5s delay + 10s fade */
+        animation-delay: 3s; /* 5s delay + 10s fade */
+            }
+            
+            /* .replacement {
+                font-size: 0.76rem;
+                display: inline-block;
+                text-align: center; 
+                position: fixed;
+                top: 0;
+                width: 100%;
+                font-family: 'Caslon'; /* Optional: Style it to match */
+                /* z-index: 1000;
+                letter-spacing: 8pc; /* Optional: Adds space between letters */
+                /* padding-top: 3%;
+                 align-items: center;
+                  justify-content: center;
+        opacity: 1;
+        animation: fadeIn 2s forwards;
+        animation-delay: 7s; 5s delay + 10s fade */ */ */
     }
-    @keyframes fadeOutShrink {
+    /* @keyframes fadeOutShrink {
             0% { opacity: 1; transform: scale(5); }
-            100% { opacity: 0; transform: scale(0); visibility: hidden; }
+            100% { opacity: 0; transform: scale(0); visibility: hidden; } */
          
-    }
+    
     @keyframes fadeIn {
         0% { opacity: 0; }
-        100% { opacity: .3; }
+        100% { opacity: .5; }
     }
             
         </style>
     </head>
     <body>
     <section class="header">
-        <p>Screenplays<br>by<br>Nicholas Griffo</p>
+        <p>Screenplays by Nicholas Griffo</p>
         </section>
-        <div class="replacement">
+        <!-- <div class="replacement">
             <p>Screenplays<br>by<br>Nicholas Griffo</p>
-        </div>
+        </div> -->
     </body>
     </section>
     
