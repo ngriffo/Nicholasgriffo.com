@@ -39,39 +39,36 @@
                 z-index: 1000;
                 letter-spacing: 6pc; /* Optional: Adds space between letters */
                 padding-top: 3%;
+                opacity: .5;
                  align-items: center;
                   justify-content: center;
-        opacity: 1;
-        animation: fadeIn 2s forwards;
-        animation-delay: 3s; /* 5s delay + 10s fade */
+                  animation: fadeIn 3s forwards, twinkle 10s infinite alternate;
+
+
             }
-            
-            /* .replacement {
-                font-size: 0.76rem;
-                display: inline-block;
-                text-align: center; 
-                position: fixed;
-                top: 0;
-                width: 100%;
-                font-family: 'Caslon'; /* Optional: Style it to match */
-                /* z-index: 1000;
-                letter-spacing: 8pc; /* Optional: Adds space between letters */
-                /* padding-top: 3%;
-                 align-items: center;
-                  justify-content: center;
+            @keyframes twinkle {
+    0% {
+        opacity: 0.3;
+        text-shadow: 0 0 1px #fff;
+    }
+    50% {
+        opacity: .7;
+        text-shadow: 0 0 1px #fff, 0 0 17px #ff0, 0 0 35px #ff0;
+    }
+    100% {
+        opacity: 0.5;
+        text-shadow: 0 0 1px #fff, 0 0 10px #ff0, 0 0 20px #ff0;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
         opacity: 1;
-        animation: fadeIn 2s forwards;
-        animation-delay: 7s; 5s delay + 10s fade */ */ */
     }
-    /* @keyframes fadeOutShrink {
-            0% { opacity: 1; transform: scale(5); }
-            100% { opacity: 0; transform: scale(0); visibility: hidden; } */
-         
-    
-    @keyframes fadeIn {
-        0% { opacity: 0; }
-        100% { opacity: .5; }
-    }
+}
             
         </style>
     </head>
@@ -80,8 +77,9 @@
         <p>Screenplays by Nicholas Griffo</p>
         </section>
         <!-- <div class="replacement">
-            <p>Screenplays<br>by<br>Nicholas Griffo</p>
+            <p id="twinklingText">Screenplays<br>by<br>Nicholas Griffo</p>
         </div> -->
+        
     </body>
     </section>
     
@@ -257,20 +255,22 @@
                     href = "mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20PENETRATION%20INGO%20SWANN&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27PENETRATION%20INGO%20SWANN%27."
                     document.getElementById("myModal").style.display = "block"; // Show modal
                 } else if (id == "fuse") {
-                    content = "A former fraudster seeks investment from old colleagues, inadvertently putting his business in the crosshairs of a group he once betrayed- now, they want him dead broke and humiliated.\n\n A BAD MAN AGAINST WORSE"
+                    content = "Los Angeles, California\n\nKevin Stranahan, former fraudster now commercial property flipper, seeks investment from old colleagues, inadvertently putting his business in the crosshairs of a group he once betrayed— now, they want him dead broke and humiliated.\n\n A bad man against worse."
                     content = content.replace(/\n/g, '<br>');
 
                     href = "mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20The%20World%20is%20My%20Fuse&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27The%20World%20is%20My%20Fuse%27."
                 } else if (id == "patterns") {
-                    content = "A young woman and her boyfriend visit his Ornithologist buddy at a firewatch tower in a beautiful national park. Before the trip she recognizes him as a summer lover from the past. He pressures her into cam work, boyfriend falls drunk from tower and she runs off with Ornithologist only to shortly return for help, they realized he was taken by a wealthy forest cult."
+                    content = "Canyonlands - Moab, Utah\n\nA movie for women— a love story\n\nA woman loves two men. These two men love this woman. She feels like a slut. She is a slut, on webcam. No man likes this, but they can look past it. It’s not like she’s doing porn. Spending the season together in a fire-watch tower, the three witness hikers kidnapped by a wealthy cult under the pretense of finding crystals. This disturbs the nesting grounds of a certain scientific bird."
+                    content = content.replace(/\n/g, '<br>');
+
                     href = "mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20Patterns%20of%20a%20Certain%20Scientific%20Bird&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27Patterns%20of%20a%20Certain%20Scientific%20Bird%27%20when%20it%20is%20finished."
                 } else if (id == "bloody") {
-                    content = "27 year old clean from coke and pills sets his life straight with a new job.\n\nOver-eagerness at work uncovers illegal relations with local government, memories of a pedophile his mother shot at a mall look-alike contest resurface"
+                    content = "Wilmington, North Carolina\n\nA 27 year old clean from coke and pills sets his life straight with a new job. He’s still ok to smoke.\n\nEager for his first commission, he digs into old contracts, one of which is with a well respected local official. By now he’s dug too deep, and despite not knowing much, they know who he has, and a promise of sealed lips won’t cut it. The ex-addict is pursued by shadowy figures and skips town, gets fucked by his e-girlfriend and faces a dark experience from his youth that turned him into a drug-addled sexless loser."
                     content = content.replace(/\n/g, '<br>');
 
                     href = "mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20Bloody%20Knuckles&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27Bloody%20Knuckles%27%20when%20it%20is%20finished."
                 } else if (id == "creation") {
-                    content = "His aunt dies suddenly, shocking her twin, his mother, into a coma. He agrees to vist Oklahoma and go through her belongings and property in his mother's stead.\n\nHorny for some action he picks the hottest girl in town to pursue, inciting rage and revenge from her schizo brother who holds her secrets for malicious gain."
+                    content = "Few Hours Southwest of Tulsa, Oklahoma\n\nA man’s aunt dies suddenly, shocking her twin, his mother, into a coma. He attends her funeral and stays to go through her belongings and property in his mother's stead.\n\nA waitress likes him. He could go for some action, plus she’s hot. She gets pregnant— things just happen in the country. He tries to settle down with her in his Aunt’s old house. She becomes sick, resentment grows towards the unborn baby and he begins having sex with various women in the area as his woman’s condition grows worse."
                     content = content.replace(/\n/g, '<br>');
 
                     href = "mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20Man's%20Creation&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27Man's%20Creation%27%20when%20it%20is%20finished."
@@ -291,6 +291,21 @@
                 emailLink.style.display = 'none';
             }
         });
-    </script>
+  
+        // Get the text element and split it into individual letters
+        const textElement = document.getElementById('twinklingText');
+        const text = textElement.innerText.split('');
+        textElement.innerHTML = ''; // Clear the original text content
+    
+        // Wrap each letter in a span and add it to the text element
+        text.forEach(letter => {
+          const span = document.createElement('span');
+          span.innerText = letter;
+          // Set a random animation delay between 0 and 2 seconds for each letter
+          const delay = Math.random() * 6; // Random delay up to 2 seconds
+          span.style.animationDelay = `${delay}s`;
+          textElement.appendChild(span);
+        });
+      </script>
 </body>
 </html>
