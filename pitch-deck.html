@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Pitch Deck</title>
     <style>
         body {
@@ -12,19 +12,16 @@
             align-items: center;
             height: 100vh;
             background-color: #f4f4f4;
+            overflow: hidden;
         }
         .pdf-container {
-            width: 90vw;
-            height: 90vh;
+            width: 100%;
+            height: 100%;
             max-width: 1200px;
             border: none;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             background: #fff;
-        }
-           iframe {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
+            overflow: auto;
         }
     </style>
 </head>
