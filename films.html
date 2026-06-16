@@ -1,311 +1,306 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <!-- Character Encoding -->
-        <meta charset="UTF-8">
-    
-        <!-- Viewport settings for mobile responsiveness -->
-        <meta name="viewport" content="width=device-width, initial-scale=.5, maximum-scale=1.0, user-scalable=no">
-    
-        <!-- Title of the page -->
-        <title>Nicholas Griffo</title>
-    
-    
-        <link rel="stylesheet" href="https://use.typekit.net/jbi5gtg.css">
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Nicholas Griffo — Films</title>
+  <link rel="stylesheet" href="https://use.typekit.net/jbi5gtg.css">
+  <style>
 
-        <!-- CSS Styles (either inline or linked externally) -->
-        <style>
-            .header {
-                text-align: center; 
-                position: fixed;
-                width: 100%;
-                font-family: 'Caslon'; /* Optional: Style it to match */
-                z-index: 1000;
-                 display: flex;
-                 align-items: center;
-                  justify-content: center;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-
-
-            }
-            .header p {
-                font-size: 0.76rem;
-                display: inline-block;
-                text-align: center; 
-                position: fixed;
-                top: 0;
-                width: 100%;
-                font-family: 'Caslon'; /* Optional: Style it to match */
-                z-index: 1000;
-                letter-spacing: 6pc; /* Optional: Adds space between letters */
-                padding-top: 3%;
-                opacity: .5;
-                 align-items: center;
-                  justify-content: center;
-                  animation: fadeIn 3s forwards, twinkle 10s infinite alternate;
-
-
-            }
-            @keyframes twinkle {
-    0% {
-        opacity: 0.3;
-        text-shadow: 0 0 1px #fff;
+    body {
+      font-family: 'adobe-caslon-pro', 'Caslon', serif;
+      background-color: #000;
+      color: #fff;
+      border: 0.1in solid #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      overflow-x: hidden;
+      position: relative;
     }
-    50% {
-        opacity: .7;
-        text-shadow: 0 0 1px #fff, 0 0 17px #ff0, 0 0 35px #ff0;
+
+    /* NAV */
+    .nav {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 32px 0;
+      flex-shrink: 0;
     }
-    100% {
-        opacity: 0.5;
-        text-shadow: 0 0 1px #fff, 0 0 10px #ff0, 0 0 20px #ff0;
+
+    .nav a {
+      font-family: 'adobe-caslon-pro', 'Caslon', serif;
+      font-size: 0.5rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+      text-decoration: none;
+      transition: color 0.3s;
     }
-}
 
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
+    .nav a:hover { color: rgba(255,255,255,0.65); }
+
+    /* BYLINE — below nav, centered */
+    .byline {
+      width: 100%;
+      text-align: center;
+      font-size: 0.55rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.22);
+      padding: 14px 0 0;
+      flex-shrink: 0;
+      animation: fadeIn 3s forwards;
     }
-    100% {
-        opacity: 1;
+
+    /* TITLES BLOCK — takes remaining space above logline zone */
+    .main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 20px 40px 0;
+      /* leave 32vh for logline at bottom */
+      margin-bottom: 32vh;
     }
-}
-            
-        </style>
-    </head>
-    <body>
-    <section class="header">
-        <p>Screenplays by Nicholas Griffo</p>
-        </section>
-        <!-- <div class="replacement">
-            <p id="twinklingText">Screenplays<br>by<br>Nicholas Griffo</p>
-        </div> -->
-        
-    </body>
-    </section>
-    
 
-    <style>
-        body {
-            /* font-family: 'adobe-caslon-pro', serif; */
-            font-family: '', serif;
-            margin: 0;
-            padding: 10px;
-            background-color: black;
-            color: white;
-            box-sizing: border-box;
-            border: 0.1in solid white;
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* Center horizontally */
-            justify-content: center;
-            min-height: 100vh;
-            position: relative;
-            overflow: hidden;
-            text-align: left;
+    /* FILM LIST */
+    .film-list {
+      list-style: none;
+      width: fit-content;
+    }
 
-        }
+    .film-list li {
+      line-height: 1;
+      margin-bottom: 36px;
+    }
 
-        .container {
-            max-width: 1000px;
-            box-sizing: border-box;
-            align-items: center; /* Center horizontally */
+    .film-list li:last-child { margin-bottom: 0; }
 
-           
-        }
+    .film-link {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+    }
 
-        .centered {
-            text-shadow: 0 0 5px white;
-        }
+    .film-title {
+      font-family: 'adobe-caslon-pro', 'Caslon', serif;
+      display: block;
+      font-size: 0.9em;
+      transform: scaleY(4.2);
+      transform-origin: left center;
+      white-space: nowrap;
+      text-align: left;
+      text-shadow: 0 0 4px rgba(255,255,255,0.2);
+      transition: text-shadow 0.4s;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+    }
 
-        .stretched-text {
-            transform: scaleY(6);
-            display: block;
-            font-size: 1em;
-        }
+    .film-link:hover .film-title {
+      text-shadow:
+        0 0 6px #fff,
+        0 0 18px rgba(255,252,240,0.45),
+        0 0 38px rgba(255,252,240,0.15);
+    }
 
-        a {
-            color: rgb(255, 255, 255);
-            text-decoration: none;
-        }
+    /* LOGLINE ZONE — fixed to bottom */
+    .logline-area {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 32vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0 60px 28px;
+      pointer-events: none;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
 
-        @media (max-width: 600px) {
-            body {
-                width: 100%;
-                max-width: none;
-            }
+    .logline-text {
+      font-family: 'adobe-caslon-pro', 'Caslon', serif;
+      font-size: 11px;
+      font-style: italic;
+      color: rgba(255,255,255,0.0);
+      text-align: center;
+      max-width: 560px;
+      line-height: 2;
+      letter-spacing: 0.04em;
+      transition: color 0.5s;
+      margin-bottom: 18px;
+    }
 
-            .stretched-text {
-                font-size: 2em;
-                transform: scaleY(6);
-            }
-            .long-text {
-                font-size: 4em;
-                transform: scaleX(10);
-            }
-            h2 {
-  width: 200%;
-  margin: auto;
-  transform: scaleX(6);
-}
-        }
+    .logline-text.visible {
+      color: rgba(255,255,255,0.6);
+      pointer-events: auto;
+    }
 
-        .modal {
-            font-family: 'Caslon';
-            display: none;
-            position: fixed;
-            bottom: 05%;
-            left: 0%;
-            width: 100%;
-            height: auto%;
-            justify-content: center;
-            align-items: center;
-            padding: 10px;
-        }
+    .logline-inquire {
+      font-family: 'adobe-caslon-pro', 'Caslon', serif;
+      font-size: 9px;
+      font-style: italic;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.0);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0);
+      padding-bottom: 2px;
+      transition: color 0.5s, border-color 0.5s;
+      pointer-events: none;
+    }
 
-        .modal-content {
-            padding: 20px;
-            border-radius: 8px;
-            font-family: 'Caslon';
-            text-align: center;
-            font-style: monospace;
-            font-size: 12px;
-            width: 100%;  /* Ensure the modal content is wide enough */
-            max-width: 600px;  /* You can adjust this based on your preference */
-            margin: 0 auto;
-            word-wrap: break-word;
-            white-space: normal;
-            
-        }
+    .logline-inquire.visible {
+      color: rgba(255,255,255,0.28);
+      border-color: rgba(255,255,255,0.15);
+      pointer-events: auto;
+    }
 
-      
-        .button-link {
-            display: none; /* Makes the link behave like a button */
-            color: #00ccff;
-            padding: 10px 20px;
-            text-decoration: none; /* Removes the underline */
-            font-size: 12px;
-        }
+    .logline-inquire:hover {
+      color: rgba(255,255,255,0.8) !important;
+      border-color: rgba(255,255,255,0.5) !important;
+    }
 
-        .button-link:hover {
-            text-decoration: none;
-        }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
 
-       
+    @media (max-width: 600px) {
+      .film-title { font-size: 0.7em; transform: scaleY(4); }
+      .film-list li { margin-bottom: 16px; }
+      .main { padding: 10px 20px 0; }
+      .logline-area { padding: 0 24px 20px; }
+      .logline-text { font-size: 10px; }
+    }
 
-    </style>
+  </style>
 </head>
 <body>
-    <div class="container">
-        
 
-        <br>
-        <br>
-        <br>
-        <a id="penetration" class="modal-link" href="#">
-            <p class="centered stretched-text">PENETRATION INGO SWANN</p>
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="/">← nicholasgriffo.com</a>
+    <a href="mailto:film@nicholasgriffo.com">film@nicholasgriffo.com</a>
+  </nav>
+
+  <!-- BYLINE — in document flow, below nav -->
+  <p class="byline">Screenplays by Nicholas Griffo</p>
+
+  <!-- TITLES -->
+  <div class="main">
+    <ul class="film-list">
+      <li>
+        <a class="film-link" href="#" data-film="penetration">
+          <span class="film-title">PENETRATION INGO SWANN</span>
         </a>
-        <br>
-        <a id="fuse" class="modal-link" href="#">
-            <p class="centered stretched-text">THE WORLD IS MY FUSE</p>
+      </li>
+      <li>
+        <a class="film-link" href="#" data-film="fuse">
+          <span class="film-title">THE WORLD IS MY FUSE</span>
         </a>
-        <br>
-        <a id="patterns" class="modal-link" href="#">
-            <p class="centered stretched-text">PATTERNS OF A CERTAIN SCIENTIFIC BIRD</p>
+      </li>
+      <li>
+        <a class="film-link" href="#" data-film="patterns">
+          <span class="film-title">PATTERNS OF A CERTAIN SCIENTIFIC BIRD</span>
         </a>
-        <br>
-        <a id="bloody" class="modal-link" href="#">
-            <p class="centered stretched-text">BLOODY KNUCKLES</p>
+      </li>
+      <li>
+        <a class="film-link" href="#" data-film="bloody">
+          <span class="film-title">BLOODY KNUCKLES</span>
         </a>
-        <br>
-        <a id="creation" class="modal-link" href="#">
-            <p class="centered stretched-text">MAN'S CREATION</p>
+      </li>
+      <li>
+        <a class="film-link" href="#" data-film="creation">
+          <span class="film-title">MAN'S CREATION</span>
         </a>
-        <BR><BR><BR></BR></BR></BR>
-        <!-- <h1 style="color: rgb(255, 255, 255); font-size: .5rem;"></h1>Click to Inquire.</h1> -->
-        <!-- Modal -->
-        <div id="myModal" class="modal">
-            <div class="modal-content">
-                <p id="modal-text"></p>
-                <a id="email-link" class="button-link">Email</button>
-            </div>
-        </div>
-    </div>
-    <script>
-        const modal = document.getElementById('myModal');
-        const modalText = document.getElementById('modal-text');
-        const openModalLinks = document.querySelectorAll('.modal-link');
-        const closeModalButton = document.querySelector('.close-btn');
-        const emailLink = document.getElementById('email-link');
-        let content = "";
-        let href = "";
+      </li>
+    </ul>
+  </div>
 
-        // Loop over all modal links and set up click handlers
-        openModalLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const id = link.getAttribute('id');
-                console.log(id)
-                if (id == "penetration") {
-                    content = "California, New York, Washington D.C. - 1973.\n\nIngo Swann, CIA-funded psychic at the Stanford Research Institute, is contracted by secretive military figure 'Axelrod' for his ability to 'remote-view' for dangerous and experimental moon-spying.\n\nBased on the memoir within his 1998 book, 'Penetration: The Question of Extraterrestrial and Human Telepathy'"
-                   
-                    content = content.replace(/\n/g, '<br>');
-                    document.getElementById("modal-text").innerHTML = content;
+  <!-- LOGLINE ZONE -->
+  <div class="logline-area">
+    <p class="logline-text" id="logline-text"></p>
+    <a class="logline-inquire" id="logline-inquire" href="#">Inquire</a>
+  </div>
 
+  <script>
+    const films = {
+      penetration: {
+        text: "California, New York, Washington D.C. — 1973.\n\nIngo Swann, CIA-funded psychic at the Stanford Research Institute, is contracted by a secretive military figure for his ability to remote-view — dangerous and experimental moon-spying.\n\nBased on the memoir within Swann's 1998 book, Penetration.",
+        email: "mailto:film@nicholasgriffo.com?subject=Inquiry%20%E2%80%94%20PENETRATION%20INGO%20SWANN"
+      },
+      fuse: {
+        text: "Los Angeles, California.\n\nKevin Stranahan, former fraudster now commercial property flipper, seeks investment from old colleagues — inadvertently putting his business in the crosshairs of a group he once betrayed. Now they want him dead broke and humiliated.\n\nA bad man against worse.",
+        email: "mailto:film@nicholasgriffo.com?subject=Inquiry%20%E2%80%94%20THE%20WORLD%20IS%20MY%20FUSE"
+      },
+      patterns: {
+        text: "Canyonlands — Moab, Utah.\n\nA love story. A woman loves two men. They spend a season together in a fire-watch tower and witness hikers kidnapped by a wealthy cult under the pretense of finding crystals. This disturbs the nesting grounds of a certain scientific bird.",
+        email: "mailto:film@nicholasgriffo.com?subject=Inquiry%20%E2%80%94%20PATTERNS%20OF%20A%20CERTAIN%20SCIENTIFIC%20BIRD"
+      },
+      bloody: {
+        text: "Wilmington, North Carolina.\n\nA 27-year-old, clean from coke and pills, sets his life straight with a new job. He digs into old contracts — one belonging to a well-respected local official. He's dug too deep. Shadowy figures pursue him out of town, where a dark experience from his youth waits.",
+        email: "mailto:film@nicholasgriffo.com?subject=Inquiry%20%E2%80%94%20BLOODY%20KNUCKLES"
+      },
+      creation: {
+        text: "Few hours southwest of Tulsa, Oklahoma.\n\nA man's aunt dies suddenly, shocking her twin — his mother — into a coma. He stays to settle her affairs. A waitress likes him. Things just happen in the country. She gets pregnant. He tries to settle down. She grows obsessive. He grows restless. Her family grows jealous.",
+        email: "mailto:film@nicholasgriffo.com?subject=Inquiry%20%E2%80%94%20MAN'S%20CREATION"
+      }
+    };
 
-                    href = "mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20PENETRATION%20INGO%20SWANN&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27PENETRATION%20INGO%20SWANN%27."
-                    document.getElementById("myModal").style.display = "block"; // Show modal
-                } else if (id == "fuse") {
-                    content = "Los Angeles, California\n\nKevin Stranahan, former fraudster now commercial property flipper, seeks investment from old colleagues, inadvertently putting his business in the crosshairs of a group he once betrayed— now, they want him dead broke and humiliated.\n\n A bad man against worse."
-                    content = content.replace(/\n/g, '<br>');
+    const loglineText    = document.getElementById('logline-text');
+    const loglineInquire = document.getElementById('logline-inquire');
+    let active = null;
 
-                    href = "mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20The%20World%20is%20My%20Fuse&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27The%20World%20is%20My%20Fuse%27."
-                } else if (id == "patterns") {
-                    content = "Canyonlands - Moab, Utah\n\nA movie for women— a love story\n\nA woman loves two men. Maybe they love her. It makes her feel dirty. She is dirty, on webcam. No man likes this, but they can look past it. They spend a season together in a fire-watch tower and witness hikers kidnapped by a wealthy cult under the pretense of finding crystals. This disturbs the nesting grounds of a certain scientific bird."
-                    content = content.replace(/\n/g, '<br>');
+    document.querySelectorAll('.film-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const key = this.dataset.film;
 
-                    href = "mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20Patterns%20of%20a%20Certain%20Scientific%20Bird&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27Patterns%20of%20a%20Certain%20Scientific%20Bird%27%20when%20it%20is%20finished."
-                } else if (id == "bloody") {
-                    content = "Wilmington, North Carolina\n\nA 27 year old clean from coke and pills sets his life straight with a new job. He’s still ok to smoke.\n\nEager for his first commission, he digs into old contracts, one of which is with a well respected local official. By now he’s dug too deep, and despite not knowing much, they know who he has, and a promise of sealed lips won’t cut it. The ex-addict is pursued by shadowy figures and skips town, gets fucked by his e-girlfriend and faces a dark experience from his youth that turned him into a drug-addled sexless loser."
-                    content = content.replace(/\n/g, '<br>');
+        if (active === key) {
+          active = null;
+          loglineText.classList.remove('visible');
+          loglineInquire.classList.remove('visible');
+          loglineText.innerHTML = '';
+          loglineInquire.href = '#';
+          return;
+        }
 
-                    href = "mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20Bloody%20Knuckles&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27Bloody%20Knuckles%27%20when%20it%20is%20finished."
-                } else if (id == "creation") {
-                    content = "Few Hours Southwest of Tulsa, Oklahoma\n\nA man’s aunt dies suddenly, shocking her twin, his mother, into a coma. He attends his aunt's funeral and stays to go through her belongings/property in his mother's stead.\n\nA waitress likes him. He needs some action and she’s hot enough. She gets pregnant—things just happen in the country. He tries to settle down with her in his Aunt’s old house. She becomes sick, obsessive deep-love andresentment grows towards the unborn baby and he begins having sex with various women in the area as his woman’s condition grows worse and her family jealous."
-                    content = content.replace(/\n/g, '<br>');
+        active = key;
+        const film = films[key];
+        loglineText.innerHTML = film.text.replace(/\n/g, '<br>');
+        loglineInquire.href = film.email;
+        loglineText.classList.add('visible');
+        loglineInquire.classList.add('visible');
+      });
+    });
 
-                    href = "mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20Man's%20Creation&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27Man's%20Creation%27%20when%20it%20is%20finished."
-                }
-                modalText.innerHTML = content;
-                emailLink.href = href;
-                modal.style.display = 'flex';
-                emailLink.style.display = 'inline-block';
-            });
-        });
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.film-link') && !e.target.closest('.logline-area')) {
+        active = null;
+        loglineText.classList.remove('visible');
+        loglineInquire.classList.remove('visible');
+        loglineText.innerHTML = '';
+      }
+    });
 
-      
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        active = null;
+        loglineText.classList.remove('visible');
+        loglineInquire.classList.remove('visible');
+        loglineText.innerHTML = '';
+      }
+    });
+  </script>
 
-        // Optional: Close modal when clicking outside the content
-        window.addEventListener('click', function(e) {
-            if (e.target === modal) {
-                modal.style.display = 'none';
-                emailLink.style.display = 'none';
-            }
-        });
-  
-        // Get the text element and split it into individual letters
-        const textElement = document.getElementById('twinklingText');
-        const text = textElement.innerText.split('');
-        textElement.innerHTML = ''; // Clear the original text content
-    
-        // Wrap each letter in a span and add it to the text element
-        text.forEach(letter => {
-          const span = document.createElement('span');
-          span.innerText = letter;
-          // Set a random animation delay between 0 and 2 seconds for each letter
-          const delay = Math.random() * 6; // Random delay up to 2 seconds
-          span.style.animationDelay = `${delay}s`;
-          textElement.appendChild(span);
-        });
-      </script>
 </body>
 </html>
