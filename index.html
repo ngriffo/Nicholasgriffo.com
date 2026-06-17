@@ -3,35 +3,32 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nicholas Griffo — Creative Director & AI Specialist</title>
+<title>Nicholas Griffo — Director & Creative Technologist</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700;800&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --ink: #0f0f0d;
-    --paper: #f7f5f0;
-    --mid: #6b6860;
-    --rule: #d8d5ce;
-    --accent: #1a1a18;
+    --bg: #ffffff;
+    --ink: #000000;
+    --mid: #4a4a4a;
+    --rule: #000000;
+    --flash: #fff200;
     --flame: #c4471f;
-    --warm-white: #faf9f6;
   }
 
-  html { font-size: 16px; scroll-behavior: smooth; }
-
   body {
-    background: var(--warm-white);
+    background: var(--bg);
     color: var(--ink);
-    font-family: 'Inter', sans-serif;
-    font-weight: 300;
-    line-height: 1.6;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 400;
+    line-height: 1.5;
     -webkit-font-smoothing: antialiased;
   }
 
-  /* NAV */
+  a { color: var(--ink); }
+
   nav {
     position: fixed;
     top: 0; left: 0; right: 0;
@@ -39,696 +36,535 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.25rem 3rem;
-    background: rgba(250, 249, 246, 0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--rule);
+    padding: 1rem 1.5rem;
+    background: var(--bg);
+    border-bottom: 2px solid var(--rule);
   }
 
   .nav-name {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    font-weight: 400;
-    letter-spacing: 0.12em;
+    font-size: 0.78rem;
+    font-weight: 700;
     text-transform: uppercase;
-    color: var(--ink);
+    letter-spacing: 0.02em;
     text-decoration: none;
   }
 
-  .nav-links {
-    display: flex;
-    gap: 2.5rem;
-    list-style: none;
-  }
+  .nav-links { display: flex; gap: 1.75rem; list-style: none; }
 
   .nav-links a {
-    font-family: 'DM Mono', monospace;
     font-size: 0.7rem;
-    letter-spacing: 0.1em;
+    font-weight: 500;
     text-transform: uppercase;
-    color: var(--mid);
     text-decoration: none;
-    transition: color 0.2s;
+    position: relative;
   }
 
-  .nav-links a:hover { color: var(--flame); }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -3px;
+    width: 0%;
+    height: 2px;
+    background: var(--ink);
+    transition: width 0.2s;
+  }
 
-  /* HERO */
+  .nav-links a:hover::after { width: 100%; }
+
   .hero {
-    min-height: 100vh;
-    display: grid;
-    grid-template-rows: 1fr auto;
-    padding: 0 3rem;
-    padding-top: 6rem;
+    margin-top: 56px;
+    border-bottom: 2px solid var(--rule);
+    padding: 3rem 1.5rem;
+    position: relative;
   }
 
-  .hero-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    max-width: 900px;
-    padding: 4rem 0 2rem;
-  }
-
-  .hero-eyebrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    letter-spacing: 0.18em;
+  .hero-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
     text-transform: uppercase;
-    color: var(--mid);
+    letter-spacing: 0.04em;
+    background: var(--ink);
+    color: var(--bg);
+    padding: 0.3rem 0.6rem;
     margin-bottom: 2rem;
   }
 
   .hero-headline {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(3rem, 6vw, 5.5rem);
-    font-weight: 300;
-    line-height: 1.05;
-    letter-spacing: -0.01em;
-    color: var(--ink);
-    margin-bottom: 2.5rem;
-  }
-
-  .hero-headline em {
-    font-style: italic;
-    font-weight: 300;
-    color: var(--flame);
-  }
-
-  .hero-sub {
-    font-size: 1rem;
-    font-weight: 300;
-    color: var(--mid);
-    max-width: 520px;
-    line-height: 1.75;
-    margin-bottom: 3rem;
-  }
-
-  .hero-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
+    font-size: clamp(2.2rem, 7vw, 5rem);
+    font-weight: 800;
+    line-height: 0.98;
+    letter-spacing: -0.02em;
     text-transform: uppercase;
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid var(--ink);
-    padding-bottom: 0.2rem;
-    transition: opacity 0.2s;
-    width: fit-content;
+    max-width: 1100px;
   }
 
-  .hero-cta:hover { color: var(--flame); border-color: var(--flame); opacity: 1; }
+  .hero-headline .hl {
+    background: var(--flash);
+    padding: 0 0.15em;
+  }
 
-  .hero-footer {
+  .hero-meta-row {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    padding: 2rem 0;
-    border-top: 1px solid var(--rule);
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--rule);
+    gap: 2rem;
+    flex-wrap: wrap;
   }
 
-  .hero-stats {
+  .hero-sub {
+    font-size: 0.92rem;
+    color: var(--ink);
+    max-width: 480px;
+    line-height: 1.7;
+  }
+
+  .hero-cta {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 2px solid var(--ink);
+    padding: 0.7rem 1.2rem;
+    white-space: nowrap;
+    transition: background 0.15s, color 0.15s;
+  }
+
+  .hero-cta:hover { background: var(--ink); color: var(--bg); }
+
+  .hero-stats-row {
     display: flex;
-    gap: 4rem;
+    border-top: 2px solid var(--rule);
+    margin-top: 2rem;
   }
 
-  .stat-item {}
+  .stat-item {
+    flex: 1;
+    padding: 1.25rem 1.5rem;
+    border-left: 1px solid var(--rule);
+  }
+  .stat-item:first-child { border-left: none; }
+
   .stat-num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    font-weight: 300;
+    font-size: 1.8rem;
+    font-weight: 800;
     line-height: 1;
     display: block;
     color: var(--flame);
   }
   .stat-label {
-    font-family: 'DM Mono', monospace;
     font-size: 0.62rem;
-    letter-spacing: 0.12em;
+    font-weight: 500;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     color: var(--mid);
-    margin-top: 0.3rem;
+    margin-top: 0.4rem;
     display: block;
   }
 
-  .scroll-hint {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--mid);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  /* SECTIONS */
-  section {
-    padding: 7rem 3rem;
-    border-top: 1px solid var(--rule);
-  }
+  section { border-bottom: 2px solid var(--rule); }
 
   .section-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.18em;
+    font-size: 0.7rem;
+    font-weight: 700;
     text-transform: uppercase;
-    color: var(--mid);
-    margin-bottom: 4rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+    letter-spacing: 0.04em;
+    padding: 1rem 1.5rem;
+    border-bottom: 2px solid var(--rule);
+    background: var(--ink);
+    color: var(--bg);
   }
 
-  .section-label::before {
-    content: '';
-    width: 6px;
-    height: 6px;
-    background: var(--flame);
-    border-radius: 50%;
-    display: inline-block;
-  }
-
-  .section-label::after {
-    content: '';
-    display: block;
-    height: 1px;
-    width: 3rem;
-    background: var(--rule);
-  }
-
-  /* ABOUT / THESIS */
-  .thesis {
-    max-width: 820px;
-  }
+  .thesis-block { padding: 3rem 1.5rem; }
 
   .thesis-headline {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(1.8rem, 3vw, 2.8rem);
-    font-weight: 300;
-    line-height: 1.25;
-    margin-bottom: 2.5rem;
-    color: var(--ink);
+    font-size: clamp(1.3rem, 2.8vw, 2rem);
+    font-weight: 500;
+    line-height: 1.5;
+    max-width: 800px;
+    margin-bottom: 2rem;
   }
 
-  .thesis-headline em { font-style: italic; color: var(--flame); }
+  .thesis-headline .hl {
+    background: var(--flash);
+    padding: 0 0.15em;
+    font-weight: 700;
+  }
 
   .thesis-body {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    gap: 2.5rem;
+    max-width: 1100px;
   }
 
   .thesis-body p {
-    font-size: 0.95rem;
-    color: var(--mid);
-    line-height: 1.85;
-  }
-
-  /* WORK */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0;
-  }
-
-  .project-card {
-    padding: 3rem;
-    border: 1px solid var(--rule);
-    margin: -1px 0 0 -1px;
-    transition: background 0.25s;
-    cursor: default;
-  }
-
-  .project-card:hover { background: var(--paper); }
-
-  .project-client {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--mid);
-    margin-bottom: 1rem;
-  }
-
-  .project-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.7rem;
-    font-weight: 400;
-    line-height: 1.2;
-    margin-bottom: 1rem;
+    font-size: 0.88rem;
+    line-height: 1.75;
     color: var(--ink);
   }
 
-  .project-desc {
-    font-size: 0.875rem;
+  .project-row {
+    display: grid;
+    grid-template-columns: 140px 1fr 160px;
+    border-bottom: 1px solid var(--rule);
+    padding: 1.5rem;
+    gap: 1.5rem;
+    align-items: start;
+    transition: background 0.15s;
+  }
+
+  .project-row:last-child { border-bottom: none; }
+  .project-row:hover { background: var(--flash); }
+
+  .project-num {
+    font-size: 0.72rem;
+    font-weight: 700;
     color: var(--mid);
-    line-height: 1.75;
-    margin-bottom: 1.75rem;
+    padding-top: 0.1rem;
+  }
+
+  .project-row:hover .project-num { color: var(--ink); }
+
+  .project-content { display: flex; flex-direction: column; }
+
+  .project-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+
+  .project-desc {
+    font-size: 0.82rem;
+    line-height: 1.65;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+    max-width: 560px;
   }
 
   .project-tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.6rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--mid);
-    border: 1px solid var(--rule);
-    padding: 0.3rem 0.65rem;
-    border-radius: 2px;
-    transition: border-color 0.2s, color 0.2s;
-  }
-
-  .project-card:hover .tag {
-    border-color: rgba(196,71,31,0.3);
-  }
-
-  .project-trailer-link {
-    display: inline-flex;
-    align-items: center;
     gap: 0.4rem;
-    margin-top: 1.25rem;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+  }
+
+  .ptag {
+    font-size: 0.6rem;
+    font-weight: 700;
     text-transform: uppercase;
-    color: var(--mid);
+    letter-spacing: 0.02em;
+    border: 1.5px solid var(--ink);
+    padding: 0.2rem 0.5rem;
+  }
+
+  .project-row:hover .ptag { border-color: var(--flame); color: var(--flame); }
+
+  .trailer-link {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
     text-decoration: none;
-    border-bottom: 1px solid var(--rule);
-    padding-bottom: 0.2rem;
+    color: var(--ink);
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 2px;
     width: fit-content;
-    transition: color 0.2s, border-color 0.2s;
   }
 
-  .project-trailer-link:hover {
-    color: var(--flame);
-    border-color: var(--flame);
+  .trailer-link:hover { color: var(--flame); border-color: var(--flame); }
+
+  .project-client {
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-align: right;
+    color: var(--mid);
   }
 
-  .project-card.featured {
-    grid-column: span 2;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    align-items: center;
-    padding: 4rem;
-  }
+  .project-row:hover .project-client { color: var(--ink); }
 
-  .project-card.featured .project-title {
-    font-size: 2.4rem;
-  }
-
-  .featured-visual {
-    background: var(--ink);
-    height: 200px;
-    border-radius: 2px;
-    overflow: hidden;
-    position: relative;
-    align-self: center;
-  }
-
-  .featured-visual-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 35%;
-    display: block;
-    filter: saturate(0.82) contrast(0.96) brightness(0.94);
-    opacity: 0.92;
-    transition: filter 0.4s ease, opacity 0.4s ease;
-  }
-
-  .project-card.featured:hover .featured-visual-img {
-    filter: saturate(0.95) contrast(1) brightness(1);
-    opacity: 1;
-  }
-
-  /* SKILLS / TRANSLATION */
   .translation-table {
     width: 100%;
     border-collapse: collapse;
   }
 
   .translation-table thead th {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem;
-    letter-spacing: 0.15em;
+    font-size: 0.65rem;
+    font-weight: 700;
     text-transform: uppercase;
-    color: var(--mid);
+    letter-spacing: 0.03em;
+    background: var(--ink);
+    color: var(--bg);
     text-align: left;
-    padding: 0 1.5rem 1.5rem 0;
-    border-bottom: 1px solid var(--rule);
+    padding: 0.8rem 1.25rem;
   }
 
   .translation-table tbody tr {
     border-bottom: 1px solid var(--rule);
-    transition: background 0.2s;
+    transition: background 0.15s;
   }
 
-  .translation-table tbody tr:hover { background: var(--paper); }
+  .translation-table tbody tr:hover { background: var(--flash); }
 
   .translation-table tbody td {
-    padding: 1.5rem 1.5rem 1.5rem 0;
+    padding: 1.25rem 1.25rem;
     vertical-align: top;
-    font-size: 0.9rem;
+    font-size: 0.82rem;
   }
 
   .td-film {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.05rem;
-    font-weight: 400;
-    width: 30%;
-    color: var(--ink);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    width: 24%;
   }
 
   .td-arrow {
     color: var(--flame);
-    width: 6%;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.8rem;
-    padding-top: 1.65rem;
+    font-weight: 700;
+    width: 5%;
   }
 
-  .td-ai {
-    font-size: 0.9rem;
-    color: var(--mid);
-    width: 30%;
-    line-height: 1.7;
-  }
+  .td-ai { width: 36%; line-height: 1.6; }
+  .td-why { color: var(--mid); line-height: 1.6; font-size: 0.78rem; }
 
-  .td-why {
-    font-size: 0.825rem;
-    color: var(--mid);
-    opacity: 0.7;
-    line-height: 1.7;
-  }
-
-  /* CONTACT */
-  .contact-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6rem;
-    align-items: start;
-  }
+  .contact-block { padding: 3rem 1.5rem; }
 
   .contact-headline {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 300;
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    font-weight: 800;
     line-height: 1.1;
-    color: var(--ink);
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    max-width: 800px;
   }
 
-  .contact-headline em { font-style: italic; color: var(--flame); }
+  .contact-headline .hl {
+    background: var(--flash);
+    padding: 0 0.15em;
+  }
+
+  .contact-sub {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    max-width: 600px;
+    margin-bottom: 2.5rem;
+    color: var(--ink);
+  }
 
   .contact-links {
     display: flex;
     flex-direction: column;
-    gap: 0;
-    margin-top: 1rem;
+    border-top: 2px solid var(--rule);
+    max-width: 600px;
   }
 
   .contact-link {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.25rem 0;
+    padding: 1rem 0;
     border-bottom: 1px solid var(--rule);
     text-decoration: none;
     color: var(--ink);
-    transition: opacity 0.2s;
+    transition: background 0.15s, padding-left 0.15s;
   }
 
-  .contact-link:first-child { border-top: 1px solid var(--rule); }
-  .contact-link:hover { opacity: 0.45; }
+  .contact-link:hover { background: var(--flash); padding-left: 0.5rem; }
 
   .contact-link-label {
-    font-family: 'DM Mono', monospace;
     font-size: 0.68rem;
-    letter-spacing: 0.12em;
+    font-weight: 700;
     text-transform: uppercase;
     color: var(--mid);
   }
 
-  .contact-link-value {
-    font-size: 0.9rem;
-    font-weight: 400;
-  }
+  .contact-link:hover .contact-link-label { color: var(--ink); }
 
-  .contact-link-arrow {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.8rem;
-    color: var(--rule);
-    transition: color 0.2s;
-  }
+  .contact-link-value { font-size: 0.85rem; font-weight: 500; }
 
-  .contact-link:hover .contact-link-arrow { color: var(--flame); }
+  .contact-link-arrow { font-size: 0.85rem; font-weight: 700; }
 
-  /* FOOTER */
   footer {
-    padding: 2rem 3rem;
-    border-top: 1px solid var(--rule);
+    padding: 1rem 1.5rem;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-  }
-
-  footer p {
-    font-family: 'DM Mono', monospace;
     font-size: 0.62rem;
-    letter-spacing: 0.1em;
+    font-weight: 500;
     text-transform: uppercase;
-    color: var(--mid);
   }
 
-  /* SCROLL ANIMATIONS */
-  .reveal {
-    opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
-  }
-
-  .reveal.visible {
-    opacity: 1;
-    transform: none;
-  }
-
-  /* MOBILE */
   @media (max-width: 768px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links { gap: 1.5rem; }
-    .hero { padding: 0 1.5rem; padding-top: 5rem; }
-    section { padding: 5rem 1.5rem; }
-    .projects-grid { grid-template-columns: 1fr; }
-    .project-card.featured { grid-column: span 1; grid-template-columns: 1fr; gap: 2rem; }
-    .thesis-body { grid-template-columns: 1fr; gap: 1.5rem; }
-    .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
-    .hero-stats { gap: 2rem; }
-    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    .project-row { grid-template-columns: 1fr; gap: 0.5rem; }
+    .project-client { text-align: left; }
+    .hero-meta-row { flex-direction: column; align-items: flex-start; }
+    .thesis-body { grid-template-columns: 1fr; }
+    .hero-stats-row { flex-direction: column; }
+    .stat-item { border-left: none; border-top: 1px solid var(--rule); }
+    .stat-item:first-child { border-top: none; }
     .translation-table thead th:last-child,
     .translation-table tbody .td-why { display: none; }
-    .td-arrow { width: 10%; }
-    .td-film, .td-ai { width: 45%; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .reveal { opacity: 1; transform: none; transition: none; }
+    footer { flex-direction: column; gap: 0.5rem; text-align: center; }
   }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
-  <a class="nav-name" href="#">Nicholas Griffo</a>
+  <a class="nav-name" href="#">NICHOLAS GRIFFO</a>
   <ul class="nav-links">
-    <li><a href="#work">Work</a></li>
-    <li><a href="#translation">Skills</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#work">WORK</a></li>
+    <li><a href="#translation">SKILLS</a></li>
+    <li><a href="#contact">CONTACT</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
 <header class="hero">
-  <div class="hero-body">
-    <p class="hero-eyebrow">Creative Director &amp; AI Specialist — Los Angeles, Relocating to San Francisco</p>
-    <h1 class="hero-headline">
-      The best creative directors<br>
-      don't just have taste —<br>
-      <em>they build what doesn't exist yet.</em>
-    </h1>
+  <span class="hero-tag">DIRECTOR / CREATIVE TECHNOLOGIST — LA → SF</span>
+  <h1 class="hero-headline">
+    THE BEST CREATIVE DIRECTORS DON'T JUST HAVE TASTE — THEY <span class="hl">BUILD WHAT DOESN'T EXIST YET.</span>
+  </h1>
+  <div class="hero-meta-row">
     <p class="hero-sub">
-      I build environments that have to feel real — sets, installations, worlds. 
-      Physical ones first. Now the kind machines generate. 
-      I'm finding the team building the next canvas.
+      I build environments that have to feel real — sets, installations, worlds. Physical ones first. Now the kind machines generate. I'm finding the team building the next canvas.
     </p>
-    <a href="#work" class="hero-cta">View selected work →</a>
+    <a href="#work" class="hero-cta">VIEW WORK →</a>
   </div>
-  <div class="hero-footer">
-    <div class="hero-stats">
-      <div class="stat-item">
-        <span class="stat-num">6+</span>
-        <span class="stat-label">Years in production</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-num">2</span>
-        <span class="stat-label">Feature screenplays</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-num">∞</span>
-        <span class="stat-label">Builds per vision</span>
-      </div>
+  <div class="hero-stats-row">
+    <div class="stat-item">
+      <span class="stat-num">6+</span>
+      <span class="stat-label">Years in Production</span>
     </div>
-    <span class="scroll-hint">↓ Scroll</span>
+    <div class="stat-item">
+      <span class="stat-num">2</span>
+      <span class="stat-label">Feature Screenplays</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">∞</span>
+      <span class="stat-label">Builds Per Vision</span>
+    </div>
   </div>
 </header>
 
-<!-- ABOUT -->
 <section id="about">
-  <p class="section-label">About</p>
-  <div class="thesis reveal">
+  <p class="section-label">ABOUT</p>
+  <div class="thesis-block">
     <h2 class="thesis-headline">
-      Film taught me that <em>every frame</em> is a decision.<br>
-      AI taught me that every decision is a dataset.
+      Film taught me that every frame is a decision. AI taught me that <span class="hl">every decision is a dataset.</span>
     </h2>
     <div class="thesis-body">
       <p>
-        I started as a camera assistant on NYC productions, learning that the gap between 
-        a good shot and a great one is always craft — not budget. That instinct followed me 
-        into production design, building sets and environments that had to feel real enough 
-        to disappear. The invisible work is the hardest. It's also the most valuable.
+        I started as a camera assistant on NYC productions, learning that the gap between a good shot and a great one is always craft — not budget. That instinct followed me into production design, building sets and environments that had to feel real enough to disappear. The invisible work is the hardest. It's also the most valuable.
       </p>
       <p>
-        Today I evaluate generative AI outputs for frontier model labs through Mercor — 
-        flagging spatial incoherence, lighting inconsistencies, and the subtle wrongness that 
-        audiences feel before they can name it. My job is to close the gap between what AI 
-        produces and what a trained eye demands. That gap is exactly where I live.
+        Today, as an independent contractor, I provide creative and visual expertise to help improve generative AI models for a leading AI lab. My job draws directly on six years of production design and art direction — knowing instantly when something is almost right but isn't. That instinct is exactly where I live.
       </p>
     </div>
   </div>
 </section>
 
-<!-- WORK -->
 <section id="work">
-  <p class="section-label">Selected Work</p>
-  <div class="projects-grid">
+  <p class="section-label">SELECTED WORK</p>
 
-    <!-- Featured: Coachella -->
-    <div class="project-card featured reveal">
-      <div>
-        <p class="project-client">Fuller Street Productions — Coachella 2025</p>
-        <h3 class="project-title">Immersive Installations at Scale</h3>
-        <p class="project-desc">
-          Built large-scale custom installations for Always &amp; Tampax, Tito's, BRUNCH!, 
-          and Olipop activations — constructed entirely in-warehouse and shipped to site 
-          under live-event deadlines. Physical world-building at its most unforgiving — 
-          no retakes, no renders, just craft and problem-solving under pressure.
-        </p>
-        <div class="project-tags">
-          <span class="tag">Fabrication</span>
-          <span class="tag">Experiential Design</span>
-          <span class="tag">Live Event</span>
-          <span class="tag">Installation</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Mercor -->
-    <div class="project-card reveal">
-      <p class="project-client">Mercor — Ongoing</p>
-      <h3 class="project-title">Training Frontier AI to See</h3>
+  <div class="project-row">
+    <span class="project-num">01 / FULLER ST.</span>
+    <div class="project-content">
+      <h3 class="project-title">Immersive Installations at Scale</h3>
       <p class="project-desc">
-        As an AI Expert and Creative Specialist, I evaluate generative video, image, and 
-        scene outputs for leading AI labs — applying film production expertise to assess 
-        visual realism, spatial coherence, lighting logic, and continuity. This is the work 
-        that closes the uncanny valley.
+        Built large-scale custom installations for Always &amp; Tampax, Tito's, BRUNCH!, and Olipop activations — constructed entirely in-warehouse and shipped to site under live-event deadlines. Physical world-building at its most unforgiving — no retakes, no renders, just craft and problem-solving under pressure.
       </p>
       <div class="project-tags">
-        <span class="tag">Generative AI</span>
-        <span class="tag">Visual Evaluation</span>
-        <span class="tag">Multimodal Training Data</span>
-        <span class="tag">Production Expertise</span>
+        <span class="ptag">Fabrication</span>
+        <span class="ptag">Experiential Design</span>
+        <span class="ptag">Live Event</span>
+        <span class="ptag">Installation</span>
       </div>
     </div>
+    <span class="project-client">Coachella 2025</span>
+  </div>
 
-    <!-- Sinking Cities -->
-    <div class="project-card reveal">
-      <p class="project-client">Independent — 16mm Thriller</p>
+  <div class="project-row">
+    <span class="project-num">02 / MERCOR</span>
+    <div class="project-content">
+      <h3 class="project-title">Creative Expertise for Generative AI</h3>
+      <p class="project-desc">
+        Providing creative and visual expertise to help improve generative AI models for a leading AI lab — applying six years of production design and art direction experience to assess and inform visual quality in AI-generated content.
+      </p>
+      <div class="project-tags">
+        <span class="ptag">Generative AI</span>
+        <span class="ptag">Visual Expertise</span>
+        <span class="ptag">Independent Contractor</span>
+      </div>
+    </div>
+    <span class="project-client">Mercor Intelligence</span>
+  </div>
+
+  <div class="project-row">
+    <span class="project-num">03 / INDIE FILM</span>
+    <div class="project-content">
       <h3 class="project-title">Sinking Cities</h3>
       <p class="project-desc">
-        Production designer on an indie 16mm thriller — led all set design and fabrication, 
-        delivered under accelerated timelines with significant cost savings through strategic 
-        sourcing. Shooting on film means every decision is permanent. That constraint sharpens 
-        everything.
+        Production designer on an indie 16mm thriller — led all set design and fabrication, delivered under accelerated timelines with significant cost savings through strategic sourcing. Shooting on film means every decision is permanent. That constraint sharpens everything.
       </p>
       <div class="project-tags">
-        <span class="tag">Production Design</span>
-        <span class="tag">Set Fabrication</span>
-        <span class="tag">16mm Film</span>
-        <span class="tag">Budget Management</span>
+        <span class="ptag">Production Design</span>
+        <span class="ptag">Set Fabrication</span>
+        <span class="ptag">16mm Film</span>
+        <span class="ptag">Budget Management</span>
       </div>
     </div>
+    <span class="project-client">Independent</span>
+  </div>
 
-    <!-- Meta / Google -->
-    <div class="project-card reveal">
-      <p class="project-client">Meta &amp; Google — Brand Campaigns</p>
+  <div class="project-row">
+    <span class="project-num">04 / BRAND</span>
+    <div class="project-content">
       <h3 class="project-title">Wave &amp; Real Tone</h3>
       <p class="project-desc">
-        Designed and built physical sets for two major social campaigns — Meta's 'Wave' 
-        and Google's 'Real Tone.' These had to hold up under the scrutiny of a camera 
-        that captures everything. Brand work at this level requires both aesthetic 
-        precision and operational efficiency.
+        Designed and built physical sets for two major social campaigns — Meta's 'Wave' and Google's 'Real Tone.' These had to hold up under the scrutiny of a camera that captures everything. Brand work at this level requires both aesthetic precision and operational efficiency.
       </p>
       <div class="project-tags">
-        <span class="tag">Set Design</span>
-        <span class="tag">Brand Campaign</span>
-        <span class="tag">Meta</span>
-        <span class="tag">Google</span>
+        <span class="ptag">Set Design</span>
+        <span class="ptag">Brand Campaign</span>
+        <span class="ptag">Meta</span>
+        <span class="ptag">Google</span>
       </div>
     </div>
+    <span class="project-client">Meta & Google</span>
+  </div>
 
-    <!-- Indulgence -->
-    <div class="project-card reveal">
-      <p class="project-client">Falling Dominoes — Feature Film</p>
+  <div class="project-row">
+    <span class="project-num">05 / FEATURE</span>
+    <div class="project-content">
       <h3 class="project-title">Indulgence</h3>
       <p class="project-desc">
-        Production designer across 10+ locations, leading a 5-person fabrication team. 
-        Managing that many environments simultaneously demands systems thinking — 
-        the same kind of structured creative logic that scales from film sets to AI pipelines.
+        Production designer across 10+ locations, leading a 5-person fabrication team. Managing that many environments simultaneously demands systems thinking — the same kind of structured creative logic that scales from film sets to AI pipelines.
       </p>
       <div class="project-tags">
-        <span class="tag">Production Design</span>
-        <span class="tag">Team Leadership</span>
-        <span class="tag">Multi-location</span>
-        <span class="tag">Feature Film</span>
+        <span class="ptag">Production Design</span>
+        <span class="ptag">Team Leadership</span>
+        <span class="ptag">Multi-location</span>
+        <span class="ptag">Feature Film</span>
       </div>
-      <a href="https://www.youtube.com/watch?v=QPNSytJXnFk" target="_blank" rel="noopener" class="project-trailer-link">
-        ▶ Watch Trailer
-      </a>
+      <a href="https://www.youtube.com/watch?v=QPNSytJXnFk" target="_blank" rel="noopener" class="trailer-link">▶ WATCH TRAILER</a>
     </div>
-
+    <span class="project-client">Falling Dominoes</span>
   </div>
+
 </section>
 
-<!-- SKILL TRANSLATION -->
 <section id="translation">
-  <p class="section-label">Why Film → AI</p>
-  <table class="translation-table reveal">
+  <p class="section-label">WHY FILM → AI</p>
+  <table class="translation-table">
     <thead>
       <tr>
-        <th>What I did on set</th>
+        <th>What I Did On Set</th>
         <th></th>
-        <th>What that means for AI</th>
-        <th>Why it matters</th>
+        <th>What That Means For AI</th>
+        <th>Why It Matters</th>
       </tr>
     </thead>
     <tbody>
@@ -751,7 +587,7 @@
         <td class="td-why">The best prompt is a director's shot list. Most AI teams don't have a director.</td>
       </tr>
       <tr>
-        <td class="td-film">Multi-location management</td>
+        <td class="td-film">Multi-Location Management</td>
         <td class="td-arrow">→</td>
         <td class="td-ai">Managing pipelines across multiple models, teams, and output types simultaneously.</td>
         <td class="td-why">Scale on a film set and scale in a model pipeline require identical coordination instincts.</td>
@@ -772,69 +608,44 @@
   </table>
 </section>
 
-<!-- CONTACT -->
 <section id="contact">
-  <p class="section-label">Let's Talk</p>
-  <div class="contact-inner reveal">
+  <p class="section-label">LET'S TALK</p>
+  <div class="contact-block">
     <h2 class="contact-headline">
-      I'm already building<br>what's <em>next.</em><br>
-      The right team<br>accelerates it.
+      I'M ALREADY BUILDING WHAT'S NEXT. <span class="hl">THE RIGHT TEAM ACCELERATES IT.</span>
     </h2>
-    <div>
-      <p style="font-size: 0.9rem; color: var(--mid); line-height: 1.8; margin-bottom: 2rem;">
-        I'm finding the team building the next canvas — an AI video company, a studio 
-        rethinking its pipeline, or a startup that needs its first real creative force. 
-        Based in LA. Relocating to San Francisco.
-      </p>
-      <div class="contact-links">
-        <a class="contact-link" href="mailto:nicholasgriffo@hotmail.com">
-          <span class="contact-link-label">Email</span>
-          <span class="contact-link-value">nicholasgriffo@hotmail.com</span>
-          <span class="contact-link-arrow">→</span>
-        </a>
-        <a class="contact-link" href="tel:9199611382">
-          <span class="contact-link-label">Phone</span>
-          <span class="contact-link-value">919-961-1382</span>
-          <span class="contact-link-arrow">→</span>
-        </a>
-        <a class="contact-link" href="https://www.linkedin.com/in/nicholas-griffo-79a38030a/" target="_blank">
-          <span class="contact-link-label">LinkedIn</span>
-          <span class="contact-link-value">Connect</span>
-          <span class="contact-link-arrow">→</span>
-        </a>
-        <a class="contact-link" href="https://www.imdb.com/name/nm11881226/" target="_blank">
-          <span class="contact-link-label">IMDb</span>
-          <span class="contact-link-value">View Credits</span>
-          <span class="contact-link-arrow">→</span>
-        </a>
-      </div>
+    <p class="contact-sub">
+      I'm finding the team building the next canvas — an AI video company, a studio rethinking its pipeline, or a startup that needs its first real creative force. Based in LA. Relocating to San Francisco.
+    </p>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:nicholasgriffo@hotmail.com">
+        <span class="contact-link-label">EMAIL</span>
+        <span class="contact-link-value">nicholasgriffo@hotmail.com</span>
+        <span class="contact-link-arrow">→</span>
+      </a>
+      <a class="contact-link" href="tel:9199611382">
+        <span class="contact-link-label">PHONE</span>
+        <span class="contact-link-value">919-961-1382</span>
+        <span class="contact-link-arrow">→</span>
+      </a>
+      <a class="contact-link" href="https://www.linkedin.com/in/nicholas-griffo-79a38030a/" target="_blank">
+        <span class="contact-link-label">LINKEDIN</span>
+        <span class="contact-link-value">Connect</span>
+        <span class="contact-link-arrow">→</span>
+      </a>
+      <a class="contact-link" href="https://www.imdb.com/name/nm11881226/" target="_blank">
+        <span class="contact-link-label">IMDB</span>
+        <span class="contact-link-value">View Credits</span>
+        <span class="contact-link-arrow">→</span>
+      </a>
     </div>
   </div>
 </section>
 
 <footer>
-  <p>© 2026 Nicholas Griffo</p>
-  <p>Creative Director — AI Specialist — Los Angeles</p>
+  <p>© 2026 NICHOLAS GRIFFO</p>
+  <p>DIRECTOR — CREATIVE TECHNOLOGIST — LOS ANGELES</p>
 </footer>
 
-<script>
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
-
-  reveals.forEach(el => observer.observe(el));
-
-  // Stagger children inside grids
-  document.querySelectorAll('.projects-grid .reveal').forEach((el, i) => {
-    el.style.transitionDelay = `${(i % 2) * 0.12}s`;
-  });
-</script>
 </body>
 </html>
