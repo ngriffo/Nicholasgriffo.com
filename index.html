@@ -16,6 +16,7 @@
     --mid: #6b6860;
     --rule: #d8d5ce;
     --accent: #1a1a18;
+    --flame: #c4471f;
     --warm-white: #faf9f6;
   }
 
@@ -70,7 +71,7 @@
     transition: color 0.2s;
   }
 
-  .nav-links a:hover { color: var(--ink); }
+  .nav-links a:hover { color: var(--flame); }
 
   /* HERO */
   .hero {
@@ -111,6 +112,7 @@
   .hero-headline em {
     font-style: italic;
     font-weight: 300;
+    color: var(--flame);
   }
 
   .hero-sub {
@@ -138,7 +140,7 @@
     width: fit-content;
   }
 
-  .hero-cta:hover { opacity: 0.5; }
+  .hero-cta:hover { color: var(--flame); border-color: var(--flame); opacity: 1; }
 
   .hero-footer {
     display: flex;
@@ -160,6 +162,7 @@
     font-weight: 300;
     line-height: 1;
     display: block;
+    color: var(--flame);
   }
   .stat-label {
     font-family: 'DM Mono', monospace;
@@ -200,6 +203,15 @@
     gap: 1rem;
   }
 
+  .section-label::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--flame);
+    border-radius: 50%;
+    display: inline-block;
+  }
+
   .section-label::after {
     content: '';
     display: block;
@@ -222,7 +234,7 @@
     color: var(--ink);
   }
 
-  .thesis-headline em { font-style: italic; }
+  .thesis-headline em { font-style: italic; color: var(--flame); }
 
   .thesis-body {
     display: grid;
@@ -293,6 +305,33 @@
     border: 1px solid var(--rule);
     padding: 0.3rem 0.65rem;
     border-radius: 2px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .project-card:hover .tag {
+    border-color: rgba(196,71,31,0.3);
+  }
+
+  .project-trailer-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 1.25rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--mid);
+    text-decoration: none;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 0.2rem;
+    width: fit-content;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .project-trailer-link:hover {
+    color: var(--flame);
+    border-color: var(--flame);
   }
 
   .project-card.featured {
@@ -312,43 +351,28 @@
     background: var(--ink);
     height: 280px;
     border-radius: 2px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     overflow: hidden;
     position: relative;
   }
 
-  .featured-visual-inner {
+  .featured-visual-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .featured-visual-img {
     width: 100%;
     height: 100%;
-    background: linear-gradient(135deg, #1a1a18 0%, #2d2d28 50%, #1a1a18 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+    object-fit: cover;
+    object-position: center 30%;
+    display: block;
+    filter: saturate(1.03) contrast(1.02);
+    transition: transform 0.5s ease;
   }
 
-  /* Subtle film-frame grid overlay */
-  .featured-visual-inner::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: 
-      linear-gradient(rgba(247,245,240,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(247,245,240,0.04) 1px, transparent 1px);
-    background-size: 40px 40px;
-  }
-
-  .featured-visual-text {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 0.8rem;
-    font-style: italic;
-    color: rgba(247,245,240,0.3);
-    letter-spacing: 0.08em;
-    position: relative;
-    z-index: 1;
-    text-align: center;
+  .project-card.featured:hover .featured-visual-img {
+    transform: scale(1.04);
   }
 
   /* SKILLS / TRANSLATION */
@@ -390,7 +414,7 @@
   }
 
   .td-arrow {
-    color: var(--rule);
+    color: var(--flame);
     width: 6%;
     font-family: 'DM Mono', monospace;
     font-size: 0.8rem;
@@ -427,7 +451,7 @@
     color: var(--ink);
   }
 
-  .contact-headline em { font-style: italic; }
+  .contact-headline em { font-style: italic; color: var(--flame); }
 
   .contact-links {
     display: flex;
@@ -467,7 +491,10 @@
     font-family: 'DM Mono', monospace;
     font-size: 0.8rem;
     color: var(--rule);
+    transition: color 0.2s;
   }
+
+  .contact-link:hover .contact-link-arrow { color: var(--flame); }
 
   /* FOOTER */
   footer {
@@ -536,15 +563,15 @@
 <!-- HERO -->
 <header class="hero">
   <div class="hero-body">
-    <p class="hero-eyebrow">Creative Director &amp; AI Specialist — Los Angeles / Open to San Francisco</p>
+    <p class="hero-eyebrow">Creative Director &amp; AI Specialist — Los Angeles, Relocating to San Francisco</p>
     <h1 class="hero-headline">
       The best creative directors<br>
       don't just have taste —<br>
       <em>they build what doesn't exist yet.</em>
     </h1>
     <p class="hero-sub">
-      I've spent a decade constructing physical worlds for Google, Meta, and Coachella. 
-      Now I work at the frontier of generative AI, shaping what machines learn to see. 
+      I build environments that have to feel real — sets, installations, worlds. 
+      Physical ones first. Now the kind machines generate. 
       I'm looking for the team that's building the next canvas.
     </p>
     <a href="#work" class="hero-cta">View selected work →</a>
@@ -580,8 +607,8 @@
       <p>
         I started as a camera assistant on NYC productions, learning that the gap between 
         a good shot and a great one is always craft — not budget. That instinct followed me 
-        into production design, where I built sets for Google and Meta that had to feel real 
-        enough to disappear. The invisible work is the hardest. It's also the most valuable.
+        into production design, building sets and environments that had to feel real enough 
+        to disappear. The invisible work is the hardest. It's also the most valuable.
       </p>
       <p>
         Today I evaluate generative AI outputs for frontier model labs through Mercor — 
@@ -598,46 +625,45 @@
   <p class="section-label">Selected Work</p>
   <div class="projects-grid">
 
-    <!-- Featured -->
+    <!-- Featured: Coachella -->
     <div class="project-card featured reveal">
       <div>
-        <p class="project-client">Mercor — Ongoing</p>
-        <h3 class="project-title">Training Frontier AI to See</h3>
+        <p class="project-client">Fuller Street Productions — Coachella 2025</p>
+        <h3 class="project-title">Immersive Installations at Scale</h3>
         <p class="project-desc">
-          As an AI Expert and Creative Specialist, I evaluate generative video, images, and 
-          scene outputs for leading AI labs — applying film production expertise to assess 
-          visual realism, spatial coherence, lighting logic, and continuity. I also generate 
-          and refine multimodal training data that shapes what the next generation of models 
-          considers "correct." This is the work that closes the uncanny valley.
+          Built large-scale custom installations for Always &amp; Tampax, Tito's, BRUNCH!, 
+          and Olipop activations — constructed entirely in-warehouse and shipped to site 
+          under live-event deadlines. Physical world-building at its most unforgiving — 
+          no retakes, no renders, just craft and problem-solving under pressure.
         </p>
         <div class="project-tags">
-          <span class="tag">Generative AI</span>
-          <span class="tag">Visual Evaluation</span>
-          <span class="tag">Multimodal Training Data</span>
-          <span class="tag">Production Expertise</span>
+          <span class="tag">Fabrication</span>
+          <span class="tag">Experiential Design</span>
+          <span class="tag">Live Event</span>
+          <span class="tag">Installation</span>
         </div>
       </div>
-      <div class="featured-visual">
-        <div class="featured-visual-inner">
-          <p class="featured-visual-text">[ Add image or screen capture here ]</p>
-        </div>
+      <div class="featured-visual featured-visual-split">
+        <img src="titos-warehouse.jpg" alt="Tito's installation under construction in the Fuller Street Productions warehouse" class="featured-visual-img">
+        <img src="coachella-tampax.jpg" alt="Always & Tampax installation at Coachella 2025, built by Fuller Street Productions" class="featured-visual-img">
       </div>
     </div>
 
-    <!-- Coachella -->
+    <!-- Mercor -->
     <div class="project-card reveal">
-      <p class="project-client">Fuller Street Productions — Coachella 2025</p>
-      <h3 class="project-title">Immersive Installations at Scale</h3>
+      <p class="project-client">Mercor — Ongoing</p>
+      <h3 class="project-title">Training Frontier AI to See</h3>
       <p class="project-desc">
-        Built large-scale custom installations and props for Coachella, Tito's, BRUNCH!, 
-        and Olipop activations under live-event deadlines. Physical world-building at its 
-        most unforgiving — no retakes, no renders, just craft and problem-solving under pressure.
+        As an AI Expert and Creative Specialist, I evaluate generative video, image, and 
+        scene outputs for leading AI labs — applying film production expertise to assess 
+        visual realism, spatial coherence, lighting logic, and continuity. This is the work 
+        that closes the uncanny valley.
       </p>
       <div class="project-tags">
-        <span class="tag">Fabrication</span>
-        <span class="tag">Experiential Design</span>
-        <span class="tag">Live Event</span>
-        <span class="tag">Installation</span>
+        <span class="tag">Generative AI</span>
+        <span class="tag">Visual Evaluation</span>
+        <span class="tag">Multimodal Training Data</span>
+        <span class="tag">Production Expertise</span>
       </div>
     </div>
 
@@ -692,6 +718,9 @@
         <span class="tag">Multi-location</span>
         <span class="tag">Feature Film</span>
       </div>
+      <a href="https://www.youtube.com/watch?v=QPNSytJXnFk" target="_blank" rel="noopener" class="project-trailer-link">
+        ▶ Watch Trailer
+      </a>
     </div>
 
   </div>
@@ -755,14 +784,14 @@
   <p class="section-label">Let's Talk</p>
   <div class="contact-inner reveal">
     <h2 class="contact-headline">
-      If you're building<br>something that<br><em>doesn't exist yet</em>,<br>
-      I want in.
+      I'm already building<br>what's <em>next.</em><br>
+      The right room<br>just speeds it up.
     </h2>
     <div>
       <p style="font-size: 0.9rem; color: var(--mid); line-height: 1.8; margin-bottom: 2rem;">
-        Open to full-time creative leadership roles at AI video companies, entertainment studios 
-        building AI pipelines, and early-stage startups that need a first creative hire who can 
-        both think and build. Based in LA. Willing to relocate to San Francisco.
+        I'm looking for the team building the next canvas — an AI video company, a studio 
+        rethinking its pipeline, or a startup that needs its first real creative force. 
+        Based in LA. Relocating to San Francisco for the right room.
       </p>
       <div class="contact-links">
         <a class="contact-link" href="mailto:nicholasgriffo@hotmail.com">
