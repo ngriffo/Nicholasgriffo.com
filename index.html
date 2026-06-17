@@ -349,30 +349,27 @@
 
   .featured-visual {
     background: var(--ink);
-    height: 280px;
+    height: 200px;
     border-radius: 2px;
     overflow: hidden;
     position: relative;
-  }
-
-  .featured-visual-split {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
+    align-self: center;
   }
 
   .featured-visual-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 30%;
+    object-position: center 35%;
     display: block;
-    filter: saturate(1.03) contrast(1.02);
-    transition: transform 0.5s ease;
+    filter: saturate(0.82) contrast(0.96) brightness(0.94);
+    opacity: 0.92;
+    transition: filter 0.4s ease, opacity 0.4s ease;
   }
 
   .project-card.featured:hover .featured-visual-img {
-    transform: scale(1.04);
+    filter: saturate(0.95) contrast(1) brightness(1);
+    opacity: 1;
   }
 
   /* SKILLS / TRANSLATION */
@@ -572,7 +569,7 @@
     <p class="hero-sub">
       I build environments that have to feel real — sets, installations, worlds. 
       Physical ones first. Now the kind machines generate. 
-      I'm looking for the team that's building the next canvas.
+      I'm finding the team building the next canvas.
     </p>
     <a href="#work" class="hero-cta">View selected work →</a>
   </div>
@@ -642,10 +639,6 @@
           <span class="tag">Live Event</span>
           <span class="tag">Installation</span>
         </div>
-      </div>
-      <div class="featured-visual featured-visual-split">
-        <img src="titos-warehouse.jpg" alt="Tito's installation under construction in the Fuller Street Productions warehouse" class="featured-visual-img">
-        <img src="coachella-tampax.jpg" alt="Always & Tampax installation at Coachella 2025, built by Fuller Street Productions" class="featured-visual-img">
       </div>
     </div>
 
@@ -785,13 +778,13 @@
   <div class="contact-inner reveal">
     <h2 class="contact-headline">
       I'm already building<br>what's <em>next.</em><br>
-      The right room<br>just speeds it up.
+      The right team<br>accelerates it.
     </h2>
     <div>
       <p style="font-size: 0.9rem; color: var(--mid); line-height: 1.8; margin-bottom: 2rem;">
-        I'm looking for the team building the next canvas — an AI video company, a studio 
+        I'm finding the team building the next canvas — an AI video company, a studio 
         rethinking its pipeline, or a startup that needs its first real creative force. 
-        Based in LA. Relocating to San Francisco for the right room.
+        Based in LA. Relocating to San Francisco.
       </p>
       <div class="contact-links">
         <a class="contact-link" href="mailto:nicholasgriffo@hotmail.com">
@@ -804,14 +797,14 @@
           <span class="contact-link-value">919-961-1382</span>
           <span class="contact-link-arrow">→</span>
         </a>
-        <a class="contact-link" href="#" target="_blank">
+        <a class="contact-link" href="https://www.linkedin.com/in/nicholas-griffo-79a38030a/" target="_blank">
           <span class="contact-link-label">LinkedIn</span>
-          <span class="contact-link-value">Add your LinkedIn URL</span>
+          <span class="contact-link-value">Connect</span>
           <span class="contact-link-arrow">→</span>
         </a>
-        <a class="contact-link" href="#" target="_blank">
+        <a class="contact-link" href="https://www.imdb.com/name/nm11881226/" target="_blank">
           <span class="contact-link-label">IMDb</span>
-          <span class="contact-link-value">Add your IMDb link</span>
+          <span class="contact-link-value">View Credits</span>
           <span class="contact-link-arrow">→</span>
         </a>
       </div>
