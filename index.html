@@ -14,7 +14,7 @@
     --void: #08070A;
     --void-2: #0F0D10;
     --paper: #E9E5DC;
-    --dim: #726F68;
+    --dim: #9C978E;
     --hair: #201C1A;
     --gas: #C9A227;
     --gas-bright: #E8BF3C;
@@ -330,7 +330,11 @@
   }
   .trailer-link:hover { text-decoration: underline; }
 
-  .translation-table { width: 100%; border-collapse: collapse; }
+  .table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .translation-table { width: 100%; min-width: 780px; border-collapse: collapse; }
   .translation-table th {
     font-family: 'JetBrains Mono', monospace; font-size: 0.64rem; letter-spacing: 0.05em; text-transform: uppercase;
     color: var(--dim); text-align: left; padding: 1.1rem 2rem; border-bottom: 1px solid var(--hair);
@@ -378,7 +382,6 @@
     .thesis-body { column-count: 1; }
     .project-row { grid-template-columns: 1fr; }
     .project-client { text-align: left; }
-    .translation-table, .translation-table thead { display: none; }
     .contact-links { grid-template-columns: 1fr; }
   }
 
@@ -549,7 +552,8 @@
 
 <section id="translation">
   <p class="section-label reveal"><span>WHY FILM → AI</span> <span class="tc mono">FRAME 03</span></p>
-  <table class="translation-table reveal">
+  <div class="table-scroll reveal">
+  <table class="translation-table">
     <thead>
       <tr><th>What I Did On Set</th><th></th><th>What That Means For AI</th><th>Why It Matters</th></tr>
     </thead>
@@ -562,6 +566,7 @@
       <tr><td class="td-film">Shooting on 16mm</td><td class="td-arrow mono">→</td><td class="td-ai">High-stakes, low-margin-for-error decision-making. No undo button.</td><td class="td-why">Permanent decisions build better judgment than infinite iteration.</td></tr>
     </tbody>
   </table>
+  </div>
 </section>
 
 <section id="contact">
