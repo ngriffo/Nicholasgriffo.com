@@ -1,638 +1,306 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Nicholas Griffo</title>
-<link rel="icon" type="image/png" href="favicon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=M+PLUS+1:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Nicholas Griffo — Films</title>
+  <link rel="stylesheet" href="https://use.typekit.net/jbi5gtg.css">
+  <style>
 
-  :root {
-    --void: #08070A;
-    --void-2: #0F0D10;
-    --paper: #E9E5DC;
-    --dim: #9C978E;
-    --hair: #201C1A;
-    --gas: #C9A227;
-    --gas-bright: #E8BF3C;
-    --gas-dim: #4A3B14;
-  }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  ::selection { background: var(--gas); color: var(--void); }
+    body {
+      font-family: 'adobe-caslon-pro', 'Caslon', serif;
+      background-color: #000;
+      color: #fff;
+      border: 0.1in solid #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      overflow-x: hidden;
+      position: relative;
+    }
 
-  html { scroll-behavior: smooth; background: var(--void); }
+    /* NAV */
+    .nav {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 32px 0;
+      flex-shrink: 0;
+    }
 
-  body {
-    background: var(--void);
-    color: var(--paper);
-    font-family: 'M PLUS 1', sans-serif;
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
-    -webkit-tap-highlight-color: transparent;
-  }
+    .nav a {
+      font-family: 'adobe-caslon-pro', 'Caslon', serif;
+      font-size: 0.5rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.28);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
 
-  a { color: inherit; -webkit-tap-highlight-color: transparent; }
-  .mono { font-family: 'JetBrains Mono', monospace; }
-  .display { font-family: 'Anton', sans-serif; }
+    .nav a:hover { color: rgba(255,255,255,0.65); }
 
-  /* film grain, fixed over everything */
-  .grain {
-    position: fixed; inset: 0; z-index: 300; pointer-events: none;
-    opacity: 0.05; mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    animation: grain-shift 0.4s steps(4) infinite;
-  }
-  @keyframes grain-shift {
-    0%,100% { transform: translate(0,0); }
-    50% { transform: translate(-2%,1%); }
-  }
+    /* BYLINE — below nav, centered */
+    .byline {
+      width: 100%;
+      text-align: center;
+      font-size: 0.55rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.22);
+      padding: 14px 0 0;
+      flex-shrink: 0;
+      animation: fadeIn 3s forwards;
+    }
 
-  /* vignette */
-  .vignette {
-    position: fixed; inset: 0; z-index: 290; pointer-events: none;
-    background: radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,0.75) 100%);
-  }
+    /* TITLES BLOCK — takes remaining space above logline zone */
+    .main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding: 20px 40px 0;
+      /* leave 32vh for logline at bottom */
+      margin-bottom: 32vh;
+    }
 
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-    display: flex; justify-content: space-between; align-items: center;
-    padding: calc(1.4rem + env(safe-area-inset-top)) calc(2rem + env(safe-area-inset-right)) 1.4rem calc(2rem + env(safe-area-inset-left));
-    mix-blend-mode: difference;
-  }
-  .nav-name {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.06em;
-    text-decoration: none; color: var(--paper);
-  }
-  .nav-tc {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem; color: var(--paper); letter-spacing: 0.03em;
-  }
+    /* FILM LIST */
+    .film-list {
+      list-style: none;
+      width: fit-content;
+    }
 
-  /* HERO — converging road lines receding into darkness */
-  .hero {
-    height: 100vh;
-    height: 100dvh;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    border-bottom: 1px solid var(--hair);
-  }
+    .film-list li {
+      line-height: 1;
+      margin-bottom: 36px;
+    }
 
-  .road-lines {
-    position: absolute; inset: 0;
-    display: flex; justify-content: center;
-    z-index: 1;
-    filter: blur(0.4px);
-  }
+    .film-list li:last-child { margin-bottom: 0; }
 
-  .road-lines svg {
-    width: 160%; height: 160%;
-    opacity: 0.5;
-  }
+    .film-link {
+      display: block;
+      color: #fff;
+      text-decoration: none;
+    }
 
-  .atmosphere {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    overflow: hidden;
-  }
+    .film-title {
+      font-family: 'adobe-caslon-pro', 'Caslon', serif;
+      display: block;
+      font-size: 0.9em;
+      transform: scaleY(4.2);
+      transform-origin: left center;
+      white-space: nowrap;
+      text-align: left;
+      text-shadow: 0 0 4px rgba(255,255,255,0.2);
+      transition: text-shadow 0.4s;
+      cursor: pointer;
+      letter-spacing: 0.05em;
+    }
 
-  .headlights {
-    position: absolute;
-    display: flex;
-    gap: 2.6vw;
-    bottom: 14%;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    animation: headlights-pass 34s ease-in-out infinite;
-    animation-delay: 4s;
-  }
-  .headlight {
-    width: 1.6vw; height: 1.6vw;
-    min-width: 14px; min-height: 14px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(232,191,60,0.85) 0%, rgba(201,162,39,0.3) 45%, transparent 75%);
-    filter: blur(2.5px);
-    box-shadow: 0 0 30px 8px rgba(201,162,39,0.3);
-  }
-  @keyframes headlights-pass {
-    0%   { opacity: 0; transform: translateX(-56%) translateY(30px) scale(0.6); }
-    6%   { opacity: 0.5; }
-    18%  { opacity: 0.65; transform: translateX(-50%) translateY(0) scale(1); }
-    30%  { opacity: 0.2; transform: translateX(-44%) translateY(-20px) scale(1.4); }
-    38%  { opacity: 0; }
-    100% { opacity: 0; }
-  }
+    .film-link:hover .film-title {
+      text-shadow:
+        0 0 6px #fff,
+        0 0 18px rgba(255,252,240,0.45),
+        0 0 38px rgba(255,252,240,0.15);
+    }
 
-  .fog-layer {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(70px);
-    pointer-events: none;
-    mix-blend-mode: screen;
-  }
-  .fog-1 {
-    width: 46vw; height: 30vw;
-    top: 18%; left: 8%;
-    background: radial-gradient(ellipse, rgba(201,162,39,0.14) 0%, transparent 70%);
-    animation: drift-a 22s ease-in-out infinite;
-  }
-  .fog-2 {
-    width: 55vw; height: 38vw;
-    bottom: 8%; right: 5%;
-    background: radial-gradient(ellipse, rgba(74,59,20,0.22) 0%, transparent 72%);
-    animation: drift-b 28s ease-in-out infinite;
-  }
-  .fog-3 {
-    width: 30vw; height: 30vw;
-    top: 40%; left: 45%;
-    background: radial-gradient(circle, rgba(232,191,60,0.1) 0%, transparent 70%);
-    animation: drift-c 18s ease-in-out infinite;
-  }
-  @keyframes drift-a {
-    0%,100% { transform: translate(0,0) scale(1); }
-    50% { transform: translate(4vw,-2vw) scale(1.15); }
-  }
-  @keyframes drift-b {
-    0%,100% { transform: translate(0,0) scale(1); }
-    50% { transform: translate(-3vw,3vw) scale(1.1); }
-  }
-  @keyframes drift-c {
-    0%,100% { transform: translate(-50%,-50%) scale(0.9); opacity: 0.7; }
-    50% { transform: translate(-45%,-55%) scale(1.2); opacity: 1; }
-  }
+    /* LOGLINE ZONE — fixed to bottom */
+    .logline-area {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 32vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 0 60px 28px;
+      pointer-events: none;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
 
-  .hero-glow {
-    position: absolute;
-    width: 55vw; height: 55vw;
-    top: 50%; left: 50%;
-    transform: translate(-50%,-50%);
-    background: radial-gradient(circle, rgba(201,162,39,0.16) 0%, transparent 65%);
-    z-index: 2;
-    pointer-events: none;
-    animation: glow-flicker 7s ease-in-out infinite;
-  }
-  @keyframes glow-flicker {
-    0%, 100% { opacity: 0.55; transform: translate(-50%,-50%) scale(1); }
-    38% { opacity: 0.85; transform: translate(-50%,-50%) scale(1.05); }
-    52% { opacity: 0.4; }
-    70% { opacity: 0.9; transform: translate(-50%,-50%) scale(1.1); }
-  }
+    .logline-text {
+      font-family: 'adobe-caslon-pro', 'Caslon', serif;
+      font-size: 11px;
+      font-style: italic;
+      color: rgba(255,255,255,0.0);
+      text-align: center;
+      max-width: 560px;
+      line-height: 2;
+      letter-spacing: 0.04em;
+      transition: color 0.5s;
+      margin-bottom: 18px;
+    }
 
-  .hero-content {
-    position: relative;
-    z-index: 5;
-    text-align: center;
-    padding: 0 1.5rem;
-    will-change: transform;
-  }
+    .logline-text.visible {
+      color: rgba(255,255,255,0.6);
+      pointer-events: auto;
+    }
 
-  .hero-tag {
-    display: inline-flex; align-items: center; gap: 0.6rem;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
-    color: var(--dim); margin-bottom: 1.4rem;
-  }
+    .logline-inquire {
+      font-family: 'adobe-caslon-pro', 'Caslon', serif;
+      font-size: 9px;
+      font-style: italic;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.0);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0);
+      padding-bottom: 2px;
+      transition: color 0.5s, border-color 0.5s;
+      pointer-events: none;
+    }
 
-  .hero-byline {
-    font-family: 'Anton', sans-serif;
-    text-transform: uppercase;
-    font-size: clamp(1.1rem, 2.4vw, 1.7rem);
-    letter-spacing: 0.04em;
-    color: var(--paper);
-    transform: skewX(-12deg);
-    display: inline-block;
-    margin-bottom: 1.6rem;
-    text-shadow: 0 0 20px rgba(0,0,0,0.7);
-  }
+    .logline-inquire.visible {
+      color: rgba(255,255,255,0.28);
+      border-color: rgba(255,255,255,0.15);
+      pointer-events: auto;
+    }
 
-  .hero-headline {
-    font-family: 'Anton', sans-serif;
-    font-weight: 400;
-    text-transform: uppercase;
-    font-size: clamp(3rem, 9.6vw, 7.6rem);
-    line-height: 0.94;
-    letter-spacing: 0.01em;
-    max-width: 1300px;
-    color: var(--paper);
-    text-shadow: 0 0 1px rgba(0,0,0,0.6), 0 2px 40px rgba(0,0,0,0.85);
-  }
+    .logline-inquire:hover {
+      color: rgba(255,255,255,0.8) !important;
+      border-color: rgba(255,255,255,0.5) !important;
+    }
 
-  .hero-headline .hl {
-    color: var(--gas-bright);
-    text-shadow: 0 0 24px rgba(232,191,60,0.55), 0 0 60px rgba(201,162,39,0.35);
-  }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
 
-  .hero-sub {
-    margin-top: 2.2rem;
-    font-size: 1rem;
-    color: var(--dim);
-    max-width: 520px;
-    margin-left: auto; margin-right: auto;
-    line-height: 1.8;
-  }
+    @media (max-width: 600px) {
+      .film-title { font-size: 0.7em; transform: scaleY(4); }
+      .film-list li { margin-bottom: 16px; }
+      .main { padding: 10px 20px 0; }
+      .logline-area { padding: 0 24px 20px; }
+      .logline-text { font-size: 10px; }
+    }
 
-  .scroll-cue {
-    position: absolute;
-    bottom: 2.5rem; left: 50%; transform: translateX(-50%);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--dim);
-    z-index: 5;
-    display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
-  }
-  .scroll-cue-line {
-    width: 1px; height: 32px; background: var(--dim);
-    animation: cue-drop 2s ease-in-out infinite;
-  }
-  @keyframes cue-drop {
-    0% { transform: scaleY(0); transform-origin: top; }
-    50% { transform: scaleY(1); transform-origin: top; }
-    50.1% { transform-origin: bottom; }
-    100% { transform: scaleY(0); transform-origin: bottom; }
-  }
-
-  /* reveal-on-scroll */
-  .reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 1s cubic-bezier(.16,.8,.24,1), transform 1s cubic-bezier(.16,.8,.24,1);
-  }
-  .reveal.in-view { opacity: 1; transform: translateY(0); }
-
-  section { position: relative; border-bottom: 1px solid var(--hair); background: rgba(8,7,10,0.93); z-index: 1; }
-
-  .section-label {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase;
-    padding: 1.2rem 2rem; border-bottom: 1px solid var(--hair);
-    color: var(--dim);
-    display: flex; justify-content: space-between;
-    background: var(--void-2);
-  }
-  .section-label .tc { color: var(--gas-bright); }
-
-  .thesis-block { padding: 4rem 2rem; }
-
-  .thesis-headline {
-    font-family: 'Anton', sans-serif;
-    font-size: clamp(1.7rem, 3.6vw, 2.9rem);
-    line-height: 1.3;
-    max-width: 900px;
-    margin-bottom: 3rem;
-    color: var(--paper);
-  }
-  .thesis-headline .hl { color: var(--gas-bright); }
-
-  .thesis-body {
-    column-count: 2;
-    column-gap: 3rem;
-    max-width: 1100px;
-  }
-  .thesis-body p { font-size: 0.92rem; line-height: 1.85; color: var(--dim); margin-bottom: 1.6rem; break-inside: avoid; }
-
-  .project-row {
-    display: grid;
-    grid-template-columns: 100px 1fr 170px;
-    border-bottom: 1px solid var(--hair);
-    padding: 2rem;
-    gap: 1.5rem;
-    align-items: start;
-    transition: background 0.3s;
-  }
-  .project-row:last-child { border-bottom: none; }
-  .project-row:hover { background: var(--void-2); }
-  .project-row:hover .project-num { color: var(--gas-bright); }
-
-  .project-num { font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: var(--gas-dim); padding-top: 0.15rem; }
-  .project-content { display: flex; flex-direction: column; }
-  .project-title { font-family: 'Anton', sans-serif; text-transform: uppercase; letter-spacing: 0.01em; font-size: 1.5rem; margin-bottom: 0.7rem; color: var(--paper); }
-  .project-desc { font-size: 0.87rem; line-height: 1.75; color: var(--dim); max-width: 640px; }
-
-  .project-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.1rem; }
-  .ptag { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.03em; text-transform: uppercase; color: var(--dim); border: 1px solid var(--hair); padding: 0.28rem 0.55rem; }
-
-  .project-client { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--dim); text-align: right; }
-
-  .trailer-link {
-    display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 1.2rem;
-    font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.03em; text-transform: uppercase;
-    text-decoration: none; color: var(--gas-bright); width: fit-content;
-  }
-  .trailer-link:hover { text-decoration: underline; }
-
-  .table-scroll {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  .translation-table { width: 100%; min-width: 780px; border-collapse: collapse; }
-  .translation-table th {
-    font-family: 'JetBrains Mono', monospace; font-size: 0.64rem; letter-spacing: 0.05em; text-transform: uppercase;
-    color: var(--dim); text-align: left; padding: 1.1rem 2rem; border-bottom: 1px solid var(--hair);
-  }
-  .translation-table td { padding: 1.2rem 2rem; border-bottom: 1px solid var(--hair); font-size: 0.86rem; line-height: 1.6; vertical-align: top; }
-  .translation-table tr:last-child td { border-bottom: none; }
-  .translation-table tr:hover td { background: var(--void-2); }
-  .td-film { color: var(--paper); font-weight: 600; width: 190px; }
-  .td-arrow { color: var(--gas-dim); width: 30px; }
-  .td-ai { color: var(--paper); width: 32%; }
-  .td-why { color: var(--dim); }
-
-  .contact-block { padding: 5rem 2rem 6rem; text-align: center; }
-  .contact-headline {
-    font-family: 'Anton', sans-serif; text-transform: uppercase; letter-spacing: 0.005em;
-    font-size: clamp(2rem, 5.4vw, 3.8rem);
-    line-height: 1.1; max-width: 1000px; margin: 0 auto 1.5rem;
-    color: var(--paper);
-  }
-  .contact-headline .hl { color: var(--gas-bright); }
-  .contact-sub { font-size: 0.96rem; color: var(--dim); max-width: 520px; margin: 0 auto 3rem; line-height: 1.7; }
-
-  .contact-links {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px;
-    background: var(--hair); max-width: 700px; border: 1px solid var(--hair);
-    margin: 0 auto;
-  }
-  .contact-link {
-    background: var(--void); padding: 1.3rem 1.5rem; text-decoration: none;
-    display: flex; flex-direction: column; gap: 0.3rem; text-align: left;
-    transition: background 0.25s;
-  }
-  .contact-link:hover { background: var(--void-2); }
-  .contact-link-label { font-family: 'JetBrains Mono', monospace; font-size: 0.62rem; letter-spacing: 0.05em; text-transform: uppercase; color: var(--dim); }
-  .contact-link-value { font-size: 0.96rem; font-weight: 600; color: var(--paper); }
-  .contact-link-arrow { font-family: 'JetBrains Mono', monospace; color: var(--gas-bright); font-size: 0.8rem; margin-top: 0.2rem; }
-
-  footer {
-    padding: 1.6rem 2rem; display: flex; justify-content: space-between;
-    font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; color: var(--dim);
-    background: var(--void);
-  }
-
-  @media (max-width: 720px) {
-    .thesis-body { column-count: 1; }
-    .project-row { grid-template-columns: 1fr; }
-    .project-client { text-align: left; }
-    .contact-links { grid-template-columns: 1fr; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    * { animation: none !important; transition: none !important; }
-    .reveal { opacity: 1; transform: none; }
-  }
-</style>
+  </style>
 </head>
 <body>
 
-<div class="grain"></div>
-<div class="vignette"></div>
-<div class="atmosphere">
-  <div class="fog-layer fog-1"></div>
-  <div class="fog-layer fog-2"></div>
-  <div class="fog-layer fog-3"></div>
-  <div class="headlights">
-    <div class="headlight"></div>
-    <div class="headlight"></div>
-  </div>
-</div>
+  <!-- NAV -->
+  <nav class="nav">
+    <a href="/portfolio.html">portfolio →</a>
+    <a href="mailto:film@nicholasgriffo.com">film@nicholasgriffo.com</a>
+  </nav>
 
-<nav>
-  <a href="#" class="nav-name">NICHOLAS GRIFFO</a>
-  <span class="nav-tc mono" id="tc">00:00:00:00</span>
-</nav>
+  <!-- BYLINE — in document flow, below nav -->
+  <p class="byline">Screenplays by Nicholas Griffo</p>
 
-<header class="hero" id="heroSection">
-  <div class="road-lines">
-    <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <filter id="soft1"><feGaussianBlur stdDeviation="2.5"/></filter>
-        <filter id="soft2"><feGaussianBlur stdDeviation="0.6"/></filter>
-      </defs>
-      <path d="M 400 820 Q 250 500 120 -20" stroke="#E8BF3C" stroke-width="1.4" opacity="0.22" fill="none" filter="url(#soft1)"/>
-      <path d="M 400 820 Q 560 480 700 -20" stroke="#E8BF3C" stroke-width="1.4" opacity="0.2" fill="none" filter="url(#soft1)"/>
-      <path d="M 400 820 Q 320 460 250 20" stroke="#4A3B14" stroke-width="1" opacity="0.4" fill="none" filter="url(#soft2)"/>
-      <path d="M 400 820 Q 490 460 560 20" stroke="#4A3B14" stroke-width="1" opacity="0.4" fill="none" filter="url(#soft2)"/>
-      <path d="M 400 820 Q 405 400 395 40" stroke="#726F68" stroke-width="0.8" opacity="0.3" fill="none" filter="url(#soft2)"/>
-    </svg>
-  </div>
-  <div class="fog-layer fog-1"></div>
-  <div class="fog-layer fog-2"></div>
-  <div class="fog-layer fog-3"></div>
-  <div class="hero-glow"></div>
-  <div class="hero-content" id="heroContent">
-    <span class="hero-tag">FRONTIER FILMMAKER / LOS ANGELES CALIF.</span>
-    <br>
-    <span class="hero-byline">NICHOLAS C. GRIFFO</span>
-    <h1 class="hero-headline">
-      A feeling isn't finished until it's <span class="hl">real.</span>
-    </h1>
-    <p class="hero-sub">
-      I build environments that have to feel real. Sets, installations, worlds. Every one of them in service of a story. Physical worlds first. Now commanding the evolution into a chimera of the physical and the imagined.
-    </p>
-  </div>
-  <div class="scroll-cue">
-    <span>SCROLL</span>
-    <span class="scroll-cue-line"></span>
-  </div>
-</header>
-
-<section id="about">
-  <p class="section-label reveal"><span>ABOUT</span> <span class="tc mono">FRAME 01</span></p>
-  <div class="thesis-block">
-    <h2 class="thesis-headline reveal">
-      Film is decisions made one frame at a time. AI is <span class="hl">the same decisions made at scale.</span>
-    </h2>
-    <div class="thesis-body reveal">
-      <p>
-        I'm a filmmaker, writer, and creative technologist. Two screenplays in development, written the old way, because the stories demand it. AI isn't making movies, it's a toolkit, and a powerful one at that.
-      </p>
-      <p>
-        I get the panic. They're scanning actors' faces and soon all cinema will be re-engineered slop. It isn't true. Every generation of filmmakers gets a new tool and the same conversation follows. The camera was going to kill painting. Sound was going to kill cinema. CGI was going to kill practical effects. None of it happened. What happened instead was that the best artists figured out what the new thing made possible and ran toward it. That's what I'm doing.
-      </p>
-      <p>
-        Six years building physical sets for Google, Meta, Coachella, and more than a dozen film productions, including a 16mm feature. The last year evaluating and improving generative AI models for a leading AI lab. I know what a set needs to feel real before the camera rolls, and I know what a generated frame has to feel like before it goes anywhere.
-      </p>
-      <p>
-        AI isn't coming for the storytellers. It's coming for the parts of production that were always in the way of the story. That's good news. That's actually great news.
-      </p>
-      <p>
-        I write stories a model couldn't invent on its own. Built specifically to live in the gap AI just opened, too strange for a traditional budget and too human to come from anywhere but a person.
-      </p>
-    </div>
-  </div>
-</section>
-
-<section id="work">
-  <p class="section-label reveal"><span>SELECTED WORK</span> <span class="tc mono">FRAME 02</span></p>
-
-  <div class="project-row reveal">
-    <span class="project-num mono">00:01</span>
-    <div class="project-content">
-      <h3 class="project-title">Immersive Installations at Scale</h3>
-      <p class="project-desc">Built large-scale custom installations for Always &amp; Tampax, Tito's, BRUNCH!, and Olipop activations. Constructed entirely in-warehouse and shipped to site under live-event deadlines. No retakes, no renders, just craft under pressure.</p>
-      <div class="project-tags">
-        <span class="ptag">Fabrication</span>
-        <span class="ptag">Experiential Design</span>
-        <span class="ptag">Live Event</span>
-        <span class="ptag">Installation</span>
-      </div>
-    </div>
-    <span class="project-client mono">Coachella 2025</span>
+  <!-- TITLES -->
+  <div class="main">
+    <ul class="film-list">
+      <li>
+        <a class="film-link" href="#" data-film="penetration">
+          <span class="film-title">PENETRATION INGO SWANN</span>
+        </a>
+      </li>
+      <li>
+        <a class="film-link" href="#" data-film="fuse">
+          <span class="film-title">THE WORLD IS MY FUSE</span>
+        </a>
+      </li>
+      <li>
+        <a class="film-link" href="#" data-film="patterns">
+          <span class="film-title">PATTERNS OF A CERTAIN SCIENTIFIC BIRD</span>
+        </a>
+      </li>
+      <li>
+        <a class="film-link" href="#" data-film="bloody">
+          <span class="film-title">BLOODY KNUCKLES</span>
+        </a>
+      </li>
+      <li>
+        <a class="film-link" href="#" data-film="creation">
+          <span class="film-title">MAN'S CREATION</span>
+        </a>
+      </li>
+    </ul>
   </div>
 
-  <div class="project-row reveal">
-    <span class="project-num mono">00:02</span>
-    <div class="project-content">
-      <h3 class="project-title">Creative Expertise for Generative AI</h3>
-      <p class="project-desc">Providing creative and visual expertise to help improve generative AI models for a leading AI lab. Applying six years of production design experience to assess and inform visual quality in AI-generated content.</p>
-      <div class="project-tags">
-        <span class="ptag">Generative AI</span>
-        <span class="ptag">Visual Expertise</span>
-        <span class="ptag">Independent Contractor</span>
-      </div>
-    </div>
-    <span class="project-client mono">Mercor Intelligence</span>
+  <!-- LOGLINE ZONE -->
+  <div class="logline-area">
+    <p class="logline-text" id="logline-text"></p>
+    <a class="logline-inquire" id="logline-inquire" href="#">Inquire</a>
   </div>
 
-  <div class="project-row reveal">
-    <span class="project-num mono">00:03</span>
-    <div class="project-content">
-      <h3 class="project-title">Sinking Cities</h3>
-      <p class="project-desc">Production designer on an indie 16mm thriller. Led all set design and fabrication, delivered under accelerated timelines. Shooting on film means every decision is permanent. That constraint sharpens everything.</p>
-      <div class="project-tags">
-        <span class="ptag">Production Design</span>
-        <span class="ptag">Set Fabrication</span>
-        <span class="ptag">16mm Film</span>
-        <span class="ptag">Budget Management</span>
-      </div>
-    </div>
-    <span class="project-client mono">Independent</span>
-  </div>
+  <script>
+    const films = {
+      penetration: {
+        text: "California, New York, Washington D.C. — 1973.\n\nIngo Swann, CIA-funded psychic at the Stanford Research Institute, is contracted by a secretive military figure for his ability to remote-view — dangerous and experimental moon-spying.\n\nBased on the memoir within Swann's 1998 book, Penetration.",
+        email: "mailto:film@nicholasgriffo.com?subject=Inquiry%20%E2%80%94%20PENETRATION%20INGO%20SWANN"
+      },
+      fuse: {
+        text: "Los Angeles, California.\n\nKevin Stranahan, former fraudster now commercial property flipper, seeks investment from old colleagues — inadvertently putting his business in the crosshairs of a group he once betrayed. Now they want him dead broke and humiliated.\n\nA bad man against worse.",
+        email: "mailto:film@nicholasgriffo.com?subject=Inquiry%20%E2%80%94%20THE%20WORLD%20IS%20MY%20FUSE"
+      },
+      patterns: {
+        text: "Canyonlands — Moab, Utah.\n\nA love story. A woman loves two men. They spend a season together in a fire-watch tower and witness hikers kidnapped by a wealthy cult under the pretense of finding crystals. This disturbs the nesting grounds of a certain scientific bird.",
+        email: "mailto:film@nicholasgriffo.com?subject=Inquiry%20%E2%80%94%20PATTERNS%20OF%20A%20CERTAIN%20SCIENTIFIC%20BIRD"
+      },
+      bloody: {
+        text: "Wilmington, North Carolina.\n\nA 27-year-old, clean from coke and pills, sets his life straight with a new job. He digs into old contracts — one belonging to a well-respected local official. He's dug too deep. Shadowy figures pursue him out of town, where a dark experience from his youth waits.",
+        email: "mailto:film@nicholasgriffo.com?subject=Inquiry%20%E2%80%94%20BLOODY%20KNUCKLES"
+      },
+      creation: {
+        text: "Few hours southwest of Tulsa, Oklahoma.\n\nA man's aunt dies suddenly, shocking her twin — his mother — into a coma. He stays to settle her affairs. A waitress likes him. Things just happen in the country. She gets pregnant. He tries to settle down. She grows obsessive. He grows restless. Her family grows jealous.",
+        email: "mailto:film@nicholasgriffo.com?subject=Inquiry%20%E2%80%94%20MAN'S%20CREATION"
+      }
+    };
 
-  <div class="project-row reveal">
-    <span class="project-num mono">00:04</span>
-    <div class="project-content">
-      <h3 class="project-title">Wave &amp; Real Tone</h3>
-      <p class="project-desc">Designed and built physical sets for two major social campaigns, Meta's 'Wave' and Google's 'Real Tone.' These had to hold up under the scrutiny of a camera that captures everything.</p>
-      <div class="project-tags">
-        <span class="ptag">Set Design</span>
-        <span class="ptag">Brand Campaign</span>
-        <span class="ptag">Meta</span>
-        <span class="ptag">Google</span>
-      </div>
-    </div>
-    <span class="project-client mono">Meta & Google</span>
-  </div>
+    const loglineText    = document.getElementById('logline-text');
+    const loglineInquire = document.getElementById('logline-inquire');
+    let active = null;
 
-  <div class="project-row reveal">
-    <span class="project-num mono">00:05</span>
-    <div class="project-content">
-      <h3 class="project-title">Indulgence</h3>
-      <p class="project-desc">Production designer across 10+ locations, leading a 5-person fabrication team. Managing that many environments simultaneously demands systems thinking.</p>
-      <div class="project-tags">
-        <span class="ptag">Production Design</span>
-        <span class="ptag">Team Leadership</span>
-        <span class="ptag">Multi-location</span>
-        <span class="ptag">Feature Film</span>
-      </div>
-      <a href="https://www.youtube.com/watch?v=QPNSytJXnFk" target="_blank" rel="noopener" class="trailer-link">▶ WATCH TRAILER</a>
-    </div>
-    <span class="project-client mono">Falling Dominoes</span>
-  </div>
-</section>
+    document.querySelectorAll('.film-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const key = this.dataset.film;
 
-<section id="translation">
-  <p class="section-label reveal"><span>WHY FILM → AI</span> <span class="tc mono">FRAME 03</span></p>
-  <div class="table-scroll reveal">
-  <table class="translation-table">
-    <thead>
-      <tr><th>What I Did On Set</th><th></th><th>What That Means For AI</th><th>Why It Matters</th></tr>
-    </thead>
-    <tbody>
-      <tr><td class="td-film">Production Design</td><td class="td-arrow mono">→</td><td class="td-ai">World-building for generative models. Defining what a scene should contain, feel, and imply.</td><td class="td-why">AI video tools need creative directors who can articulate visual logic, not just taste.</td></tr>
-      <tr><td class="td-film">Continuity & Coherence</td><td class="td-arrow mono">→</td><td class="td-ai">Detecting spatial and temporal errors in generated outputs that break viewer trust.</td><td class="td-why">The uncanny valley is a craft problem. Film trains the eye to close it.</td></tr>
-      <tr><td class="td-film">Directing</td><td class="td-arrow mono">→</td><td class="td-ai">Prompt engineering, creative direction, and defining the intent behind a generation.</td><td class="td-why">The best prompt is a director's shot list. Most AI teams don't have a director.</td></tr>
-      <tr><td class="td-film">Multi-Location Management</td><td class="td-arrow mono">→</td><td class="td-ai">Managing pipelines across multiple models, teams, and output types simultaneously.</td><td class="td-why">Scale on a film set and scale in a model pipeline require identical coordination instincts.</td></tr>
-      <tr><td class="td-film">Budget & Sourcing</td><td class="td-arrow mono">→</td><td class="td-ai">Resource allocation, vendor evaluation, and creative problem-solving under constraint.</td><td class="td-why">Startups need people who maximize output with minimum waste. That's every film.</td></tr>
-      <tr><td class="td-film">Shooting on 16mm</td><td class="td-arrow mono">→</td><td class="td-ai">High-stakes, low-margin-for-error decision-making. No undo button.</td><td class="td-why">Permanent decisions build better judgment than infinite iteration.</td></tr>
-    </tbody>
-  </table>
-  </div>
-</section>
+        if (active === key) {
+          active = null;
+          loglineText.classList.remove('visible');
+          loglineInquire.classList.remove('visible');
+          loglineText.innerHTML = '';
+          loglineInquire.href = '#';
+          return;
+        }
 
-<section id="contact">
-  <p class="section-label reveal"><span>CONTACT</span> <span class="tc mono">FRAME 04</span></p>
-  <div class="contact-block reveal">
-    <h2 class="contact-headline">I'm already building what's next. <span class="hl">The right team accelerates it.</span></h2>
-    <p class="contact-sub">I'm finding the team building the next canvas. An AI video company, a studio rethinking its pipeline, or a startup that needs its first real creative force. Based in Los Angeles.</p>
-    <div class="contact-links">
-      <a class="contact-link" href="mailto:nicholasgriffo@hotmail.com"><span class="contact-link-label">EMAIL</span><span class="contact-link-value">nicholasgriffo@hotmail.com</span><span class="contact-link-arrow">→</span></a>
-      <a class="contact-link" href="tel:9199611382"><span class="contact-link-label">PHONE</span><span class="contact-link-value">919-961-1382</span><span class="contact-link-arrow">→</span></a>
-      <a class="contact-link" href="https://www.linkedin.com/in/nicholas-griffo-79a38030a/" target="_blank"><span class="contact-link-label">LINKEDIN</span><span class="contact-link-value">Connect</span><span class="contact-link-arrow">→</span></a>
-      <a class="contact-link" href="https://www.imdb.com/name/nm11881226/" target="_blank"><span class="contact-link-label">IMDB</span><span class="contact-link-value">View Credits</span><span class="contact-link-arrow">→</span></a>
-    </div>
-  </div>
-</section>
+        active = key;
+        const film = films[key];
+        loglineText.innerHTML = film.text.replace(/\n/g, '<br>');
+        loglineInquire.href = film.email;
+        loglineText.classList.add('visible');
+        loglineInquire.classList.add('visible');
+      });
+    });
 
-<footer>
-  <p>© 2026 NICHOLAS GRIFFO</p>
-  <p>FILMMAKER — CREATIVE TECHNOLOGIST — LOS ANGELES</p>
-</footer>
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.film-link') && !e.target.closest('.logline-area')) {
+        active = null;
+        loglineText.classList.remove('visible');
+        loglineInquire.classList.remove('visible');
+        loglineText.innerHTML = '';
+      }
+    });
 
-<script>
-  // running SMPTE timecode
-  const tcEl = document.getElementById('tc');
-  let frame = 0;
-  function pad(n) { return String(n).padStart(2, '0'); }
-  function tick() {
-    frame++;
-    const fps = 24;
-    const t = Math.floor(frame / fps);
-    tcEl.textContent = `${pad(Math.floor(t/3600))}:${pad(Math.floor((t%3600)/60))}:${pad(t%60)}:${pad(frame%fps)}`;
-  }
-  setInterval(tick, 1000/24);
-
-  // scroll reveal
-  const revealEls = document.querySelectorAll('.reveal');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in-view'); });
-  }, { threshold: 0.15 });
-  revealEls.forEach(el => io.observe(el));
-
-  // hero parallax: content drifts slower than scroll, road lines drift opposite for depth
-  const heroContent = document.getElementById('heroContent');
-  const roadLines = document.querySelector('.road-lines');
-  const heroSection = document.getElementById('heroSection');
-  const atmosphere = document.querySelector('.atmosphere');
-  window.addEventListener('scroll', () => {
-    atmosphere.style.transform = `translateY(${window.scrollY * 0.04}px)`;
-    const y = window.scrollY;
-    const heroHeight = heroSection.offsetHeight;
-    if (y < heroHeight) {
-      heroContent.style.transform = `translateY(${y * 0.35}px)`;
-      heroContent.style.opacity = 1 - (y / heroHeight) * 1.2;
-      roadLines.style.transform = `translateY(${y * 0.15}px) scale(${1 + y/heroHeight*0.15})`;
-    }
-  }, { passive: true });
-
-  // subtle 3D tilt on hero, mouse-driven, for depth
-  document.addEventListener('mousemove', (e) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 2;
-    const y = (e.clientY / window.innerHeight - 0.5) * 2;
-    heroContent.style.transform += ` `;
-    heroContent.style.setProperty('--tiltx', `${y * -3}deg`);
-    heroContent.style.setProperty('--tilty', `${x * 3}deg`);
-  }, { passive: true });
-</script>
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        active = null;
+        loglineText.classList.remove('visible');
+        loglineInquire.classList.remove('visible');
+        loglineText.innerHTML = '';
+      }
+    });
+  </script>
 
 </body>
 </html>
