@@ -1,306 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Nicholas Griffo — Films</title>
-  <link rel="stylesheet" href="https://use.typekit.net/jbi5gtg.css">
-  <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Nicholas Griffo</title>
+<link rel="stylesheet" href="https://use.typekit.net/jbi5gtg.css">
+<style>
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    body {
-      font-family: 'adobe-caslon-pro', 'Caslon', serif;
-      background-color: #000;
-      color: #fff;
-      border: 0.1in solid #fff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      overflow-x: hidden;
-      position: relative;
-    }
+  body {
+    font-family: 'adobe-caslon-pro', 'Caslon', serif;
+    background-color: #000;
+    color: #fff;
+    border: 0.1in solid #fff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    position: relative;
+    padding: 40px 20px;
+  }
 
-    /* NAV */
-    .nav {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 32px 0;
-      flex-shrink: 0;
-    }
+  .byline {
+    position: absolute;
+    top: 18px;
+    right: 24px;
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.75);
+    font-style: italic;
+  }
 
-    .nav a {
-      font-family: 'adobe-caslon-pro', 'Caslon', serif;
-      font-size: 0.5rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.28);
-      text-decoration: none;
-      transition: color 0.3s;
-    }
+  .film-list {
+    list-style: none;
+    width: fit-content;
+  }
 
-    .nav a:hover { color: rgba(255,255,255,0.65); }
+  .film-list li {
+    line-height: 1;
+    margin-bottom: 46px;
+  }
 
-    /* BYLINE — below nav, centered */
-    .byline {
-      width: 100%;
-      text-align: center;
-      font-size: 0.55rem;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.22);
-      padding: 14px 0 0;
-      flex-shrink: 0;
-      animation: fadeIn 3s forwards;
-    }
+  .film-list li:last-child { margin-bottom: 0; }
 
-    /* TITLES BLOCK — takes remaining space above logline zone */
-    .main {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      padding: 20px 40px 0;
-      /* leave 32vh for logline at bottom */
-      margin-bottom: 32vh;
-    }
+  .film-link {
+    display: block;
+    color: #fff;
+    text-decoration: none;
+  }
 
-    /* FILM LIST */
-    .film-list {
-      list-style: none;
-      width: fit-content;
-    }
+  .film-title {
+    display: block;
+    font-size: 0.9em;
+    transform: scaleY(4.5);
+    transform-origin: left center;
+    white-space: nowrap;
+    text-align: left;
+    text-shadow: 0 0 5px rgba(255,255,255,0.4);
+    transition: text-shadow 0.4s;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+  }
 
-    .film-list li {
-      line-height: 1;
-      margin-bottom: 36px;
-    }
+  .film-link:hover .film-title {
+    text-shadow:
+      0 0 6px #fff,
+      0 0 18px rgba(255,252,240,0.45),
+      0 0 38px rgba(255,252,240,0.15);
+  }
 
-    .film-list li:last-child { margin-bottom: 0; }
+  @media (max-width: 600px) {
+    .film-title { font-size: 0.65em; transform: scaleY(4.2); }
+    .film-list li { margin-bottom: 26px; }
+    .byline { font-size: 0.6rem; top: 14px; right: 16px; }
+  }
 
-    .film-link {
-      display: block;
-      color: #fff;
-      text-decoration: none;
-    }
-
-    .film-title {
-      font-family: 'adobe-caslon-pro', 'Caslon', serif;
-      display: block;
-      font-size: 0.9em;
-      transform: scaleY(4.2);
-      transform-origin: left center;
-      white-space: nowrap;
-      text-align: left;
-      text-shadow: 0 0 4px rgba(255,255,255,0.2);
-      transition: text-shadow 0.4s;
-      cursor: pointer;
-      letter-spacing: 0.05em;
-    }
-
-    .film-link:hover .film-title {
-      text-shadow:
-        0 0 6px #fff,
-        0 0 18px rgba(255,252,240,0.45),
-        0 0 38px rgba(255,252,240,0.15);
-    }
-
-    /* LOGLINE ZONE — fixed to bottom */
-    .logline-area {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 32vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 0 60px 28px;
-      pointer-events: none;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .logline-text {
-      font-family: 'adobe-caslon-pro', 'Caslon', serif;
-      font-size: 11px;
-      font-style: italic;
-      color: rgba(255,255,255,0.0);
-      text-align: center;
-      max-width: 560px;
-      line-height: 2;
-      letter-spacing: 0.04em;
-      transition: color 0.5s;
-      margin-bottom: 18px;
-    }
-
-    .logline-text.visible {
-      color: rgba(255,255,255,0.6);
-      pointer-events: auto;
-    }
-
-    .logline-inquire {
-      font-family: 'adobe-caslon-pro', 'Caslon', serif;
-      font-size: 9px;
-      font-style: italic;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.0);
-      text-decoration: none;
-      border-bottom: 1px solid rgba(255,255,255,0);
-      padding-bottom: 2px;
-      transition: color 0.5s, border-color 0.5s;
-      pointer-events: none;
-    }
-
-    .logline-inquire.visible {
-      color: rgba(255,255,255,0.28);
-      border-color: rgba(255,255,255,0.15);
-      pointer-events: auto;
-    }
-
-    .logline-inquire:hover {
-      color: rgba(255,255,255,0.8) !important;
-      border-color: rgba(255,255,255,0.5) !important;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to   { opacity: 1; }
-    }
-
-    @media (max-width: 600px) {
-      .film-title { font-size: 0.7em; transform: scaleY(4); }
-      .film-list li { margin-bottom: 16px; }
-      .main { padding: 10px 20px 0; }
-      .logline-area { padding: 0 24px 20px; }
-      .logline-text { font-size: 10px; }
-    }
-
-  </style>
+</style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav class="nav">
-    <a href="/portfolio.html">portfolio →</a>
-    <a href="mailto:film@nicholasgriffo.com">film@nicholasgriffo.com</a>
-  </nav>
-
-  <!-- BYLINE — in document flow, below nav -->
   <p class="byline">Screenplays by Nicholas Griffo</p>
 
-  <!-- TITLES -->
-  <div class="main">
-    <ul class="film-list">
-      <li>
-        <a class="film-link" href="#" data-film="penetration">
-          <span class="film-title">PENETRATION INGO SWANN</span>
-        </a>
-      </li>
-      <li>
-        <a class="film-link" href="#" data-film="fuse">
-          <span class="film-title">THE WORLD IS MY FUSE</span>
-        </a>
-      </li>
-      <li>
-        <a class="film-link" href="#" data-film="patterns">
-          <span class="film-title">PATTERNS OF A CERTAIN SCIENTIFIC BIRD</span>
-        </a>
-      </li>
-      <li>
-        <a class="film-link" href="#" data-film="bloody">
-          <span class="film-title">BLOODY KNUCKLES</span>
-        </a>
-      </li>
-      <li>
-        <a class="film-link" href="#" data-film="creation">
-          <span class="film-title">MAN'S CREATION</span>
-        </a>
-      </li>
-    </ul>
-  </div>
-
-  <!-- LOGLINE ZONE -->
-  <div class="logline-area">
-    <p class="logline-text" id="logline-text"></p>
-    <a class="logline-inquire" id="logline-inquire" href="#">Inquire</a>
-  </div>
-
-  <script>
-    const films = {
-      penetration: {
-        text: "California, New York, Washington D.C. — 1973.\n\nIngo Swann, CIA-funded psychic at the Stanford Research Institute, is contracted by a secretive military figure for his ability to remote-view — dangerous and experimental moon-spying.\n\nBased on the memoir within Swann's 1998 book, Penetration.",
-        email: "mailto:film@nicholasgriffo.com?subject=Inquiry%20%E2%80%94%20PENETRATION%20INGO%20SWANN"
-      },
-      fuse: {
-        text: "Los Angeles, California.\n\nKevin Stranahan, former fraudster now commercial property flipper, seeks investment from old colleagues — inadvertently putting his business in the crosshairs of a group he once betrayed. Now they want him dead broke and humiliated.\n\nA bad man against worse.",
-        email: "mailto:film@nicholasgriffo.com?subject=Inquiry%20%E2%80%94%20THE%20WORLD%20IS%20MY%20FUSE"
-      },
-      patterns: {
-        text: "Canyonlands — Moab, Utah.\n\nA love story. A woman loves two men. They spend a season together in a fire-watch tower and witness hikers kidnapped by a wealthy cult under the pretense of finding crystals. This disturbs the nesting grounds of a certain scientific bird.",
-        email: "mailto:film@nicholasgriffo.com?subject=Inquiry%20%E2%80%94%20PATTERNS%20OF%20A%20CERTAIN%20SCIENTIFIC%20BIRD"
-      },
-      bloody: {
-        text: "Wilmington, North Carolina.\n\nA 27-year-old, clean from coke and pills, sets his life straight with a new job. He digs into old contracts — one belonging to a well-respected local official. He's dug too deep. Shadowy figures pursue him out of town, where a dark experience from his youth waits.",
-        email: "mailto:film@nicholasgriffo.com?subject=Inquiry%20%E2%80%94%20BLOODY%20KNUCKLES"
-      },
-      creation: {
-        text: "Few hours southwest of Tulsa, Oklahoma.\n\nA man's aunt dies suddenly, shocking her twin — his mother — into a coma. He stays to settle her affairs. A waitress likes him. Things just happen in the country. She gets pregnant. He tries to settle down. She grows obsessive. He grows restless. Her family grows jealous.",
-        email: "mailto:film@nicholasgriffo.com?subject=Inquiry%20%E2%80%94%20MAN'S%20CREATION"
-      }
-    };
-
-    const loglineText    = document.getElementById('logline-text');
-    const loglineInquire = document.getElementById('logline-inquire');
-    let active = null;
-
-    document.querySelectorAll('.film-link').forEach(link => {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        const key = this.dataset.film;
-
-        if (active === key) {
-          active = null;
-          loglineText.classList.remove('visible');
-          loglineInquire.classList.remove('visible');
-          loglineText.innerHTML = '';
-          loglineInquire.href = '#';
-          return;
-        }
-
-        active = key;
-        const film = films[key];
-        loglineText.innerHTML = film.text.replace(/\n/g, '<br>');
-        loglineInquire.href = film.email;
-        loglineText.classList.add('visible');
-        loglineInquire.classList.add('visible');
-      });
-    });
-
-    document.addEventListener('click', function(e) {
-      if (!e.target.closest('.film-link') && !e.target.closest('.logline-area')) {
-        active = null;
-        loglineText.classList.remove('visible');
-        loglineInquire.classList.remove('visible');
-        loglineText.innerHTML = '';
-      }
-    });
-
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        active = null;
-        loglineText.classList.remove('visible');
-        loglineInquire.classList.remove('visible');
-        loglineText.innerHTML = '';
-      }
-    });
-  </script>
+  <ul class="film-list">
+    <li>
+      <a class="film-link" href="mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20PENETRATION%20INGO%20SWANN&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27PENETRATION%20INGO%20SWANN%27.">
+        <span class="film-title">PENETRATION INGO SWANN</span>
+      </a>
+    </li>
+    <li>
+      <a class="film-link" href="mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20The%20World%20is%20My%20Fuse&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27The%20World%20is%20My%20Fuse%27.">
+        <span class="film-title">THE WORLD IS MY FUSE</span>
+      </a>
+    </li>
+    <li>
+      <a class="film-link" href="mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20Patterns%20of%20a%20Certain%20Scientific%20Bird&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27Patterns%20of%20a%20Certain%20Scientific%20Bird%27%20when%20it%20is%20finished.">
+        <span class="film-title">PATTERNS OF A CERTAIN SCIENTIFIC BIRD</span>
+      </a>
+    </li>
+    <li>
+      <a class="film-link" href="mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20Bloody%20Knuckles&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27Bloody%20Knuckles%27%20when%20it%20is%20finished.">
+        <span class="film-title">BLOODY KNUCKLES</span>
+      </a>
+    </li>
+    <li>
+      <a class="film-link" href="mailto:film@nicholasgriffo.com?subject=Request%20for%20Script%20-%20Man's%20Creation&body=Please%20send%20me%20a%20copy%20of%20your%20screenplay,%20%27Man's%20Creation%27%20when%20it%20is%20finished.">
+        <span class="film-title">MAN'S CREATION</span>
+      </a>
+    </li>
+  </ul>
 
 </body>
 </html>
