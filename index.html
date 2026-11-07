@@ -240,6 +240,21 @@
             .logline-area { padding: 0 24px 18px; }
             .logline-text { font-size: .7rem; }
         }
+
+        /* Phones and tablets: larger loglines (viewport is scaled to .5) */
+        @media (hover: none) and (pointer: coarse) {
+            .logline-area {
+                height: auto;
+                min-height: 26vh;
+                padding: 0 48px 48px;
+            }
+            .logline-text {
+                font-size: 1.7rem;
+                line-height: 1.5;
+                max-width: none;
+            }
+            .logline-email { font-size: 1.7rem; }
+        }
     </style>
 </head>
 <body>
