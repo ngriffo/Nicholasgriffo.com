@@ -1,0 +1,7 @@
+# Keep pitch decks and samples out of search results for the name.
+/*.pdf
+  X-Robots-Tag: noindex
+/pitch-deck*
+  X-Robots-Tag: noindex
+/VCAngel-pitch-deck*
+  X-Robots-Tag: noindex
