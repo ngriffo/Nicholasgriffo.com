@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><title>Resume</title></head>
+<body>
+<p id="s">Sending resume...</p>
+<script>
+(async () => {
+  const s = document.getElementById('s');
+  try {
+    const buf = await (await fetch('/Nicholas_Griffo_Resume.pdf', {cache: 'no-store'})).arrayBuffer();
+    if (!window.opener) { s.textContent = 'No opener window.'; return; }
+    window.opener.postMessage({type: 'ng-resume', name: 'Nicholas_Griffo_Resume.pdf', buf}, '*', [buf]);
+    s.textContent = 'Sent.';
+    setTimeout(() => window.close(), 500);
+  } catch (e) { s.textContent = 'Error: ' + e; }
+})();
+</script>
+</body></html>
