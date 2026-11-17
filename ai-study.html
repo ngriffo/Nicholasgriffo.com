@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>AI Study Plan</title>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <link rel="stylesheet" href="https://use.typekit.net/jbi5gtg.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --fg: #fff;
+      --dim: rgba(255,255,255,0.55);
+      --faint: rgba(255,255,255,0.3);
+      --line: rgba(255,255,255,0.12);
+      --link: rgb(70,130,255);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'adobe-caslon-pro', 'Caslon', Georgia, serif;
+      background: #000;
+      color: var(--fg);
+      border: 0.1in solid #fff;
+      min-height: 100vh;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 32px 0;
+      gap: 16px;
+    }
+    .nav a, .nav button {
+      font-family: inherit;
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--faint);
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+    .nav a:hover, .nav button:hover { color: rgba(255,255,255,0.8); }
+
+    .wrap { max-width: 760px; margin: 0 auto; padding: 48px 24px 120px; }
+
+    .byline {
+      text-align: center;
+      font-size: 0.6rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--faint);
+    }
+    h1 {
+      font-weight: 400;
+      text-align: center;
+      font-size: 1.4rem;
+      letter-spacing: 0.05em;
+      transform: scaleY(2.4);
+      margin: 34px 0 40px;
+      text-shadow: 0 0 5px rgba(255,255,255,0.5);
+    }
+    .sub {
+      text-align: center;
+      font-style: italic;
+      color: var(--dim);
+      font-size: 0.95rem;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* progress */
+    .progress { margin: 44px 0 12px; }
+    .bar { height: 2px; background: var(--line); position: relative; }
+    .bar > span { position: absolute; inset: 0 auto 0 0; background: #fff; box-shadow: 0 0 6px #fff; transition: width .5s; }
+    .stats {
+      display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px;
+      font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dim);
+      margin-top: 10px;
+    }
+    .actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px 22px; margin: 26px 0 0; }
+    .btn {
+      font-family: inherit; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--dim); background: none; border: none; border-bottom: 1px solid var(--faint);
+      padding: 2px 0; cursor: pointer; text-decoration: none; transition: color .3s, border-color .3s;
+    }
+    .btn:hover { color: #fff; border-color: #fff; }
+    .toast {
+      text-align: center; font-style: italic; font-size: 0.85rem; color: var(--dim);
+      min-height: 1.4em; margin-top: 12px;
+    }
+
+    /* phases */
+    .phase { margin-top: 70px; }
+    .phase-head {
+      display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+      border-bottom: 1px solid var(--faint); padding-bottom: 8px; margin-bottom: 6px;
+    }
+    .phase-head h2 {
+      font-weight: 400; font-size: 0.75rem; letter-spacing: 0.24em; text-transform: uppercase;
+    }
+    .phase-head .count { font-size: 0.65rem; letter-spacing: 0.14em; color: var(--dim); white-space: nowrap; }
+
+    /* weeks */
+    details.week { border-bottom: 1px solid var(--line); }
+    details.week > summary {
+      list-style: none; cursor: pointer; display: grid;
+      grid-template-columns: 58px 1fr auto; gap: 12px; align-items: baseline;
+      padding: 16px 0;
+    }
+    details.week > summary::-webkit-details-marker { display: none; }
+    .tag { font-size: 0.65rem; letter-spacing: 0.18em; color: var(--dim); }
+    .focus { font-size: 1.05rem; }
+    .when { display: block; font-size: 0.78rem; font-style: italic; color: var(--dim); }
+    .wk-count { font-size: 0.65rem; letter-spacing: 0.12em; color: var(--dim); white-space: nowrap; }
+    details.week.done .focus { color: var(--dim); text-decoration: line-through; text-decoration-color: var(--faint); }
+    details.week.done .wk-count { color: #fff; }
+    details.week.current > summary .tag { color: #fff; text-shadow: 0 0 6px #fff; }
+    .now-pill {
+      display: inline-block; margin-left: 8px; font-size: 0.55rem; letter-spacing: 0.2em; text-transform: uppercase;
+      border: 1px solid #fff; padding: 1px 6px; vertical-align: middle; font-style: normal;
+    }
+
+    ul.sessions { list-style: none; padding: 0 0 18px 70px; }
+    ul.sessions li { display: grid; grid-template-columns: 26px 1fr; gap: 10px; padding: 10px 0; }
+    ul.sessions li + li { border-top: 1px dashed var(--line); }
+
+    input[type=checkbox] {
+      appearance: none; -webkit-appearance: none;
+      width: 18px; height: 18px; margin-top: 3px;
+      border: 1px solid rgba(255,255,255,0.6); background: transparent; cursor: pointer;
+      display: grid; place-content: center; transition: box-shadow .2s;
+    }
+    input[type=checkbox]::after { content: ""; width: 10px; height: 10px; background: #fff; transform: scale(0); transition: transform .15s; }
+    input[type=checkbox]:checked::after { transform: scale(1); }
+    input[type=checkbox]:checked { box-shadow: 0 0 6px rgba(255,255,255,0.7); }
+    input[type=checkbox]:focus-visible { outline: 1px solid var(--link); outline-offset: 3px; }
+
+    .s-day { font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dim); }
+    .s-title { font-size: 1rem; }
+    label { cursor: pointer; }
+    li.checked .s-title { color: var(--dim); text-decoration: line-through; text-decoration-color: var(--faint); }
+    .s-detail { font-size: 0.88rem; font-style: italic; color: var(--dim); margin-top: 2px; }
+    .s-link { display: inline-block; margin-top: 4px; font-size: 0.8rem; color: var(--link); text-decoration: underline; word-break: break-all; }
+    .s-link:hover { color: #9bb8ff; }
+
+    .note-row {
+      padding: 14px 0 14px 70px; border-bottom: 1px solid var(--line);
+      font-size: 0.85rem; font-style: italic; color: var(--faint);
+    }
+    .note-row b { font-style: normal; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; font-size: 0.62rem; margin-right: 8px; color: var(--dim); }
+
+    .foot { margin-top: 70px; text-align: center; font-size: 0.8rem; font-style: italic; color: var(--faint); }
+
+    @media (max-width: 600px) {
+      .nav { padding: 14px 16px 0; }
+      .wrap { padding: 36px 16px 90px; }
+      h1 { font-size: 1.1rem; }
+      details.week > summary { grid-template-columns: 44px 1fr auto; gap: 8px; }
+      ul.sessions { padding-left: 0; }
+      .note-row { padding-left: 52px; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a href="/">← nicholasgriffo.com</a>
+    <button type="button" id="jump-top">Jump to this week</button>
+  </nav>
+
+  <main class="wrap">
+    <p class="byline">Study plan</p>
+    <h1>ARTIFICIAL INTELLIGENCE</h1>
+    <p class="sub">Mon–Thu, 7–9 pm. Nov 23, 2026 to Dec 3, 2027. Main course Mon/Tue, math Wed, build Thu.</p>
+
+    <section class="progress" aria-label="Overall progress">
+      <div class="bar"><span id="bar" style="width:0%"></span></div>
+      <div class="stats">
+        <span id="stat-done">0 of 0 sessions</span>
+        <span id="stat-pct">0%</span>
+      </div>
+    </section>
+
+    <div class="actions">
+      <button class="btn" type="button" id="ics">Add to calendar (.ics)</button>
+      <button class="btn" type="button" id="sync">Copy sync link</button>
+      <button class="btn" type="button" id="toggle-done">Hide finished weeks</button>
+      <button class="btn" type="button" id="reset">Reset</button>
+    </div>
+    <p class="toast" id="toast" role="status"></p>
+
+    <div id="plan"></div>
+
+    <p class="foot">Checkmarks are saved in this browser. To move them to another device, use “Copy sync link” and open the link there.</p>
+  </main>
+
+  <script>
+    const PLAN = [{"kind":"week","id":"w1","tag":"W1","phase":"Phase 1: Programming + Math","focus":"CS50 begins + vectors","monday":"2026-11-23","sessions":[{"title":"CS50 Lecture 0 (Scratch)","detail":"Watch Lecture 0 and do Problem Set 0. Make a GitHub account.","link":"https://cs50.harvard.edu/x/","date":"2026-11-23"},{"title":"CS50 Lecture 1 (C)","detail":"Watch Lecture 1. Set up the cs50.dev online coding environment.","link":"https://cs50.harvard.edu/x/","date":"2026-11-24"},{"title":"Math: Linear Algebra ch.1-3","detail":"3Blue1Brown: vectors, linear combinations/span, linear transformations. Take handwritten notes.","link":"https://www.3blue1brown.com/topics/linear-algebra","date":"2026-11-25"},{"title":"CS50 Problem Set 1","detail":"Do Problem Set 1 (Mario + Cash/Credit).","link":"https://cs50.harvard.edu/x/","date":"2026-11-27"}]},{"kind":"week","id":"w2","tag":"W2","phase":"Phase 1: Programming + Math","focus":"Arrays + matrices","monday":"2026-11-30","sessions":[{"title":"CS50 Lecture 2 (Arrays)","detail":"Watch Lecture 2.","link":"https://cs50.harvard.edu/x/","date":"2026-11-30"},{"title":"CS50 Problem Set 2 (start)","detail":"Start Problem Set 2.","link":"https://cs50.harvard.edu/x/","date":"2026-12-01"},{"title":"Math: Linear Algebra ch.4-5","detail":"3Blue1Brown: matrix multiplication as composition, 3D transformations.","link":"https://www.3blue1brown.com/topics/linear-algebra","date":"2026-12-02"},{"title":"CS50 Problem Set 2 (finish)","detail":"Finish Problem Set 2.","link":"https://cs50.harvard.edu/x/","date":"2026-12-03"}]},{"kind":"week","id":"w3","tag":"W3","phase":"Phase 1: Programming + Math","focus":"Algorithms + determinants","monday":"2026-12-07","sessions":[{"title":"CS50 Lecture 3 (Algorithms)","detail":"Watch Lecture 3: searching, sorting, Big O, recursion.","link":"https://cs50.harvard.edu/x/","date":"2026-12-07"},{"title":"CS50 Problem Set 3 (start)","detail":"Start Problem Set 3.","link":"https://cs50.harvard.edu/x/","date":"2026-12-08"},{"title":"Math: Linear Algebra ch.6-7","detail":"3Blue1Brown: determinants; inverse matrices, column space, rank.","link":"https://www.3blue1brown.com/topics/linear-algebra","date":"2026-12-09"},{"title":"CS50 Problem Set 3 (finish)","detail":"Finish Problem Set 3.","link":"https://cs50.harvard.edu/x/","date":"2026-12-10"}]},{"kind":"week","id":"w4","tag":"W4","phase":"Phase 1: Programming + Math","focus":"Memory + dot products","monday":"2026-12-14","sessions":[{"title":"CS50 Lecture 4 (Memory)","detail":"Watch Lecture 4: pointers, memory, files.","link":"https://cs50.harvard.edu/x/","date":"2026-12-14"},{"title":"CS50 Problem Set 4 (start)","detail":"Start Problem Set 4.","link":"https://cs50.harvard.edu/x/","date":"2026-12-15"},{"title":"Math: Linear Algebra ch.8-9","detail":"3Blue1Brown: nonsquare matrices, dot products and duality.","link":"https://www.3blue1brown.com/topics/linear-algebra","date":"2026-12-16"},{"title":"CS50 Problem Set 4 (finish)","detail":"Finish Problem Set 4.","link":"https://cs50.harvard.edu/x/","date":"2026-12-17"}]},{"kind":"rest","monday":"2026-12-21","label":"Holiday break"},{"kind":"rest","monday":"2026-12-28","label":"Holiday break"},{"kind":"week","id":"w5","tag":"W5","phase":"Phase 1: Programming + Math","focus":"Data structures + change of basis","monday":"2027-01-04","sessions":[{"title":"CS50 Lecture 5 (Data Structures)","detail":"Watch Lecture 5: linked lists, hash tables, trees.","link":"https://cs50.harvard.edu/x/","date":"2027-01-04"},{"title":"CS50 Problem Set 5 (start)","detail":"Start Problem Set 5.","link":"https://cs50.harvard.edu/x/","date":"2027-01-05"},{"title":"Math: Linear Algebra ch.10-13","detail":"3Blue1Brown: cross products and Cramer's rule (skim), change of basis (focus).","link":"https://www.3blue1brown.com/topics/linear-algebra","date":"2027-01-06"},{"title":"CS50 Problem Set 5 (finish)","detail":"Finish Problem Set 5.","link":"https://cs50.harvard.edu/x/","date":"2027-01-07"}]},{"kind":"week","id":"w6","tag":"W6","phase":"Phase 1: Programming + Math","focus":"Python + eigenvectors","monday":"2027-01-11","sessions":[{"title":"CS50 Lecture 6 (Python)","detail":"Watch Lecture 6. You're now in the language of AI.","link":"https://cs50.harvard.edu/x/","date":"2027-01-11"},{"title":"CS50 Problem Set 6 (start)","detail":"Start Problem Set 6 in Python.","link":"https://cs50.harvard.edu/x/","date":"2027-01-12"},{"title":"Math: Linear Algebra ch.14-16","detail":"3Blue1Brown: eigenvectors/eigenvalues (focus), abstract vector spaces.","link":"https://www.3blue1brown.com/topics/linear-algebra","date":"2027-01-13"},{"title":"CS50 Problem Set 6 (finish)","detail":"Finish Problem Set 6. CS50 Lectures 7-9 (SQL, web) are optional; come back later if you're curious.","link":"https://cs50.harvard.edu/x/","date":"2027-01-14"}]},{"kind":"week","id":"w7","tag":"W7","phase":"Phase 1: Programming + Math","focus":"Python fluency + tools","monday":"2027-01-18","sessions":[{"title":"Missing Semester: shell","detail":"MIT Missing Semester: the shell and shell tools lectures.","link":"https://missing.csail.mit.edu/","date":"2027-01-18"},{"title":"Git + GitHub","detail":"Missing Semester: version control (Git). Create a repo and push your CS50 Python work.","link":"https://missing.csail.mit.edu/","date":"2027-01-19"},{"title":"Math: partial derivatives + gradient","detail":"Khan Academy Multivariable Calculus: partial derivatives and the gradient.","link":"https://www.khanacademy.org/math/multivariable-calculus","date":"2027-01-20"},{"title":"Python classes + modules","detail":"Python tutorial ch. 6 (modules) and ch. 9 (classes). Write a small class-based program.","link":"https://docs.python.org/3/tutorial/","date":"2027-01-21"}]},{"kind":"week","id":"w8","tag":"W8","phase":"Phase 1: Programming + Math","focus":"NumPy","monday":"2027-01-25","sessions":[{"title":"NumPy basics","detail":"NumPy absolute beginners guide: arrays, shapes, indexing, broadcasting.","link":"https://numpy.org/doc/stable/user/absolute_beginners.html","date":"2027-01-25"},{"title":"Linear algebra in NumPy","detail":"Implement the 3Blue1Brown ideas in code: matrix multiply, determinant, inverse, eigenvectors (np.linalg). Check them against hand calculations.","link":"https://numpy.org/doc/stable/user/absolute_beginners.html","date":"2027-01-26"},{"title":"Math: multivariable chain rule","detail":"Khan Academy: multivariable chain rule and directional derivatives. This is the math behind backpropagation.","link":"https://www.khanacademy.org/math/multivariable-calculus","date":"2027-01-27"},{"title":"Build: Arduino -> Python","detail":"Stream sensor data from an Arduino over serial (pyserial) into NumPy and plot it live with matplotlib.","link":"https://numpy.org/doc/stable/user/absolute_beginners.html","date":"2027-01-28"}]},{"kind":"week","id":"w9","tag":"W9","phase":"Phase 1: Programming + Math","focus":"pandas + plotting","monday":"2027-02-01","sessions":[{"title":"pandas basics","detail":"10 Minutes to pandas: DataFrames, selecting, grouping, merging.","link":"https://pandas.pydata.org/docs/user_guide/10min.html","date":"2027-02-01"},{"title":"Plotting + Kaggle pandas","detail":"Matplotlib quick start, then Kaggle Learn's free Pandas course.","link":"https://www.kaggle.com/learn","date":"2027-02-02"},{"title":"Math: optimization","detail":"Khan Academy: optimizing multivariable functions (gradient points uphill, so step downhill).","link":"https://www.khanacademy.org/math/multivariable-calculus","date":"2027-02-03"},{"title":"Build: explore a dataset","detail":"Pick a Kaggle dataset. Load, clean and make 3 meaningful plots in a Jupyter notebook. Push it to GitHub.","link":"https://www.kaggle.com/learn","date":"2027-02-04"}]},{"kind":"week","id":"w10","tag":"W10","phase":"Phase 1: Programming + Math","focus":"Phase 1 project","monday":"2027-02-08","sessions":[{"title":"Project: plan","detail":"Pick a Python tool that solves a real problem of yours. Write a 5-line spec.","link":null,"date":"2027-02-08"},{"title":"Project: build","detail":"Build it.","link":null,"date":"2027-02-09"},{"title":"Project: build","detail":"Keep building. Get it working end to end, even if it's ugly.","link":null,"date":"2027-02-10"},{"title":"Project: ship","detail":"Clean up, write a README, push to GitHub. Phase 1 done.","link":null,"date":"2027-02-11"}]},{"kind":"buffer","monday":"2027-02-15","id":"b1"},{"kind":"week","id":"w11","tag":"W11","phase":"Phase 2: Core Machine Learning","focus":"Linear regression + probability","monday":"2027-02-22","sessions":[{"title":"Ng ML C1 Week 1 (videos)","detail":"Machine Learning Specialization, Course 1 Week 1: intro, linear regression, cost function, gradient descent.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-02-22"},{"title":"Ng ML C1 Week 1 (labs)","detail":"Do the Week 1 optional labs. Read the code, don't just run it.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-02-23"},{"title":"Math: probability basics","detail":"Khan Academy: basic and conditional probability.","link":"https://www.khanacademy.org/math/statistics-probability","date":"2027-02-24"},{"title":"Build: regression from scratch","detail":"Implement linear regression with gradient descent in pure NumPy. No libraries.","link":"https://numpy.org/doc/stable/user/absolute_beginners.html","date":"2027-02-25"}]},{"kind":"week","id":"w12","tag":"W12","phase":"Phase 2: Core Machine Learning","focus":"Multiple regression + Bayes","monday":"2027-03-01","sessions":[{"title":"Ng ML C1 Week 2 (videos)","detail":"Multiple linear regression, feature scaling, learning rate.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-03-01"},{"title":"Ng ML C1 Week 2 (labs)","detail":"Week 2 labs.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-03-02"},{"title":"Math: Bayes' rule","detail":"3Blue1Brown's Bayes theorem video, then work 5 practice problems by hand.","link":"https://www.khanacademy.org/math/statistics-probability","date":"2027-03-03"},{"title":"Ng ML C1 Week 2 assignment","detail":"Week 2 programming assignment.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-03-04"}]},{"kind":"week","id":"w13","tag":"W13","phase":"Phase 2: Core Machine Learning","focus":"Classification + random variables","monday":"2027-03-08","sessions":[{"title":"Ng ML C1 Week 3 (videos)","detail":"Logistic regression, decision boundaries.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-03-08"},{"title":"Ng ML C1 Week 3 (overfitting)","detail":"Overfitting and regularization videos + labs.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-03-09"},{"title":"Math: expectation + variance","detail":"Khan Academy: random variables, expected value, variance.","link":"https://www.khanacademy.org/math/statistics-probability","date":"2027-03-10"},{"title":"Ng ML C1 Week 3 assignment","detail":"Week 3 programming assignment. Course 1 done.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-03-11"}]},{"kind":"week","id":"w14","tag":"W14","phase":"Phase 2: Core Machine Learning","focus":"scikit-learn + distributions","monday":"2027-03-15","sessions":[{"title":"scikit-learn basics","detail":"scikit-learn getting started guide: fit/predict, train/test split.","link":"https://scikit-learn.org/stable/getting_started.html","date":"2027-03-15"},{"title":"Redo it in scikit-learn","detail":"Redo your regression and classification work with scikit-learn. Compare with your from-scratch version.","link":"https://scikit-learn.org/stable/getting_started.html","date":"2027-03-16"},{"title":"Math: distributions","detail":"StatQuest: normal and binomial distributions, the central limit theorem.","link":"https://www.youtube.com/@statquest","date":"2027-03-17"},{"title":"Kaggle: Titanic","detail":"Make your first Kaggle competition submission (Titanic).","link":"https://www.kaggle.com/learn","date":"2027-03-18"}]},{"kind":"week","id":"w15","tag":"W15","phase":"Phase 2: Core Machine Learning","focus":"Neural networks intro + MLE","monday":"2027-03-22","sessions":[{"title":"Ng ML C2 Week 1 (videos)","detail":"Course 2 Week 1: neural network intuition and forward propagation.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-03-22"},{"title":"Ng ML C2 Week 1 (labs)","detail":"Week 1 labs.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-03-23"},{"title":"Math: maximum likelihood","detail":"StatQuest: maximum likelihood. Understand why it leads to the loss functions you've been using.","link":"https://www.youtube.com/@statquest","date":"2027-03-24"},{"title":"Ng ML C2 Week 1 assignment","detail":"Week 1 programming assignment.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-03-25"}]},{"kind":"week","id":"w16","tag":"W16","phase":"Phase 2: Core Machine Learning","focus":"Training neural nets + vector calculus","monday":"2027-03-29","sessions":[{"title":"Ng ML C2 Week 2 (videos)","detail":"Training, activation functions, multiclass and softmax.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-03-29"},{"title":"Ng ML C2 Week 2 (labs)","detail":"Week 2 labs.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-03-30"},{"title":"Math: vector calculus review","detail":"Mathematics for Machine Learning book, ch. 5.1-5.3 (gradients of vectors/matrices). Skim; it's dense.","link":"https://mml-book.github.io/","date":"2027-03-31"},{"title":"Ng ML C2 Week 2 assignment","detail":"Week 2 programming assignment.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-04-01"}]},{"kind":"week","id":"w17","tag":"W17","phase":"Phase 2: Core Machine Learning","focus":"Applying ML well","monday":"2027-04-05","sessions":[{"title":"Ng ML C2 Week 3 (videos)","detail":"Advice for applying ML: bias/variance, evaluation, error analysis.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-04-05"},{"title":"Ng ML C2 Week 3 (labs)","detail":"Week 3 labs.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-04-06"},{"title":"Kaggle Intro to ML","detail":"Kaggle Learn: Intro to Machine Learning.","link":"https://www.kaggle.com/learn","date":"2027-04-07"},{"title":"Ng ML C2 Week 3 assignment","detail":"Week 3 programming assignment.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-04-08"}]},{"kind":"week","id":"w18","tag":"W18","phase":"Phase 2: Core Machine Learning","focus":"Decision trees","monday":"2027-04-12","sessions":[{"title":"Ng ML C2 Week 4 (videos)","detail":"Decision trees, random forests, XGBoost.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-04-12"},{"title":"Ng ML C2 Week 4 (labs)","detail":"Week 4 labs.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-04-13"},{"title":"Kaggle Intermediate ML","detail":"Kaggle Learn: Intermediate Machine Learning.","link":"https://www.kaggle.com/learn","date":"2027-04-14"},{"title":"Ng ML C2 Week 4 assignment","detail":"Week 4 programming assignment. Course 2 done.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-04-15"}]},{"kind":"week","id":"w19","tag":"W19","phase":"Phase 2: Core Machine Learning","focus":"Kaggle project","monday":"2027-04-19","sessions":[{"title":"Kaggle: explore","detail":"Pick a Kaggle Playground competition. Explore the data.","link":"https://www.kaggle.com/learn","date":"2027-04-19"},{"title":"Kaggle: baseline","detail":"Build a simple baseline model and submit.","link":"https://www.kaggle.com/learn","date":"2027-04-20"},{"title":"Kaggle: improve","detail":"Feature engineering, try a tree model, tune. Submit again.","link":"https://www.kaggle.com/learn","date":"2027-04-21"},{"title":"Kaggle: write-up","detail":"Write up what worked and what didn't in your notebook. Push to GitHub.","link":"https://www.kaggle.com/learn","date":"2027-04-22"}]},{"kind":"week","id":"w20","tag":"W20","phase":"Phase 2: Core Machine Learning","focus":"Unsupervised learning + PCA","monday":"2027-04-26","sessions":[{"title":"Ng ML C3 Week 1 (videos)","detail":"Course 3 Week 1: clustering (k-means), anomaly detection.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-04-26"},{"title":"Ng ML C3 Week 1 (labs)","detail":"Week 1 labs.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-04-27"},{"title":"Math: PCA","detail":"StatQuest: PCA. Connect it back to eigenvectors from Phase 1.","link":"https://www.youtube.com/@statquest","date":"2027-04-28"},{"title":"Ng ML C3 Week 1 assignment","detail":"Week 1 programming assignment.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-04-29"}]},{"kind":"week","id":"w21","tag":"W21","phase":"Phase 2: Core Machine Learning","focus":"Recommender systems","monday":"2027-05-03","sessions":[{"title":"Ng ML C3 Week 2 (videos)","detail":"Recommender systems: collaborative filtering, content-based.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-05-03"},{"title":"Ng ML C3 Week 2 (labs)","detail":"Week 2 labs.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-05-04"},{"title":"Build: k-means from scratch","detail":"Implement k-means in NumPy. Run it on a 2D dataset and plot the clusters.","link":"https://numpy.org/doc/stable/user/absolute_beginners.html","date":"2027-05-05"},{"title":"Ng ML C3 Week 2 assignment","detail":"Week 2 programming assignment.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-05-06"}]},{"kind":"week","id":"w22","tag":"W22","phase":"Phase 2: Core Machine Learning","focus":"Reinforcement learning","monday":"2027-05-10","sessions":[{"title":"Ng ML C3 Week 3 (videos)","detail":"Reinforcement learning: states, rewards, Q-learning.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-05-10"},{"title":"Ng ML C3 Week 3 (labs)","detail":"Week 3 labs.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-05-11"},{"title":"RL meets robotics","detail":"Install Gymnasium and run CartPole. Think about how this maps to controlling a real robot.","link":"https://gymnasium.farama.org/","date":"2027-05-12"},{"title":"Ng ML C3 Week 3 assignment","detail":"Week 3 programming assignment. ML Specialization complete.","link":"https://www.coursera.org/specializations/machine-learning-introduction","date":"2027-05-13"}]},{"kind":"buffer","monday":"2027-05-17","id":"b2"},{"kind":"week","id":"w23","tag":"W23","phase":"Phase 3: Deep Learning","focus":"Neural nets intuition + PyTorch","monday":"2027-05-24","sessions":[{"title":"3Blue1Brown NN ch.1-2","detail":"What is a neural network; gradient descent.","link":"https://www.3blue1brown.com/topics/neural-networks","date":"2027-05-24"},{"title":"3Blue1Brown NN ch.3-4","detail":"Backpropagation and backprop calculus. Rewatch ch. 4 if needed.","link":"https://www.3blue1brown.com/topics/neural-networks","date":"2027-05-25"},{"title":"PyTorch basics (1)","detail":"PyTorch 'Learn the Basics': tensors, datasets, dataloaders.","link":"https://pytorch.org/tutorials/beginner/basics/intro.html","date":"2027-05-26"},{"title":"PyTorch basics (2)","detail":"PyTorch 'Learn the Basics': build a model, autograd, train on FashionMNIST.","link":"https://pytorch.org/tutorials/beginner/basics/intro.html","date":"2027-05-27"}]},{"kind":"week","id":"w24","tag":"W24","phase":"Phase 3: Deep Learning","focus":"Karpathy: micrograd","monday":"2027-05-31","sessions":[{"title":"Zero to Hero: micrograd (1)","detail":"Andrej Karpathy, lecture 1. Code along; pause constantly.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-06-01"},{"title":"Zero to Hero: micrograd (2)","detail":"Keep coding along.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-06-02"},{"title":"Zero to Hero: micrograd (3)","detail":"Keep coding along.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-06-03"},{"title":"Zero to Hero: micrograd (4)","detail":"Finish the lecture.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-06-04"}]},{"kind":"week","id":"w25","tag":"W25","phase":"Phase 3: Deep Learning","focus":"micrograd from memory","monday":"2027-06-07","sessions":[{"title":"Rebuild micrograd (1)","detail":"Rebuild micrograd from scratch WITHOUT the video. Look things up only when you're stuck.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-06-07"},{"title":"Rebuild micrograd (2)","detail":"Finish it and train it on a toy dataset.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-06-08"},{"title":"Write: explain backprop","detail":"Write a short explanation of backprop as if teaching a friend. Put it in your repo README.","link":null,"date":"2027-06-09"},{"title":"Zero to Hero: makemore 1 (start)","detail":"Lecture 2: bigram language model.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-06-10"}]},{"kind":"week","id":"w26","tag":"W26","phase":"Phase 3: Deep Learning","focus":"makemore: bigrams -> MLP","monday":"2027-06-14","sessions":[{"title":"makemore 1 (continue)","detail":"Continue the bigram lecture.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-06-14"},{"title":"makemore 1 (finish)","detail":"Finish it and do the exercises in the video description.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-06-15"},{"title":"makemore 2: MLP (start)","detail":"Lecture 3: multilayer perceptron language model.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-06-16"},{"title":"makemore 2: MLP (continue)","detail":"Keep coding along.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-06-17"}]},{"kind":"week","id":"w27","tag":"W27","phase":"Phase 3: Deep Learning","focus":"makemore: MLP + BatchNorm","monday":"2027-06-21","sessions":[{"title":"makemore 2: MLP (finish)","detail":"Finish lecture 3 and the exercises.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-06-21"},{"title":"makemore 3: activations (1)","detail":"Lecture 4: activations, gradients, BatchNorm.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-06-22"},{"title":"makemore 3: activations (2)","detail":"Keep coding along.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-06-23"},{"title":"makemore 3: activations (3)","detail":"Finish the lecture and the exercises.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-06-24"}]},{"kind":"week","id":"w28","tag":"W28","phase":"Phase 3: Deep Learning","focus":"Backprop Ninja","monday":"2027-06-28","sessions":[{"title":"makemore 4: Backprop Ninja (1)","detail":"Lecture 5. The hardest one: backprop by hand. It's fine if it spills into next week.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-06-28"},{"title":"makemore 4: Backprop Ninja (2)","detail":"Keep going.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-06-29"},{"title":"makemore 4: Backprop Ninja (3)","detail":"Keep going.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-06-30"},{"title":"makemore 4: Backprop Ninja (4)","detail":"Finish if you can.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-07-01"}]},{"kind":"rest","monday":"2027-07-05","label":"Summer break"},{"kind":"week","id":"w29","tag":"W29","phase":"Phase 3: Deep Learning","focus":"WaveNet","monday":"2027-07-12","sessions":[{"title":"Backprop Ninja (wrap up)","detail":"Finish anything left from Backprop Ninja.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-07-12"},{"title":"makemore 5: WaveNet (1)","detail":"Lecture 6: building a WaveNet.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-07-13"},{"title":"makemore 5: WaveNet (2)","detail":"Finish lecture 6.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-07-14"},{"title":"Experiment","detail":"Change the architecture or dataset of your makemore model and see what happens.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-07-15"}]},{"kind":"week","id":"w30","tag":"W30","phase":"Phase 3: Deep Learning","focus":"Transformers","monday":"2027-07-19","sessions":[{"title":"3Blue1Brown: GPT + attention (1)","detail":"Neural networks series: transformers / GPT chapter.","link":"https://www.3blue1brown.com/topics/neural-networks","date":"2027-07-19"},{"title":"3Blue1Brown: GPT + attention (2)","detail":"Attention chapter, then how LLMs store facts.","link":"https://www.3blue1brown.com/topics/neural-networks","date":"2027-07-20"},{"title":"Read: Attention Is All You Need","detail":"Read the paper alongside Jay Alammar's 'The Illustrated Transformer'. Don't worry about understanding every line.","link":"https://jalammar.github.io/illustrated-transformer/","date":"2027-07-21"},{"title":"Let's build GPT (start)","detail":"Karpathy lecture 7: build GPT from scratch.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-07-22"}]},{"kind":"week","id":"w31","tag":"W31","phase":"Phase 3: Deep Learning","focus":"Build GPT","monday":"2027-07-26","sessions":[{"title":"Let's build GPT (2)","detail":"Keep coding along.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-07-26"},{"title":"Let's build GPT (3)","detail":"Keep coding along.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-07-27"},{"title":"Let's build GPT (4)","detail":"Keep coding along.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-07-28"},{"title":"Let's build GPT (5)","detail":"Finish the lecture.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-07-29"}]},{"kind":"week","id":"w32","tag":"W32","phase":"Phase 3: Deep Learning","focus":"Your own GPT","monday":"2027-08-02","sessions":[{"title":"Train on your own text","detail":"Train your GPT on a text dataset you choose (public-domain books from Project Gutenberg, your own writing, code, etc.).","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-08-02"},{"title":"Experiment: hyperparameters","detail":"Vary layers, heads, context length and learning rate. Log the results.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-08-03"},{"title":"Experiment: continue","detail":"Keep experimenting. Note what actually moves the loss.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-08-04"},{"title":"Write-up","detail":"Write up your GPT project and push it to GitHub. This is a portfolio piece.","link":null,"date":"2027-08-05"}]},{"kind":"week","id":"w33","tag":"W33","phase":"Phase 3: Deep Learning","focus":"Tokenizers","monday":"2027-08-09","sessions":[{"title":"Karpathy: tokenizer (1)","detail":"Lecture 8: build the GPT tokenizer (BPE).","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-08-09"},{"title":"Karpathy: tokenizer (2)","detail":"Keep coding along.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-08-10"},{"title":"Karpathy: tokenizer (3)","detail":"Finish the lecture.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-08-11"},{"title":"Build: BPE tokenizer","detail":"Build your own byte-pair encoding tokenizer and test it on your dataset.","link":"https://karpathy.ai/zero-to-hero.html","date":"2027-08-12"}]},{"kind":"buffer","monday":"2027-08-16","id":"b3"},{"kind":"week","id":"w34","tag":"W34","phase":"Phase 3: Deep Learning","focus":"fast.ai: vision + deployment","monday":"2027-08-23","sessions":[{"title":"fast.ai Lesson 1","detail":"Practical Deep Learning, lesson 1.","link":"https://course.fast.ai/","date":"2027-08-23"},{"title":"fast.ai Lesson 1 notebook","detail":"Build your own image classifier on your own images.","link":"https://course.fast.ai/","date":"2027-08-24"},{"title":"fast.ai Lesson 2","detail":"Lesson 2: deployment.","link":"https://course.fast.ai/","date":"2027-08-25"},{"title":"Deploy your model","detail":"Deploy your classifier to Hugging Face Spaces so anyone can use it.","link":"https://course.fast.ai/","date":"2027-08-26"}]},{"kind":"week","id":"w35","tag":"W35","phase":"Phase 3: Deep Learning","focus":"fast.ai: foundations + NLP","monday":"2027-08-30","sessions":[{"title":"fast.ai Lesson 3","detail":"Lesson 3: neural net foundations.","link":"https://course.fast.ai/","date":"2027-08-30"},{"title":"fast.ai Lesson 4","detail":"Lesson 4: NLP.","link":"https://course.fast.ai/","date":"2027-08-31"},{"title":"fast.ai Lesson 4 notebook","detail":"Work through the NLP notebook.","link":"https://course.fast.ai/","date":"2027-09-01"},{"title":"Kaggle notebook","detail":"Apply what you learned to a Kaggle NLP dataset.","link":"https://www.kaggle.com/learn","date":"2027-09-02"}]},{"kind":"week","id":"w36","tag":"W36","phase":"Phase 3: Deep Learning","focus":"fast.ai: tabular, collab filtering, convolutions","monday":"2027-09-06","sessions":[{"title":"fast.ai Lesson 5","detail":"Lesson 5: from-scratch model.","link":"https://course.fast.ai/","date":"2027-09-07"},{"title":"fast.ai Lesson 6","detail":"Lesson 6: random forests.","link":"https://course.fast.ai/","date":"2027-09-08"},{"title":"fast.ai Lesson 7","detail":"Lesson 7: collaborative filtering.","link":"https://course.fast.ai/","date":"2027-09-09"},{"title":"fast.ai Lesson 8","detail":"Lesson 8: convolutions.","link":"https://course.fast.ai/","date":"2027-09-10"}]},{"kind":"week","id":"w37","tag":"W37","phase":"Phase 3: Deep Learning","focus":"CNNs in depth","monday":"2027-09-13","sessions":[{"title":"CS231n notes: CNNs","detail":"Stanford CS231n course notes on convolutional networks.","link":"https://cs231n.github.io/","date":"2027-09-13"},{"title":"Train a CNN in PyTorch","detail":"Train a CNN on CIFAR-10 in plain PyTorch.","link":"https://pytorch.org/tutorials/beginner/basics/intro.html","date":"2027-09-14"},{"title":"Transfer learning","detail":"PyTorch transfer learning tutorial: fine-tune a pretrained ResNet.","link":"https://pytorch.org/tutorials/beginner/basics/intro.html","date":"2027-09-15"},{"title":"Experiment","detail":"Try data augmentation and different architectures. Log results.","link":"https://pytorch.org/tutorials/beginner/basics/intro.html","date":"2027-09-16"}]},{"kind":"week","id":"w38","tag":"W38","phase":"Phase 3: Deep Learning","focus":"Deep learning project (1/2)","monday":"2027-09-20","sessions":[{"title":"DL project: plan","detail":"Pick a project, ideally vision for robotics (e.g., recognize objects your robot should react to). Write a spec.","link":null,"date":"2027-09-20"},{"title":"DL project: data","detail":"Collect or find data. Label it.","link":null,"date":"2027-09-21"},{"title":"DL project: train","detail":"Train a first model.","link":null,"date":"2027-09-22"},{"title":"DL project: iterate","detail":"Analyze errors and improve.","link":null,"date":"2027-09-23"}]},{"kind":"week","id":"w39","tag":"W39","phase":"Phase 3: Deep Learning","focus":"Deep learning project (2/2)","monday":"2027-09-27","sessions":[{"title":"DL project: iterate","detail":"Keep improving.","link":null,"date":"2027-09-27"},{"title":"DL project: demo","detail":"Make a demo: a web app, Hugging Face Space or video.","link":null,"date":"2027-09-28"},{"title":"DL project: write-up","detail":"Write the README: problem, approach, results, what you'd do next.","link":null,"date":"2027-09-29"},{"title":"DL project: ship","detail":"Push it. Phase 3 done.","link":null,"date":"2027-09-30"}]},{"kind":"week","id":"w40","tag":"W40","phase":"Phase 4: Modern AI + Building","focus":"Hugging Face + fine-tuning","monday":"2027-10-04","sessions":[{"title":"HF LLM course ch.1","detail":"Hugging Face LLM course: transformer models.","link":"https://huggingface.co/learn/llm-course","date":"2027-10-04"},{"title":"HF LLM course ch.2","detail":"Using Transformers: pipelines, tokenizers, models.","link":"https://huggingface.co/learn/llm-course","date":"2027-10-05"},{"title":"HF LLM course ch.3","detail":"Fine-tuning a pretrained model.","link":"https://huggingface.co/learn/llm-course","date":"2027-10-06"},{"title":"Build: fine-tune","detail":"Fine-tune a small model on a dataset you care about.","link":"https://huggingface.co/learn/llm-course","date":"2027-10-07"}]},{"kind":"week","id":"w41","tag":"W41","phase":"Phase 4: Modern AI + Building","focus":"Building with LLM APIs","monday":"2027-10-11","sessions":[{"title":"LLM API: first calls","detail":"Get an API key (e.g., Claude) and make your first calls from Python.","link":"https://docs.claude.com/","date":"2027-10-11"},{"title":"Prompting fundamentals","detail":"Read the prompt engineering guide in the docs. Try system prompts and examples.","link":"https://docs.claude.com/","date":"2027-10-12"},{"title":"Tool use","detail":"Learn tool use (function calling): let the model call your Python functions.","link":"https://docs.claude.com/","date":"2027-10-13"},{"title":"Build: chatbot","detail":"Build a command-line chatbot with conversation memory and one tool.","link":"https://docs.claude.com/","date":"2027-10-14"}]},{"kind":"week","id":"w42","tag":"W42","phase":"Phase 4: Modern AI + Building","focus":"RAG","monday":"2027-10-18","sessions":[{"title":"Embeddings","detail":"Learn what embeddings are and how similarity search works.","link":"https://huggingface.co/learn/llm-course","date":"2027-10-18"},{"title":"Vector search","detail":"Embed your own notes/documents and search them.","link":null,"date":"2027-10-19"},{"title":"Build: RAG app","detail":"Build question-answering over your documents (retrieve, then generate).","link":null,"date":"2027-10-20"},{"title":"Evaluate it","detail":"Write 20 test questions and measure how often it's right. Improve the weakest part.","link":null,"date":"2027-10-21"}]},{"kind":"week","id":"w43","tag":"W43","phase":"Phase 4: Modern AI + Building","focus":"Agents","monday":"2027-10-25","sessions":[{"title":"Read: building agents","detail":"Anthropic's 'Building effective agents'.","link":"https://www.anthropic.com/engineering/building-effective-agents","date":"2027-10-25"},{"title":"Build: agent (1)","detail":"Build an agent that uses multiple tools to complete a task.","link":null,"date":"2027-10-26"},{"title":"Build: agent (2)","detail":"Add error handling and a stopping condition.","link":null,"date":"2027-10-27"},{"title":"Ship the agent","detail":"README + push to GitHub.","link":null,"date":"2027-10-28"}]},{"kind":"buffer","monday":"2027-11-01","id":"b4"},{"kind":"week","id":"w44","tag":"W44","phase":"Phase 4: Modern AI + Building","focus":"Reading papers","monday":"2027-11-08","sessions":[{"title":"How to read a paper","detail":"Learn the 3-pass method: skim, read, then re-derive.","link":null,"date":"2027-11-08"},{"title":"Paper: ResNet","detail":"Deep Residual Learning (He et al., 2015).","link":null,"date":"2027-11-09"},{"title":"Paper: GPT-3","detail":"Language Models are Few-Shot Learners (2020). Focus on the scaling ideas.","link":null,"date":"2027-11-10"},{"title":"Paper: InstructGPT","detail":"Training language models to follow instructions with human feedback (2022). How RLHF works.","link":null,"date":"2027-11-11"}]},{"kind":"week","id":"w45","tag":"W45","phase":"Phase 4: Modern AI + Building","focus":"AI on hardware","monday":"2027-11-15","sessions":[{"title":"Set up edge device","detail":"Set up a Raspberry Pi or Jetson with a camera.","link":null,"date":"2027-11-15"},{"title":"Run object detection","detail":"Run a pretrained object detection model on the device in real time.","link":null,"date":"2027-11-16"},{"title":"Connect to Arduino","detail":"Have detections trigger an Arduino actuator (servo, motor, LED) over serial.","link":null,"date":"2027-11-17"},{"title":"Iterate","detail":"Improve speed and reliability.","link":null,"date":"2027-11-18"}]},{"kind":"week","id":"w46","tag":"W46","phase":"Phase 4: Modern AI + Building","focus":"Capstone (1/2)","monday":"2027-11-22","sessions":[{"title":"Capstone: plan","detail":"Combine everything: an AI-powered robot or app. Write a spec.","link":null,"date":"2027-11-22"},{"title":"Capstone: build","detail":"Build.","link":null,"date":"2027-11-23"},{"title":"Capstone: build","detail":"Build.","link":null,"date":"2027-11-24"},{"title":"Capstone: build","detail":"Build. Get it working end to end.","link":null,"date":"2027-11-26"}]},{"kind":"week","id":"w47","tag":"W47","phase":"Phase 4: Modern AI + Building","focus":"Capstone (2/2)","monday":"2027-11-29","sessions":[{"title":"Capstone: polish","detail":"Fix the rough edges.","link":null,"date":"2027-11-29"},{"title":"Capstone: demo","detail":"Record a demo video.","link":null,"date":"2027-11-30"},{"title":"Capstone: write-up","detail":"Write the README and a short post about what you built.","link":null,"date":"2027-12-01"},{"title":"Year in review","detail":"Update your GitHub profile with your best 5 projects. Review the year and pick your next direction.","link":null,"date":"2027-12-02"}]}];
+    const KEY = "ai-study-progress-v1";
+    const ids = [];
+    PLAN.forEach(w => { if (w.kind === "week") w.sessions.forEach((_, i) => ids.push(w.id + "-" + i)); });
+
+    let done = new Set();
+    try { done = new Set(JSON.parse(localStorage.getItem(KEY) || "[]")); } catch (e) {}
+    const save = () => { try { localStorage.setItem(KEY, JSON.stringify([...done])); } catch (e) {} };
+
+    // Sync link: progress encoded as a bitset in the URL hash (#p=...)
+    function encode() {
+      const bytes = new Uint8Array(Math.ceil(ids.length / 8));
+      ids.forEach((id, n) => { if (done.has(id)) bytes[n >> 3] |= 1 << (n & 7); });
+      return btoa(String.fromCharCode(...bytes)).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+    }
+    function decode(s) {
+      const bin = atob(s.replace(/-/g, "+").replace(/_/g, "/"));
+      const set = new Set();
+      ids.forEach((id, n) => { if ((bin.charCodeAt(n >> 3) || 0) & (1 << (n & 7))) set.add(id); });
+      return set;
+    }
+    const m = location.hash.match(/^#p=([A-Za-z0-9_-]+)/);
+    if (m) {
+      try {
+        const incoming = decode(m[1]);
+        if (confirm("Load " + incoming.size + " checked sessions from this sync link? This replaces the checkmarks saved in this browser.")) {
+          done = incoming; save();
+        }
+      } catch (e) {}
+      history.replaceState(null, "", location.pathname);
+    }
+
+    const fmt = (iso, opts) => new Date(iso + "T12:00:00").toLocaleDateString("en-US", opts);
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+    const weekOf = iso => { const d = new Date(iso + "T00:00:00"); const end = new Date(d); end.setDate(d.getDate() + 7); return [d, end]; };
+    const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+    const plan = document.getElementById("plan");
+    let phaseEl = null, phaseName = null, currentEl = null, firstOpenEl = null;
+    const phases = {};
+
+    PLAN.forEach(w => {
+      const [start, end] = weekOf(w.monday);
+      const isNow = today >= start && today < end;
+
+      if (w.kind === "week" && w.phase !== phaseName) {
+        phaseName = w.phase;
+        const sec = document.createElement("section");
+        sec.className = "phase";
+        sec.innerHTML = `<div class="phase-head"><h2>${esc(w.phase)}</h2><span class="count"></span></div>`;
+        plan.appendChild(sec);
+        phaseEl = sec;
+        phases[w.phase] = { el: sec.querySelector(".count"), ids: [] };
+      }
+      if (!phaseEl) return;
+
+      if (w.kind !== "week") {
+        const row = document.createElement("div");
+        row.className = "note-row";
+        row.innerHTML = w.kind === "rest"
+          ? `<b>Rest</b>${esc(w.label)}, week of ${fmt(w.monday, { month: "short", day: "numeric", year: "numeric" })}. No sessions.`
+          : `<b>Buffer</b>Week of ${fmt(w.monday, { month: "short", day: "numeric", year: "numeric" })}. Catch up on anything unfinished, review, or rest.`;
+        if (isNow) { row.style.color = "#fff"; currentEl = currentEl || row; }
+        phaseEl.appendChild(row);
+        return;
+      }
+
+      const det = document.createElement("details");
+      det.className = "week" + (isNow ? " current" : "");
+      det.id = w.id;
+      const range = fmt(w.sessions[0].date, { month: "short", day: "numeric" }) + " – " +
+                    fmt(w.sessions[3].date, { month: "short", day: "numeric", year: "numeric" });
+      det.innerHTML = `
+        <summary>
+          <span class="tag">${w.tag}</span>
+          <span><span class="focus">${esc(w.focus)}</span>
+            <span class="when">${range}${isNow ? '<span class="now-pill">This week</span>' : ""}</span></span>
+          <span class="wk-count"></span>
+        </summary>
+        <ul class="sessions">
+          ${w.sessions.map((s, i) => {
+            const id = w.id + "-" + i;
+            return `<li data-id="${id}">
+              <input type="checkbox" id="c-${id}" aria-label="${esc(s.title)}">
+              <div>
+                <label for="c-${id}"><span class="s-day">${fmt(s.date, { weekday: "short", month: "short", day: "numeric" })}</span><br>
+                <span class="s-title">${esc(s.title)}</span></label>
+                <p class="s-detail">${esc(s.detail)}</p>
+                ${s.link ? `<a class="s-link" href="${s.link}" target="_blank" rel="noopener">${esc(s.link.replace(/^https?:\/\//, "").replace(/\/$/, ""))}</a>` : ""}
+              </div>
+            </li>`;
+          }).join("")}
+        </ul>`;
+      phaseEl.appendChild(det);
+      phases[w.phase].ids.push(...w.sessions.map((_, i) => w.id + "-" + i));
+      if (isNow) currentEl = det;
+    });
+
+    function weekIds(det) { return [...det.querySelectorAll("li[data-id]")].map(li => li.dataset.id); }
+
+    function refresh() {
+      document.querySelectorAll("li[data-id]").forEach(li => {
+        const on = done.has(li.dataset.id);
+        li.classList.toggle("checked", on);
+        li.querySelector("input").checked = on;
+      });
+      document.querySelectorAll("details.week").forEach(det => {
+        const ws = weekIds(det), n = ws.filter(id => done.has(id)).length;
+        det.querySelector(".wk-count").textContent = n + "/" + ws.length;
+        det.classList.toggle("done", n === ws.length);
+      });
+      Object.values(phases).forEach(p => {
+        const n = p.ids.filter(id => done.has(id)).length;
+        p.el.textContent = n + " / " + p.ids.length;
+      });
+      const n = ids.filter(id => done.has(id)).length;
+      const pct = Math.round(n / ids.length * 100);
+      document.getElementById("bar").style.width = pct + "%";
+      document.getElementById("stat-done").textContent = n + " of " + ids.length + " sessions";
+      document.getElementById("stat-pct").textContent = pct + "%";
+      applyHide();
+    }
+
+    plan.addEventListener("change", e => {
+      const li = e.target.closest("li[data-id]");
+      if (!li) return;
+      e.target.checked ? done.add(li.dataset.id) : done.delete(li.dataset.id);
+      save(); refresh();
+    });
+
+    // Open the current week (or the first unfinished one before the plan starts)
+    const firstUnfinished = [...document.querySelectorAll("details.week")].find(d => weekIds(d).some(id => !done.has(id)));
+    const target = (currentEl && currentEl.tagName === "DETAILS") ? currentEl : (currentEl || firstUnfinished);
+    if (target && target.tagName === "DETAILS") target.open = true;
+    else if (firstUnfinished) firstUnfinished.open = true;
+
+    document.getElementById("jump-top").addEventListener("click", () => {
+      const t = currentEl || firstUnfinished;
+      if (t) { if (t.tagName === "DETAILS") t.open = true; t.scrollIntoView({ block: "start" }); }
+    });
+
+    const toast = msg => { const t = document.getElementById("toast"); t.textContent = msg; clearTimeout(toast.t); toast.t = setTimeout(() => t.textContent = "", 4000); };
+
+    document.getElementById("sync").addEventListener("click", async () => {
+      const url = location.origin + location.pathname + "#p=" + encode();
+      try { await navigator.clipboard.writeText(url); toast("Sync link copied. Open it on your other device."); }
+      catch (e) { prompt("Copy this link and open it on your other device:", url); }
+    });
+
+    let hideDone = false;
+    try { hideDone = localStorage.getItem(KEY + "-hide") === "1"; } catch (e) {}
+    function applyHide() {
+      document.querySelectorAll("details.week").forEach(d => d.hidden = hideDone && d.classList.contains("done"));
+      document.getElementById("toggle-done").textContent = hideDone ? "Show finished weeks" : "Hide finished weeks";
+    }
+    document.getElementById("toggle-done").addEventListener("click", () => {
+      hideDone = !hideDone;
+      try { localStorage.setItem(KEY + "-hide", hideDone ? "1" : "0"); } catch (e) {}
+      applyHide();
+    });
+
+    document.getElementById("reset").addEventListener("click", () => {
+      if (confirm("Clear every checkmark in this browser?")) { done.clear(); save(); refresh(); toast("Progress cleared."); }
+    });
+
+    // Calendar file, built from the plan above
+    function buildIcs() {
+      const ymd = d => d.toISOString().slice(0, 10).replace(/-/g, "");
+      const day = (iso, n) => { const d = new Date(iso + "T12:00:00Z"); d.setUTCDate(d.getUTCDate() + n); return d; };
+      const icsEsc = s => s.replace(/\\/g, "\\\\").replace(/;/g, "\\;").replace(/,/g, "\\,").replace(/\n/g, "\\n");
+      const fold = line => {
+        const out = []; let cur = "", lim = 75;
+        for (const ch of line) {
+          const len = new TextEncoder().encode(ch).length;
+          if (new TextEncoder().encode(cur).length + len > lim) { out.push(cur); cur = ""; lim = 74; }
+          cur += ch;
+        }
+        out.push(cur);
+        return out.join("\r\n ");
+      };
+      const L = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//AI Study Plan//EN", "CALSCALE:GREGORIAN", "METHOD:PUBLISH", "X-WR-CALNAME:AI Study Plan"];
+      let n = 0;
+      const ev = (d, sh, eh, summary, desc, free) => {
+        L.push("BEGIN:VEVENT", `UID:ai-study-${ymd(d)}-${n++}@nicholasgriffo.com`, "DTSTAMP:20261117T000000Z");
+        if (sh === null) L.push(`DTSTART;VALUE=DATE:${ymd(d)}`, `DTEND;VALUE=DATE:${ymd(new Date(d.getTime() + 5 * 864e5))}`);
+        else L.push(`DTSTART:${ymd(d)}T${sh}0000`, `DTEND:${ymd(d)}T${eh}0000`);
+        L.push(`SUMMARY:${icsEsc(summary)}`, `DESCRIPTION:${icsEsc(desc)}`, `TRANSP:${free ? "TRANSPARENT" : "OPAQUE"}`);
+        if (!free && sh !== null) L.push("BEGIN:VALARM", "ACTION:DISPLAY", "DESCRIPTION:AI study in 15 minutes", "TRIGGER:-PT15M", "END:VALARM");
+        L.push("END:VEVENT");
+      };
+      const page = location.origin + location.pathname;
+      PLAN.forEach(w => {
+        if (w.kind === "rest") { ev(day(w.monday, 0), null, null, `AI study: ${w.label} (no sessions)`, "Rest week. No study sessions this week.", true); return; }
+        let usesFriday = false;
+        if (w.kind === "buffer") {
+          ["Catch-up", "Catch-up", "Review", "Rest or light review"].forEach((t, i) =>
+            ev(day(w.monday, i), 19, 21, `AI Buffer: ${t}`, `Buffer week. Catch up on anything unfinished, review, or rest.\n\n${page}`, false));
+        } else {
+          w.sessions.forEach(s => {
+            const d = day(s.date, 0);
+            if (d.getUTCDay() === 5) usesFriday = true;
+            ev(d, 19, 21, `AI ${w.tag}: ${s.title}`, `${w.phase} | ${w.tag}: ${w.focus}\n\n${s.detail}${s.link ? "\n\n" + s.link : ""}\n\nCheck it off: ${page}#${w.id}`, false);
+          });
+        }
+        if (!usesFriday) ev(day(w.monday, 4), 19, 20, "AI buffer (optional, only if behind)", "Optional. Use this hour only if you fell behind this week. Otherwise, take the night off.", true);
+      });
+      L.push("END:VCALENDAR");
+      return L.map(fold).join("\r\n") + "\r\n";
+    }
+    document.getElementById("ics").addEventListener("click", () => {
+      const url = URL.createObjectURL(new Blob([buildIcs()], { type: "text/calendar" }));
+      const a = document.createElement("a");
+      a.href = url; a.download = "ai-study-plan.ics";
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    });
+
+    if (location.hash && !m) {
+      const t = document.getElementById(location.hash.slice(1));
+      if (t && t.tagName === "DETAILS") { t.open = true; setTimeout(() => t.scrollIntoView({ block: "start" }), 0); }
+    }
+
+    refresh();
+  </script>
+</body>
+</html>
