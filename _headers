@@ -16,3 +16,6 @@
 /resume-writing-data.png
   Access-Control-Allow-Origin: *
   X-Robots-Tag: noindex
+/fuse-deck-data.png
+  Access-Control-Allow-Origin: *
+  X-Robots-Tag: noindex
