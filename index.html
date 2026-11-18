@@ -178,6 +178,19 @@
             text-decoration: none;
         }
 
+        .portfolio-link {
+            position: absolute;
+            top: 18px;
+            right: 32px;
+            font-size: .68rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.72);
+            z-index: 2;
+        }
+
+        .portfolio-link:hover { color: #fff; }
+
         /* LOGLINE ZONE */
         .logline-area {
             position: fixed;
@@ -236,6 +249,7 @@
             }
 
             .logline-area { padding: 0 24px 18px; }
+            .portfolio-link { top: 14px; right: 16px; }
             .logline-text { font-size: .7rem; }
         }
     </style>
@@ -245,6 +259,8 @@
     <section class="header">
         <p>Screenplays by Nicholas Griffo</p>
     </section>
+
+    <a class="portfolio-link" href="/portfolio">Portfolio →</a>
 
     <div class="container">
 
