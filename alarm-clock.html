@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-Ink Alarm Clock, EC-01</title>
+<meta name="description" content="Technical drawing of the E-Ink Alarm Clock, a personal build by Nicholas C. Griffo.">
+<link rel="icon" href="favicon.ico">
+<link rel="canonical" href="https://nicholasgriffo.com/alarm-clock">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #0c2d5c; }
+  body { min-height: 100vh; color: #eaf2ff; font-family: 'IBM Plex Mono', ui-monospace, Menlo, monospace; }
+  .nav { display: flex; justify-content: space-between; padding: 18px 32px 0; }
+  .nav a { font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(234,242,255,.8); text-decoration: none; }
+  .nav a:hover { color: #fff; }
+  .sheet { max-width: 1240px; margin: 0 auto; padding: 22px 20px 40px; }
+  .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  svg { display: block; width: 100%; height: auto; box-shadow: 0 0 0 1px rgba(234,242,255,.15), 0 30px 80px rgba(0,0,0,.45); }
+  .cap { margin-top: 14px; font-size: .7rem; letter-spacing: .1em; color: rgba(234,242,255,.7); }
+  @media (max-width: 600px) { .nav { padding: 14px 16px 0; } .sheet { padding: 16px 16px 32px; } }
+</style>
+</head>
+<body>
+<nav class="nav"><a href="/portfolio#built">← Portfolio</a><a href="/portfolio#contact">Contact</a></nav>
+<main class="sheet">
+<div class="scroll">
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Technical drawing of the E-Ink Alarm Clock: front, right side, top and isometric views with dimensions, parts list and title block.">
+<defs>
+<marker id="a" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M0,1.5 L10,5 L0,8.5 Z" fill="#eaf2ff"/></marker>
+<pattern id="g" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M20 0H0V20" fill="none" stroke="rgba(234,242,255,.07)" stroke-width="1"/></pattern>
+<pattern id="G" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M100 0H0V100" fill="none" stroke="rgba(234,242,255,.13)" stroke-width="1"/></pattern>
+<style>
+.line{fill:none;stroke:#eaf2ff;stroke-width:1.6;stroke-linejoin:round}
+.heavy{fill:#123f7d;stroke:#eaf2ff;stroke-width:2.2;stroke-linejoin:round}
+.thin{fill:none;stroke:#eaf2ff;stroke-width:.8}
+.hidden{fill:none;stroke:#eaf2ff;stroke-width:1;stroke-dasharray:5 4}
+.center{fill:none;stroke:rgba(234,242,255,.55);stroke-width:.8;stroke-dasharray:16 4 3 4}
+text{font-family:'IBM Plex Mono',ui-monospace,Menlo,monospace;fill:#eaf2ff;letter-spacing:.06em}
+.dim{font-size:12px} .small{font-size:10px;fill:rgba(234,242,255,.55)} .ball{font-size:12px;font-weight:600}
+.vlabel{font-size:13px;font-weight:600;letter-spacing:.18em}
+.note{font-size:10.5px} .head{font-size:11px;font-weight:600;letter-spacing:.2em}
+.tb{font-size:10px;fill:rgba(234,242,255,.55);letter-spacing:.14em} .tbv{font-size:14px;font-weight:600}
+.big{font-size:22px;font-weight:600;letter-spacing:.12em}
+</style></defs>
+<rect width="1200" height="800" fill="#123f7d"/><rect width="1200" height="800" fill="url(#g)"/><rect width="1200" height="800" fill="url(#G)"/>
+<rect x="16" y="16" width="1168" height="768" class="line"/><rect x="28" y="28" width="1144" height="744" class="thin"/>
+<text x="123.33333333333333" y="25" class="small" text-anchor="middle">1</text><text x="123.33333333333333" y="781" class="small" text-anchor="middle">1</text>
+<text x="314.0" y="25" class="small" text-anchor="middle">2</text><text x="314.0" y="781" class="small" text-anchor="middle">2</text>
+<line x1="218.66666666666666" y1="16" x2="218.66666666666666" y2="28" class="thin"/><line x1="218.66666666666666" y1="772" x2="218.66666666666666" y2="784" class="thin"/>
+<text x="504.6666666666667" y="25" class="small" text-anchor="middle">3</text><text x="504.6666666666667" y="781" class="small" text-anchor="middle">3</text>
+<line x1="409.3333333333333" y1="16" x2="409.3333333333333" y2="28" class="thin"/><line x1="409.3333333333333" y1="772" x2="409.3333333333333" y2="784" class="thin"/>
+<text x="695.3333333333334" y="25" class="small" text-anchor="middle">4</text><text x="695.3333333333334" y="781" class="small" text-anchor="middle">4</text>
+<line x1="600.0" y1="16" x2="600.0" y2="28" class="thin"/><line x1="600.0" y1="772" x2="600.0" y2="784" class="thin"/>
+<text x="886.0" y="25" class="small" text-anchor="middle">5</text><text x="886.0" y="781" class="small" text-anchor="middle">5</text>
+<line x1="790.6666666666666" y1="16" x2="790.6666666666666" y2="28" class="thin"/><line x1="790.6666666666666" y1="772" x2="790.6666666666666" y2="784" class="thin"/>
+<text x="1076.6666666666667" y="25" class="small" text-anchor="middle">6</text><text x="1076.6666666666667" y="781" class="small" text-anchor="middle">6</text>
+<line x1="981.3333333333334" y1="16" x2="981.3333333333334" y2="28" class="thin"/><line x1="981.3333333333334" y1="772" x2="981.3333333333334" y2="784" class="thin"/>
+<text x="22" y="125.0" class="small" text-anchor="middle">A</text><text x="1178" y="125.0" class="small" text-anchor="middle">A</text>
+<text x="22" y="311.0" class="small" text-anchor="middle">B</text><text x="1178" y="311.0" class="small" text-anchor="middle">B</text>
+<text x="22" y="497.0" class="small" text-anchor="middle">C</text><text x="1178" y="497.0" class="small" text-anchor="middle">C</text>
+<text x="22" y="683.0" class="small" text-anchor="middle">D</text><text x="1178" y="683.0" class="small" text-anchor="middle">D</text>
+<rect x="120" y="92" width="256" height="180" rx="10" class="heavy"/>
+<line x1="120" y1="202" x2="376" y2="202" class="thin"/>
+<text x="386" y="206" class="small">TANGENT</text>
+<circle cx="304" cy="237" r="24" class="line"/><circle cx="304" cy="237" r="19" class="thin"/>
+<line x1="270" y1="237" x2="338" y2="237" class="center"/><line x1="304" y1="203" x2="304" y2="271" class="center"/>
+<line x1="144" y1="264" x2="352" y2="264" class="hidden"/>
+<line x1="248.0" y1="78" x2="248.0" y2="286" class="center"/>
+<line x1="116" y1="92" x2="80" y2="92" class="thin"/>
+<line x1="116" y1="272" x2="80" y2="272" class="thin"/>
+<line x1="86" y1="92" x2="86" y2="272" class="thin" marker-start="url(#a)" marker-end="url(#a)"/>
+<rect x="77" y="167.0" width="18" height="30" fill="#123f7d"/>
+<text x="90" y="182.0" class="dim" text-anchor="middle" transform="rotate(-90 90 182.0)">45</text>
+<line x1="287" y1="220" x2="244" y2="179" class="thin"/><text x="204" y="175" class="dim">⌀12</text>
+<text x="248.0" y="70" class="vlabel" text-anchor="middle">TOP VIEW</text>
+<line x1="188.0" y1="76" x2="308.0" y2="76" class="thin"/>
+<rect x="120" y="342" width="256" height="128" rx="18" class="heavy"/>
+<rect x="144" y="352.0" width="208" height="108" rx="4" class="line"/><rect x="149" y="357.0" width="198" height="98" rx="2" class="thin"/>
+<text x="248.0" y="394.0" class="small" text-anchor="middle">E-PAPER ACTIVE AREA</text>
+<circle cx="202.24" cy="350.0" r="6.0" class="hidden"/>
+<circle cx="293.76" cy="350.0" r="6.0" class="hidden"/>
+<line x1="248.0" y1="328" x2="248.0" y2="484" class="center"/><line x1="106" y1="406.0" x2="390" y2="406.0" class="center"/>
+<line x1="120" y1="474" x2="120" y2="510" class="thin"/>
+<line x1="376" y1="474" x2="376" y2="510" class="thin"/>
+<line x1="120" y1="504" x2="376" y2="504" class="thin" marker-start="url(#a)" marker-end="url(#a)"/>
+<rect x="231.0" y="496" width="34" height="16" fill="#123f7d"/>
+<text x="248.0" y="508" class="dim" text-anchor="middle">64</text>
+<line x1="116" y1="342" x2="80" y2="342" class="thin"/>
+<line x1="116" y1="470" x2="80" y2="470" class="thin"/>
+<line x1="86" y1="342" x2="86" y2="470" class="thin" marker-start="url(#a)" marker-end="url(#a)"/>
+<rect x="77" y="391.0" width="18" height="30" fill="#123f7d"/>
+<text x="90" y="406.0" class="dim" text-anchor="middle" transform="rotate(-90 90 406.0)">32</text>
+<line x1="144" y1="464.0" x2="144" y2="538" class="thin"/>
+<line x1="352" y1="464.0" x2="352" y2="538" class="thin"/>
+<line x1="144" y1="532" x2="352" y2="532" class="thin" marker-start="url(#a)" marker-end="url(#a)"/>
+<rect x="231.0" y="524" width="34" height="16" fill="#123f7d"/>
+<text x="248.0" y="536" class="dim" text-anchor="middle">52</text>
+<text x="248.0" y="568" class="vlabel" text-anchor="middle">FRONT VIEW</text>
+<line x1="188.0" y1="574" x2="308.0" y2="574" class="thin"/>
+<text x="248.0" y="588" class="small" text-anchor="middle">WINDOW 52 × 27</text>
+<path d="M468,350 Q468,342 476,342 L538,342 C618,342 648,362 648,406.0 C648,450 618,470 538,470 L476,470 Q468,470 468,462 Z" class="heavy"/>
+<circle cx="548.0" cy="406.0" r="2.2" class="line"/>
+<circle cx="560.0" cy="394.0" r="2.2" class="line"/>
+<circle cx="560.0" cy="406.0" r="2.2" class="line"/>
+<circle cx="560.0" cy="418.0" r="2.2" class="line"/>
+<circle cx="572.0" cy="382.0" r="2.2" class="line"/>
+<circle cx="572.0" cy="394.0" r="2.2" class="line"/>
+<circle cx="572.0" cy="406.0" r="2.2" class="line"/>
+<circle cx="572.0" cy="418.0" r="2.2" class="line"/>
+<circle cx="572.0" cy="430.0" r="2.2" class="line"/>
+<circle cx="584.0" cy="394.0" r="2.2" class="line"/>
+<circle cx="584.0" cy="406.0" r="2.2" class="line"/>
+<circle cx="584.0" cy="418.0" r="2.2" class="line"/>
+<circle cx="596.0" cy="406.0" r="2.2" class="line"/>
+<rect x="634" y="401.0" width="9" height="10" rx="2" class="hidden"/>
+<line x1="454" y1="406.0" x2="662" y2="406.0" class="center"/>
+<line x1="468" y1="474" x2="468" y2="510" class="thin"/>
+<line x1="648" y1="474" x2="648" y2="510" class="thin"/>
+<line x1="468" y1="504" x2="648" y2="504" class="thin" marker-start="url(#a)" marker-end="url(#a)"/>
+<rect x="541.0" y="496" width="34" height="16" fill="#123f7d"/>
+<text x="558.0" y="508" class="dim" text-anchor="middle">45</text>
+<line x1="652" y1="342" x2="688" y2="342" class="thin"/>
+<line x1="652" y1="470" x2="688" y2="470" class="thin"/>
+<line x1="682" y1="342" x2="682" y2="470" class="thin" marker-start="url(#a)" marker-end="url(#a)"/>
+<rect x="673" y="391.0" width="18" height="30" fill="#123f7d"/>
+<text x="686" y="406.0" class="dim" text-anchor="middle" transform="rotate(-90 686 406.0)">32</text>
+<text x="546" y="332" class="small">FULL ROUND BACK</text>
+<text x="558.0" y="568" class="vlabel" text-anchor="middle">RIGHT SIDE VIEW</text>
+<line x1="498.0" y1="574" x2="618.0" y2="574" class="thin"/>
+<path d="M790.0,170.0 L850.6,135.0 C919.9,95.0 945.9,100.0 945.9,144.0 L1167.6,272.0 C1167.6,228.0 1141.6,223.0 1072.3,263.0 L1011.7,298.0 Z" class="heavy"/>
+<line x1="850.6" y1="135.0" x2="1072.3" y2="263.0" class="thin"/>
+<ellipse cx="0" cy="0" rx="24" ry="24" transform="matrix(0.866,0.5,0.866,-0.5,979.7,244.5)" class="line"/>
+<g transform="matrix(0.866,-0.5,0,1,1011.7,298.0)"><path d="M0,8 Q0,0 8,0 L70,0 C150,0 180,20 180,64.0 C180,108 150,128 70,128 L8,128 Q0,128 0,120 Z" class="heavy"/>
+<circle cx="80.0" cy="64.0" r="2" class="line"/>
+<circle cx="92.0" cy="52.0" r="2" class="line"/>
+<circle cx="92.0" cy="64.0" r="2" class="line"/>
+<circle cx="92.0" cy="76.0" r="2" class="line"/>
+<circle cx="104.0" cy="40.0" r="2" class="line"/>
+<circle cx="104.0" cy="52.0" r="2" class="line"/>
+<circle cx="104.0" cy="64.0" r="2" class="line"/>
+<circle cx="104.0" cy="76.0" r="2" class="line"/>
+<circle cx="104.0" cy="88.0" r="2" class="line"/>
+<circle cx="116.0" cy="52.0" r="2" class="line"/>
+<circle cx="116.0" cy="64.0" r="2" class="line"/>
+<circle cx="116.0" cy="76.0" r="2" class="line"/>
+<circle cx="128.0" cy="64.0" r="2" class="line"/>
+</g>
+<g transform="matrix(0.866,0.5,0,1,790,170)"><rect x="0" y="0" width="256" height="128" rx="18" class="heavy"/>
+<rect x="24" y="10.0" width="208" height="108" rx="4" class="line"/>
+<text x="128.0" y="82.0" text-anchor="middle" style="font-size:52px;font-weight:300;fill:rgba(234,242,255,.55)">6:58</text></g>
+<text x="980" y="490" class="vlabel" text-anchor="middle">ISOMETRIC VIEW</text>
+<line x1="920" y1="496" x2="1040" y2="496" class="thin"/>
+<text x="980" y="510" class="small" text-anchor="middle">NOT TO SCALE</text>
+<line x1="628" y1="360" x2="718" y2="312" class="thin"/><circle cx="628" cy="360" r="2" fill="#eaf2ff"/>
+<circle cx="718" cy="312" r="11" fill="#123f7d" class="line"/><text x="718" y="316" class="ball" text-anchor="middle">1</text>
+<line x1="322" y1="372.0" x2="436" y2="310" class="thin"/><circle cx="322" cy="372.0" r="2" fill="#eaf2ff"/>
+<circle cx="436" cy="310" r="11" fill="#123f7d" class="line"/><text x="436" y="314" class="ball" text-anchor="middle">2</text>
+<line x1="196.24" y1="348.0" x2="70" y2="306" class="thin"/><circle cx="196.24" cy="348.0" r="2" fill="#eaf2ff"/>
+<circle cx="70" cy="306" r="11" fill="#123f7d" class="line"/><text x="70" y="310" class="ball" text-anchor="middle">3</text>
+<line x1="320" y1="247" x2="436" y2="252" class="thin"/><circle cx="320" cy="247" r="2" fill="#eaf2ff"/>
+<circle cx="436" cy="252" r="11" fill="#123f7d" class="line"/><text x="436" y="256" class="ball" text-anchor="middle">4</text>
+<line x1="560" y1="382.0" x2="508" y2="308" class="thin"/><circle cx="560" cy="382.0" r="2" fill="#eaf2ff"/>
+<circle cx="508" cy="308" r="11" fill="#123f7d" class="line"/><text x="508" y="312" class="ball" text-anchor="middle">5</text>
+<line x1="639" y1="409.0" x2="718" y2="446.0" class="thin"/><circle cx="639" cy="409.0" r="2" fill="#eaf2ff"/>
+<circle cx="718" cy="446.0" r="11" fill="#123f7d" class="line"/><text x="718" y="450.0" class="ball" text-anchor="middle">6</text>
+<text x="44" y="590" class="head">NOTES</text><line x1="44" y1="597" x2="424" y2="597" class="thin"/>
+<text x="44" y="616" class="note">1.</text><text x="64" y="616" class="note">ALL DIMENSIONS IN MILLIMETERS. APPROXIMATE.</text>
+<text x="44" y="633" class="note">2.</text><text x="64" y="633" class="note">CONFIRM AGAINST THE BOARD BEFORE CUTTING.</text>
+<text x="44" y="650" class="note">3.</text><text x="64" y="650" class="note">SHELL: RAW ALUMINUM. NO PAINT OR SEALER.</text>
+<text x="44" y="667" class="note">4.</text><text x="64" y="667" class="note">FRONT FLAT. SIDES AND BACK CURVE TO A FULL ROUND.</text>
+<text x="44" y="684" class="note">5.</text><text x="64" y="684" class="note">SCREEN: 2.13 IN. E-PAPER. NO BACKLIGHT, NO GLOW.</text>
+<text x="44" y="701" class="note">6.</text><text x="64" y="701" class="note">NIGHT LIGHT: 2 AMBER LEDS BEHIND TOP EDGE OF</text>
+<text x="44" y="718" class="note"> </text><text x="64" y="718" class="note">WINDOW, AIMED DOWN ACROSS PANEL. ON PRESS ONLY.</text>
+<text x="44" y="735" class="note">7.</text><text x="64" y="735" class="note">ALARMS SYNC FROM THE PHONE'S CLOCK APP. NO APP.</text>
+<text x="44" y="752" class="note">8.</text><text x="64" y="752" class="note">THIRD-ANGLE PROJECTION.</text>
+<rect x="470" y="576" width="380" height="156" class="thin"/>
+<line x1="470" y1="600" x2="850" y2="600" class="line"/>
+<text x="478" y="592" class="tb">ITEM</text>
+<text x="518" y="592" class="tb">PART</text>
+<text x="688" y="592" class="tb">QTY</text>
+<text x="728" y="592" class="tb">SPEC</text>
+<line x1="510" y1="576" x2="510" y2="732" class="thin"/>
+<line x1="680" y1="576" x2="680" y2="732" class="thin"/>
+<line x1="720" y1="576" x2="720" y2="732" class="thin"/>
+<line x1="470" y1="622" x2="850" y2="622" class="thin"/>
+<text x="478" y="615" class="note">1</text>
+<text x="518" y="615" class="note">SHELL</text>
+<text x="688" y="615" class="note">1</text>
+<text x="728" y="615" class="note">RAW ALUMINUM</text>
+<line x1="470" y1="644" x2="850" y2="644" class="thin"/>
+<text x="478" y="637" class="note">2</text>
+<text x="518" y="637" class="note">E-PAPER DISPLAY</text>
+<text x="688" y="637" class="note">1</text>
+<text x="728" y="637" class="note">2.13 IN.</text>
+<line x1="470" y1="666" x2="850" y2="666" class="thin"/>
+<text x="478" y="659" class="note">3</text>
+<text x="518" y="659" class="note">LED, AMBER</text>
+<text x="688" y="659" class="note">2</text>
+<text x="728" y="659" class="note">3 MM</text>
+<line x1="470" y1="688" x2="850" y2="688" class="thin"/>
+<text x="478" y="681" class="note">4</text>
+<text x="518" y="681" class="note">PUSH BUTTON</text>
+<text x="688" y="681" class="note">1</text>
+<text x="728" y="681" class="note">12 MM MOMENTARY</text>
+<line x1="470" y1="710" x2="850" y2="710" class="thin"/>
+<text x="478" y="703" class="note">5</text>
+<text x="518" y="703" class="note">SPEAKER</text>
+<text x="688" y="703" class="note">1</text>
+<text x="728" y="703" class="note">1 W, RIGHT SIDE</text>
+<line x1="470" y1="732" x2="850" y2="732" class="thin"/>
+<text x="478" y="725" class="note">6</text>
+<text x="518" y="725" class="note">POWER PORT</text>
+<text x="688" y="725" class="note">1</text>
+<text x="728" y="725" class="note">MICRO-USB, REAR</text>
+<text x="470" y="752" class="small">PARTS LIST</text>
+<rect x="872" y="576" width="300" height="196" class="line"/>
+<text x="886" y="598" class="tb">TITLE</text><text x="886" y="624" class="big">E-INK ALARM CLOCK</text>
+<line x1="872" y1="638" x2="1172" y2="638" class="thin"/>
+<text x="886.0" y="651.0" class="tb">DRAWN</text><text x="886.0" y="667.0" class="tbv">N. GRIFFO</text>
+<line x1="872" y1="671.5" x2="1172" y2="671.5" class="thin"/>
+<text x="1036.0" y="651.0" class="tb">DATE</text><text x="1036.0" y="667.0" class="tbv">NOV 2026</text>
+<text x="886.0" y="684.5" class="tb">DWG NO.</text><text x="886.0" y="700.5" class="tbv">EC-01</text>
+<line x1="872" y1="705.0" x2="1172" y2="705.0" class="thin"/>
+<text x="1036.0" y="684.5" class="tb">REV</text><text x="1036.0" y="700.5" class="tbv">B</text>
+<text x="886.0" y="718.0" class="tb">SCALE</text><text x="886.0" y="734.0" class="tbv">2:1</text>
+<line x1="872" y1="738.5" x2="1172" y2="738.5" class="thin"/>
+<text x="1036.0" y="718.0" class="tb">SHEET</text><text x="1036.0" y="734.0" class="tbv">1 OF 1</text>
+<text x="886.0" y="751.5" class="tb">UNITS</text><text x="886.0" y="767.5" class="tbv">MM</text>
+<line x1="872" y1="772.0" x2="1172" y2="772.0" class="thin"/>
+<text x="1036.0" y="751.5" class="tb">STATUS</text><text x="1036.0" y="767.5" class="tbv">IN PROGRESS</text>
+<line x1="1022.0" y1="638" x2="1022.0" y2="772" class="thin"/>
+</svg>
+</div>
+<p class="cap">EC-01, Rev. B. A personal build, in progress. Drawn by Nicholas C. Griffo.</p>
+</main>
+</body>
+</html>
