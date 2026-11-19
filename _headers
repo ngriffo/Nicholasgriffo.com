@@ -19,3 +19,5 @@
 /fuse-deck-data.png
   Access-Control-Allow-Origin: *
   X-Robots-Tag: noindex
+/the-next-room*
+  X-Robots-Tag: noindex
