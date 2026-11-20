@@ -1,85 +1,137 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Human Case for Deep Tech · Nicholas Griffo</title>
 <meta name="description" content="Why the public fears frontier technology, where that fear actually forms, and what builders can do about it.">
+<link rel="icon" href="favicon.ico">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="canonical" href="https://nicholasgriffo.com/human-case-for-deep-tech">
+<meta property="og:type" content="article">
 <meta property="og:title" content="The Human Case for Deep Tech">
 <meta property="og:description" content="Why the public fears frontier technology, where that fear actually forms, and what builders can do about it.">
-<meta property="og:type" content="article">
+<meta property="og:url" content="https://nicholasgriffo.com/human-case-for-deep-tech">
+<meta property="og:site_name" content="Nicholas Griffo">
 <meta name="twitter:card" content="summary">
+<meta name="author" content="Nicholas Griffo">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"The Human Case for Deep Tech","description":"Why the public fears frontier technology, where that fear actually forms, and what builders can do about it.","datePublished":"2026-11-20","url":"https://nicholasgriffo.com/human-case-for-deep-tech","author":{"@type":"Person","@id":"https://nicholasgriffo.com/#person","name":"Nicholas Griffo","url":"https://nicholasgriffo.com/"}}
+</script>
+<link rel="stylesheet" href="https://use.typekit.net/jbi5gtg.css">
 <style>
-  :root { --bg:#fbfaf7; --fg:#1a1a1a; --muted:#666; --rule:#ddd; }
-  @media (prefers-color-scheme: dark) { :root { --bg:#111; --fg:#e8e6e1; --muted:#9a978f; --rule:#333; } }
-  body { background:var(--bg); color:var(--fg); margin:0; font-family:"Times New Roman", Times, Georgia, serif; font-size:19px; line-height:1.6; }
-  article { max-width:680px; margin:0 auto; padding:64px 20px 96px; }
-  h1 { font-size:34px; line-height:1.15; margin:0 0 12px; letter-spacing:0.01em; }
-  .dek { font-style:italic; color:var(--muted); margin:0 0 6px; }
-  .date { color:var(--muted); font-size:15px; margin:0 0 40px; }
-  .summary { margin:0 0 36px; padding:18px 22px; border-left:3px solid var(--rule); color:var(--fg); font-size:18px; }
-  .lede { font-size:23px; line-height:1.45; margin:0 0 40px; padding-bottom:32px; border-bottom:1px solid var(--rule); }
-  h2 { font-size:19px; text-transform:uppercase; letter-spacing:0.06em; margin:48px 0 14px; }
-  .num { color:var(--muted); margin-right:6px; }
-  p { margin:0 0 18px; }
-  .byline { margin-top:48px; padding-top:20px; border-top:1px solid var(--rule); font-style:italic; color:var(--muted); font-size:16px; }
-  .byline a { color:inherit; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --fg:#fff; --body:rgba(255,255,255,0.88); --dim:rgba(255,255,255,0.68); --faint:rgba(255,255,255,0.48); --line:rgba(255,255,255,0.14); --link:rgb(70,130,255); }
+  html { background:#000; scroll-behavior:smooth; }
+  body { font-family:'adobe-caslon-pro','Caslon',Georgia,'Times New Roman',serif; background:#000; color:var(--fg); border:0.1in solid #fff; min-height:100vh; -webkit-font-smoothing:antialiased; }
+  a { color:var(--link); text-underline-offset:2px; }
+  a:hover { color:#9bb8ff; }
+  #progress { position:fixed; top:0; left:0; height:2px; width:0; background:#fff; box-shadow:0 0 6px #fff; z-index:10; }
+  .nav { display:flex; justify-content:space-between; padding:18px 32px 0; gap:16px; }
+  .nav a { font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--dim); text-decoration:none; }
+  .nav a:hover { color:#fff; }
+  header { max-width:760px; margin:0 auto; padding:56px 24px 0; text-align:center; }
+  .kicker { font-size:0.68rem; letter-spacing:0.24em; text-transform:uppercase; color:var(--faint); }
+  h1 { font-weight:400; font-size:1.55rem; letter-spacing:0.05em; text-transform:uppercase; transform:scaleY(2.4); margin:44px 0 52px; text-shadow:0 0 5px #fff,0 0 14px rgba(255,255,255,0.55); }
+  .dek { font-style:italic; color:var(--dim); font-size:1.15rem; line-height:1.5; max-width:540px; margin:0 auto; }
+  .by { margin-top:22px; font-size:0.7rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--faint); }
+  .bar { height:2px; background:#fff; box-shadow:0 0 6px #fff; max-width:760px; margin:48px auto 0; }
+  article { max-width:640px; margin:0 auto; padding:48px 24px 40px; font-size:1.22rem; line-height:1.72; color:var(--body); }
+  .summary { border-left:2px solid var(--line); padding:4px 0 4px 22px; margin:0 0 48px; font-size:1.05rem; line-height:1.65; color:var(--dim); }
+  .summary b { display:block; font-weight:400; font-size:0.66rem; letter-spacing:0.24em; text-transform:uppercase; color:var(--faint); margin-bottom:8px; }
+  .lede { font-size:1.75rem; line-height:1.38; color:var(--fg); margin:0 0 8px; }
+  h2 { text-align:center; font-weight:400; margin:72px 0 30px; }
+  h2 .num { display:block; font-size:1.5rem; color:var(--fg); text-shadow:0 0 8px rgba(255,255,255,0.5); margin-bottom:8px; }
+  h2 .t { display:block; font-size:0.74rem; letter-spacing:0.24em; text-transform:uppercase; color:var(--dim); }
+  h2::after { content:""; display:block; width:40px; height:1px; background:var(--line); margin:22px auto 0; }
+  p { margin:0 0 1.25em; }
+  p.drop::first-letter { float:left; font-size:4.2em; line-height:0.82; padding:0.06em 0.1em 0 0; color:var(--fg); }
+  .pull { margin:44px -24px; padding:26px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); text-align:center; font-style:italic; font-size:1.65rem; line-height:1.35; color:var(--fg); }
+  .end { text-align:center; color:var(--faint); margin:40px 0 0; letter-spacing:0.5em; }
+  footer { max-width:640px; margin:0 auto; padding:0 24px 110px; }
+  .bio { border-top:1px solid var(--line); padding-top:24px; font-style:italic; color:var(--dim); font-size:1.02rem; }
+  .links { margin-top:18px; display:flex; gap:24px; flex-wrap:wrap; }
+  .links a { font-size:0.68rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--dim); text-decoration:none; }
+  .links a:hover { color:#fff; }
+  @media (max-width:600px) {
+    .nav { padding:16px 18px 0; }
+    h1 { font-size:1.15rem; transform:scaleY(2.1); margin:36px 0 42px; }
+    article { font-size:1.12rem; padding:36px 18px; }
+    .lede { font-size:1.45rem; }
+    .pull { margin:36px 0; font-size:1.35rem; }
+  }
 </style>
 </head>
 <body>
+<div id="progress"></div>
+<nav class="nav"><a href="/">Nicholas Griffo</a><a href="/portfolio">Portfolio</a></nav>
+<header>
+  <div class="kicker">Essay &middot; November 20, 2026</div>
+  <h1>The Human Case for Deep Tech</h1>
+  <p class="dek">Why the public fears frontier technology, where that fear actually forms, and what builders can do about it.</p>
+  <div class="by">By Nicholas Griffo &middot; 12 min read</div>
+</header>
+<div class="bar"></div>
 <article>
-<h1>The Human Case for Deep Tech</h1>
-<p class="dek">Why the public fears frontier technology, where that fear actually forms, and what builders can do about it.</p>
-<p class="date">November 20, 2026</p>
-<p class="summary">Americans fear frontier tech more than almost anyone, and that fear has killed good technology before, from a finished nuclear plant to a rice built to keep kids from going blind. I think the fear doesn't come from the tech or the people building it. It forms at the second source, in the retelling, which is why staged PR and hopium launch films flop while real, documented work travels on its own.</p>
+<p class="summary"><b>In short</b>Americans fear frontier tech more than almost anyone, and that fear has killed good technology before, from a finished nuclear plant to a rice built to keep kids from going blind. I think the fear doesn't come from the tech or the people building it. It forms at the second source, in the retelling, which is why staged PR and hopium launch films flop while real, documented work travels on its own.</p>
 <p class="lede">The country home to most of the leading AI labs is one of the few where the public feels worse about AI than better.</p>
-<h2><span class="num">I</span> Price And Consequence Of Public Image</h2>
-<p>This isn't new. On March 16, 1979, Hollywood released a thriller about a cover-up at a nuclear plant. Twelve days later, a reactor at Three Mile Island in Pennsylvania partially melted down. No one died, but the public had a mental impression of the consequence from the film before the accident, and the accident appeared in such a way as to confirm it.</p>
+<h2><span class="num">I</span><span class="t">Price And Consequence Of Public Image</span></h2>
+<p class="drop">This isn't new. On March 16, 1979, Hollywood released a thriller about a cover-up at a nuclear plant. Twelve days later, a reactor at Three Mile Island in Pennsylvania partially melted down. No one died, but the public had a mental impression of the consequence from the film before the accident, and the accident appeared in such a way as to confirm it.</p>
 <p>A company's preconceived image has historically come at great cost.</p>
 <p>The Shoreham plant on Long Island was finished and licensed by the Nuclear Regulatory Commission for full power in April 1989. It never generated commercial electricity. The evacuation plan needed local governments to take part, and opposition made sure they would not. In May 1989 the utility agreed not to operate it. Thus, most of its roughly six billion dollars was passed on to ratepayers.</p>
 <p>Golden Rice was begun in 1993 and first published in 2000, engineered to produce beta-carotene, a precursor of vitamin A, in a part of the world where vitamin A deficiency blinds children. It soon became the symbol of everything the public had been taught to fear about "GMO" food. Campaigns against it ran for two decades, and in August 2013 some 400 protesters in the Philippines pushed past police and uprooted a field trial in like fifteen minutes. The Philippines eventually approved it for cultivation in July 2021. In April 2024 its Court of Appeals halted it, citing a lack of full scientific certainty. As of late 2025 the Supreme Court was still reviewing the case. Critics point to slow development, and that is fair, but regulators in four countries, the United States among them, had judged Golden Rice safe.</p>
 <p>Set Golden Rice beside semaglutide, sold as Ozempic and Wegovy. Both come from the same branch of science: according to its own label, semaglutide is produced in yeast cells by recombinant DNA technology. In September 2023 it made Novo Nordisk the most valuable company in Europe. The public never pictured the drug as genetic engineering. It pictured friends and celebrities who lost a ton of weight.</p>
-<h2><span class="num">II</span> How Is This Not Evil?</h2>
+<h2><span class="num">II</span><span class="t">How Is This Not Evil?</span></h2>
 <p>Each of these cases asks the same question: how is this not evil? This matters to founders, scientists and engineers, builders, but it matters more to the public, who increasingly see technological advancement as an encroachment on society as they know it and ultimately on the human condition. Builders and inventors were once unequivocal heroes in American society. Now they are by and large faced with the presupposition that whatever they make, however advanced, may harm humans. This is a reasonable fear, and mostly one of the unknown. Frontier technologies are scary, and a proven threat to industry and livelihood— in England from 1811 to 1816 the Luddites broke the machines that replaced them. Many founders recognize and voice this to the masses, which can come off as presumptuous and horrifying. The message, roughly, is often this— our technology may and probably will take your job, but it's okay, because responsible guys are in charge. The public hears and recognizes this. In a Bentley University and Gallup survey published in July 2026, 79% of Americans expected AI to reduce the number of U.S. jobs over the next decade.</p>
 <p>Some companies, which will remain unnamed here, do this with every release. The product arrives alongside insiders confirming the public's genuine concerns, then a pessimistic, arguably nihilistic prediction that it won't matter, because the group producing this "problem" feels tasked to figure out the rest. The public dislikes this very much, and I do not predict this pattern ending favorably for those who operate this way.</p>
 <p>In June 2026 Pew Research found that about half of American adults were more concerned than excited about AI's growing role in daily life, up from 37 percent in 2021, while few were more excited than concerned. Abroad, opinion is the reverse. In September 2026 Gallup, in ongoing research with Microsoft, reported that positive emotions toward AI outweighed negative ones in 34 of the first 37 countries surveyed. The United States was one of only three exceptions. Despite this, these companies and most everyone else remain committed to positioning themselves as harbingers of a bright future.</p>
 <p>Walter Lippmann named this problem in his 1922 book Public Opinion. In it, his first chapter is titled "The World Outside and the Pictures in Our Heads." By his theory, people respond to the picture, not to the world— "For the most part we do not first see, and then define, we define first and then see." The pictures are simplified images built from fragments. In Lippmann's lifetime the fragments came from newspapers and word of mouth, etc. Today's news has fractured across society into soundbites, pictures, infographics, edits, long-form posts, moral positioning cues, word of mouth and so on.</p>
 <p>All of this raises the question: how does one communicate that a business is for the good of American society, that it is responsible, and that it is working within the human condition and not against it?</p>
-<h2><span class="num">III</span> Case Study On Optics</h2>
+<h2><span class="num">III</span><span class="t">Case Study On Optics</span></h2>
 <p>Tom Wolfe wrote in The Right Stuff (1979) on the making of American heroes. The test pilots and early astronauts were focused, guarded and frankly odd men. The press and public turned them into American heroes because the stories showed courage, confidence and patriotism. This was not organic. In 1959 the Mercury Seven sold their personal stories to Time-Life for $500,000. But the coverage was honest: the rockets were dangerous and these men flew them. Do I think companies should pour their resources into reframing their founders as American heroes? No. But it is the closest historical model for making builders look human.</p>
 <p>How a builder looks and sounds to the public influences opinion on whatever they are working on more than many would like to admit. I don't advocate shamelessly pandering to the masses, which distracts from the mission and often backfires, but companies should maintain an evolving identity grounded in a consistent mission.</p>
 <p>Think of the video of Mark Zuckerberg in 2016 smoking brisket and ribs on Facebook Live. Zuckerberg filmed himself performing being normal. It was heavily scrutinized and followed by accusations that he may be an alien or some kind of reptiloid. Conversely, videos of Nvidia CEO Jensen Huang in crowds, checking out new tech and throwing parties, circulate across social media and are received very positively. Both are publicity. The difference, IMO, is that one was performed and the other documented. Zuckerberg staged an ordinary activity for a camera. Huang is filmed, mostly by others, doing what he actually does. Two cases are not a law, but they seem to point to one.</p>
-<h2><span class="num">IV</span> Rainbows And Nostalgia</h2>
+<h2><span class="num">IV</span><span class="t">Rainbows And Nostalgia</span></h2>
 <p>Many frontier companies eventually make the same film. It is expensive, warmly lit and faintly nostalgic. A child looks up at the sky, the music swells, and the logo resolves. I have worked on commercial sets for most of a decade and I understand the appeal: these films are pleasant and they offend no one.</p>
 <p>They also don't work. Hype videos are crap, and the frontier version has a particular form: goofy millennial chungus 80s perfect retro hopium commercials that cost a fortune and convey nothing beyond mildly pandering that their mission is happy rainbows future powered by innocent beige desktops of yesteryear.</p>
 <p>These fail for the reason the barbecue failed. They are performed. The viewer knows the child was cast and the sunset was scheduled, and reads the film as a company describing itself, all while sensing that the endgame is potentially dystopian. There is no reactor in it, no failed test, nothing a viewer could cut out and send to a friend or fuel an Instagram reels edit. A film that reassures without explaining tends to confirm the suspicion it was made to dispel, and with it the fear some companies seem to manufacture in tandem with their products.</p>
 <p>Edits are the opposite. They're gold, extremely addictive, educational (for better or worse) and extremely influential, because they are made from real material by people who chose to make them.</p>
-<h2><span class="num">V</span> Organic Seeding</h2>
+<h2><span class="num">V</span><span class="t">Organic Seeding</span></h2>
 <p>Bringing the general public on board at an accessible level with a hopeful story is how the bright future moves forward. Builders at large believe this, and believe their work is for the good. Even so, their actions and even the physical perception of those involved with a business can work against them.</p>
 <p>Making your own edits is a recipe for failure, as it's manufactured. If edits are your goal, organic edit farming is the way, but I argue that the edit, however powerful, should not be an intended outcome, as it is simply the contemporary highest form of propaganda. René Girard argued that desire is mimetic: people want what they see others wanting. A clip a faceless stranger makes carries signal in a visceral way an advertisement does not.</p>
 <p>Benjamin Franklin used a version of this in 1731, raising subscribers for a library. "I therefore put myself as much as I could out of sight, and stated it as a scheme of a number of friends." Franklin hid his name, which is a fair objection in an essay about honesty, but my answer is that he gave up only the credit. The library was what he said it was and became such through no merit of credibility.</p>
 <p>The company's job is not to make the edit. It is to make the idea and the business attractive and supply the raw material: real footage, iconic moments, a consistent look and powerful inertia.</p>
-<h2><span class="num">VI</span> The Second Source</h2>
+<h2><span class="num">VI</span><span class="t">The Second Source</span></h2>
 <p>Peter Thiel asks what important truth very few people agree with you on. In this essay, mine is that the public is downstream of intellectual and quasi-intellectual thinkers, influencers and the like, and politicians are downstream of both. Hayek, in "The Intellectuals and Socialism" (1949), called intellectuals "professional secondhand dealers in ideas."</p>
 <p>People see silly videos of ChatGPT, and most don't understand that it's anything more than a chatbot. The evidence is that it's a chatbot, because that is what they know firsthand. Most people meet its risks only through a second source. A researcher or builder will talk about it matter of fact. Then a second source says: here's why this is bad or good, or potentially catastrophic. Everything reaches the public boiled down from source to source. That is where the fear comes from.</p>
 <p>I have watched this happen. I have been fascinated by AI for years, but I spent those years as film crew and in conversation with people in other industries who stood outside the event horizon of AI and deep tech until very recently. I heard the shards of the public picture forming in those conversations, at the second source, before most of the people holding it had touched "AI". My wife mentioned last year that she feels bad using ChatGPT for advice on her life. I asked why, and she explained that every answer apparently costs gallons of water, permanently evaporated, at the expense of her makeup and skincare routine.</p>
+<blockquote class="pull">That is where the fear comes from.</blockquote>
 <p>The data points similarly. In the same Gallup study from section II, 45 percent of daily AI users in the United States trust it completely or a lot to give accurate information, against 26 percent of weekly users, 15 percent of those who use it less than weekly, and 8 percent of those who have never used it. Trust weakens the further a person is from the thing itself. This correlation does not prove the cause, since the trusting may simply use AI more, but it is what the second-source argument predicts.</p>
 <p>The second source can't be controlled through crude media and PR engineering, and it shouldn't be. But it can be equipped. I argue that it's possible to promote honesty by giving the simple-is-best explanation, remaining transparent, and offering a naturally curated version of a company through its culture.</p>
 <p>Ozempic's fame was mostly not designed by its maker. Its first television campaign was estimated at under a million dollars. Then people began posting their own results, and views of TikTok videos tagged #Ozempic rose from 2 million in 2021 to 1.2 billion in 2023. That was a second source showing a result that was real and visible.</p>
 <p>The same case shows the limit of the method: the second source carried the result but not the full truth about it. Thousands of lawsuits, now consolidated in federal court, allege side effects that were not properly disclosed— these claims are still contested. A company that supplies only the result, without a plain account of the costs, gets ripped through as well. This is why I argue for honesty at the core.</p>
-<h2><span class="num">VII</span> Benevolent Enaction</h2>
+<h2><span class="num">VII</span><span class="t">Benevolent Enaction</span></h2>
 <p>A company that wants to change its picture can begin in three phases. In the first phase, read the picture: which fragments of the company exist, who made them, which travel and to where, and what the comments beneath them say. Then create a short account of how the public sees the company and where that picture came from.</p>
 <p>In the second phase, build the raw material: a library of real footage of the work, the hardware, the people, and the tests that fail as well as those that succeed, with one consistent look and some iconic moments. Some of what deep tech builds cannot be shown, for reasons of export control or trade secrecy, so the company decides at the start what is shown. Alongside the footage goes the simplest true explanation of what the company does and a plain account of what it does not yet know.</p>
 <p>In the third phase, seed it. Put the work, the founder, the builders where they will be documented and not performed, release the material openly for others to cut, not only give access to the people whose clips travel but encourage it, and make no edits in house.</p>
 <p>A company is not only its founder. The public sees it through everyone attached to it: the engineer who posts a failed test, the technician on the factory floor, the recruiter, the intern, the customer, and the fans who follow every launch. Each of them is a second source, and culture is what they say when no one asked them to. So the raw material is not only for strangers. It is for the people inside, so they can show their own work honestly, and for the fans, so they have something real to pass on. A company with a strong culture already has hundreds of second sources. The job is to give them something true and the freedom to share it.</p>
 <p>Consider a single test of a new reactor, or a launch, or even your dream. Filmed properly and released with a plain explanation, it can become a hundred edits made by people the company will never meet, each carrying the same true account.</p>
+<blockquote class="pull">Culture is what they say when no one asked them to.</blockquote>
 <p>The work doesn't end after these three phases. A deep tech company produces new material every week, and you must continually embody truthfulness and integrity towards a realistically bright future, by whatever means. The public's picture moves whether the company tends it or not, so it cannot simply be reassessed every quarter. It moves constantly and endlessly downstream, in different directions, carried by the swarm of online consciousness and its participants.</p>
 <p>Measuring this is slow, and it's worth saying so at the outset, but it is extremely valuable, especially to those who argue against it. What matters is who applies, who writes in to you, and the tone of what is said about the company over months. That is, I believe that the product and the talent you attract and retain are the headwaters of all else.</p>
-<h2><span class="num">VIII</span> Deep Honesty</h2>
+<h2><span class="num">VIII</span><span class="t">Deep Honesty</span></h2>
 <p>Ultimately hires and public opinion are what matter, and I believe all else is downstream. Both are measured through people: who applies, who stays, and who talks about the company without being asked. The engineer who posts their work, the employee who brings a friend in for an interview, the fan who drives out to watch a test. When those people speak well of a company on their own, the image fragment follows.</p>
 <p>A founder may object that their buyers are not the public: the Department of Defense, a utility, a pharmaceutical partner. But the public decides who applies, which towns accept a reactor, and how courts and regulators lean. Shoreham had a buyer and a license. Golden Rice had the approval of regulators in four countries. We're seeing this in real time with data centers, where local opposition is arguably fueling some extremely fascinating innovation to relocate them elsewhere.</p>
 <p>So I return to the question I began with: how is this not evil? I don't think a statement, launch film or a reassurance from a lab answers it. The answer comes from the picture the public forms at the second source, of people doing real work transparently. Mr. Lippmann 100 years ago: "The world that we have to deal with politically is out of reach, out of sight, out of mind. It has to be explored, reported, and imagined."</p>
-<p class="byline">Nicholas Griffo is a writer and filmmaker in Los Angeles. <a href="/">nicholasgriffo.com</a></p>
+<div class="end">&middot; &middot; &middot;</div>
 </article>
+<footer>
+  <p class="bio">Nicholas Griffo is a writer and filmmaker in Los Angeles.</p>
+  <div class="links"><a href="/portfolio">Portfolio</a><a href="https://x.com/intent/post?text=The+Human+Case+for+Deep+Tech&amp;url=https%3A%2F%2Fnicholasgriffo.com%2Fhuman-case-for-deep-tech" target="_blank" rel="noopener">Share on X</a><a href="/">Home</a></div>
+</footer>
+<script>
+  var b=document.getElementById('progress');
+  addEventListener('scroll',function(){var h=document.documentElement;b.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';},{passive:true});
+</script>
 </body>
 </html>
