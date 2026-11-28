@@ -157,6 +157,34 @@
   .foot { margin-top: 54px; text-align: center; font-size: 0.85rem; font-style: italic; color: var(--dim); }
   .foot span { font-style: normal; letter-spacing: 0.2em; text-transform: uppercase; font-size: 0.66rem; display: block; margin-top: 6px; }
 
+
+  /* left-aligned index with a same-page viewer (desktop) */
+  @media (min-width: 1000px) {
+    .nav { padding: 18px 28px 0; }
+    .wrap { max-width: 540px; margin: 0; padding: 40px 28px 80px; }
+    h1 { text-align: left; transform-origin: left center; }
+    .sub { text-align: left; margin: 0; }
+    .actions { justify-content: flex-start; }
+    .viewer {
+      position: fixed; top: 52px; right: 28px; bottom: 28px; left: 600px;
+      display: none; flex-direction: column; background: #000;
+    }
+    body.viewing .viewer { display: flex; }
+    .viewer-bar {
+      display: flex; justify-content: space-between; align-items: baseline; gap: 16px;
+      padding-bottom: 10px; font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dim);
+    }
+    .viewer-bar .title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .viewer-bar .acts { display: flex; gap: 18px; white-space: nowrap; }
+    .viewer-bar a, .viewer-bar button {
+      font: inherit; letter-spacing: inherit; text-transform: inherit; color: var(--fg);
+      background: none; border: 0; cursor: pointer; text-decoration: underline; text-underline-offset: 2px; padding: 0;
+    }
+    .viewer iframe { flex: 1; width: 100%; border: 0; background: #fff; }
+    a.on { color: var(--dim); }
+  }
+  .viewer { display: none; }
+
   @media (max-width: 600px) {
     .nav { padding: 14px 16px 0; }
     .wrap { padding: 36px 16px 90px; }
@@ -323,5 +351,41 @@
 
 </main>
 <script>addEventListener("beforeprint",()=>document.querySelectorAll("details.more").forEach(d=>d.open=true))</script>
+
+<aside class="viewer" aria-label="Viewer">
+  <div class="viewer-bar"><span class="title"></span><span class="acts"><a class="newtab" href="#" target="_blank" rel="noopener">Open in new tab</a><button type="button" class="close">Close</button></span></div>
+  <iframe title="Viewer" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+</aside>
+<script>
+(function(){
+  var wide = matchMedia('(min-width: 1000px)');
+  var v = document.querySelector('.viewer'), f = v.querySelector('iframe'),
+      t = v.querySelector('.title'), nt = v.querySelector('.newtab'), cur = null;
+  function embed(href){
+    var u; try { u = new URL(href, location.href); } catch(e){ return null; }
+    if (/(^|\.)youtube\.com$/.test(u.hostname) && u.searchParams.get('v')) {
+      var st = parseInt(u.searchParams.get('t')) || 0;
+      return 'https://www.youtube-nocookie.com/embed/' + u.searchParams.get('v') + '?autoplay=1&rel=0' + (st ? '&start=' + st : '');
+    }
+    if (u.origin === location.origin && (/\.pdf$/i.test(u.pathname) || /^\/(pitch-deck|human-case-for-deep-tech)/.test(u.pathname))) return /\.pdf$/i.test(u.pathname) ? u.href + '#toolbar=0&navpanes=0&view=FitH' : u.href;
+    return null;
+  }
+  function close(){ document.body.classList.remove('viewing'); f.src = 'about:blank'; if (cur) cur.classList.remove('on'); cur = null; }
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('a[href]'); if (!a || !wide.matches || a.closest('.viewer')) return;
+    if (e.metaKey || e.ctrlKey || e.shiftKey) return;
+    var src = embed(a.href); if (!src) return;
+    e.preventDefault();
+    if (cur) cur.classList.remove('on');
+    cur = a; a.classList.add('on');
+    var row = a.closest('.row'), name = row && row.querySelector('.focus');
+    t.textContent = (name ? name.textContent.trim() + ' · ' : '') + a.textContent.trim();
+    nt.href = a.href; f.src = src; document.body.classList.add('viewing');
+  });
+  v.querySelector('.close').addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+  wide.addEventListener('change', function(){ if (!wide.matches) close(); });
+})();
+</script>
 </body>
 </html>
