@@ -102,7 +102,7 @@
   section { margin-top: 70px; scroll-margin-top: 24px; }
   .sec-head {
     display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
-    border-bottom: 1px solid var(--faint); padding-bottom: 8px; margin-bottom: 6px;
+    padding-bottom: 8px; margin-bottom: 6px;
   }
   .sec-head h2 { font-weight: 400; font-size: 0.82rem; letter-spacing: 0.24em; text-transform: uppercase; }
   .sec-head .count { font-size: 0.72rem; letter-spacing: 0.14em; color: var(--dim); white-space: nowrap; }
@@ -110,7 +110,7 @@
   /* numbered rows, after ai-study weeks */
   .row {
     display: grid; grid-template-columns: 58px 1fr auto; gap: 12px; align-items: baseline;
-    padding: 16px 0; border-bottom: 1px solid var(--line);
+    padding: 16px 0;
   }
   .tag { font-size: 0.74rem; letter-spacing: 0.14em; color: var(--dim); }
   .focus { font-size: 1.05rem; }
@@ -124,7 +124,7 @@
   /* two-column table, set-to-model */
   .pair {
     display: grid; grid-template-columns: 190px 1fr; gap: 12px;
-    padding: 14px 0; border-bottom: 1px solid var(--line); align-items: baseline;
+    padding: 14px 0; align-items: baseline;
   }
   .pair .k { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--fg); }
   .pair .v { font-size: 0.98rem; color: var(--body); }
@@ -132,7 +132,7 @@
   .pair.head .k, .pair.head .v { font-size: 0.64rem; letter-spacing: 0.22em; text-transform: uppercase; font-style: normal; color: var(--faint); }
 
   .note-row {
-    padding: 14px 0 14px 70px; border-bottom: 1px solid var(--line);
+    padding: 14px 0 14px 70px;
     font-size: 0.95rem; font-style: normal; color: var(--body);
   }
   .note-row b { font-style: normal; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; font-size: 0.68rem; margin-right: 8px; color: var(--dim); }
@@ -187,10 +187,6 @@
   <h1>Nicholas C. Griffo</h1>
   <p class="sub">Filmmaker in Los Angeles, California</p>
 
-  <div class="meta">
-    <div class="bar"></div>
-  </div>
-
   <div class="actions">
     <a class="btn" href="/Nicholas_Griffo_Resume.pdf" target="_blank" rel="noopener">Résumé (PDF)</a>
     <a class="btn" href="https://www.imdb.com/name/nm11881226/" target="_blank" rel="noopener">IMDb</a>
@@ -228,38 +224,10 @@
     <p class="note-row">Loglines on the <a href="/">screenplays page</a>.</p>
   </section>
 
-  <section id="ai">
-    <div class="sec-head"><h2>2. AI Work</h2></div>
+  <section id="record">
+    <div class="sec-head"><h2>2. Production</h2></div>
     <div class="row">
       <span class="tag">2.1</span>
-      <div>
-        <p class="focus">Mercor</p>
-        <span class="when">Independent contractor</span>
-      </div>
-      <span class="side">Since May 2026</span>
-    </div>
-    <div class="row">
-      <span class="tag">2.2</span>
-      <div>
-        <p class="focus">Micro1</p>
-        <span class="when">Frontier model assessment</span>
-      </div>
-      <span class="side">Since Jul 2026</span>
-    </div>
-    <div class="row">
-      <span class="tag">2.3</span>
-      <div>
-        <p class="focus">Handshake AI</p>
-        <span class="when">Red teaming</span>
-      </div>
-      <span class="side">Since Oct 2026</span>
-    </div>
-  </section>
-
-  <section id="record">
-    <div class="sec-head"><h2>3. Production</h2></div>
-    <div class="row">
-      <span class="tag">3.1</span>
       <div>
         <p class="focus"><i>Indulgence</i></p>
         <span class="when">Production Designer</span>
@@ -268,7 +236,7 @@
       <span class="side">Feature</span>
     </div>
     <div class="row">
-      <span class="tag">3.2</span>
+      <span class="tag">2.2</span>
       <div>
         <p class="focus"><i>Sinking Cities</i></p>
         <span class="when">Production Designer</span>
@@ -276,7 +244,7 @@
       <span class="side">Feature · 16mm</span>
     </div>
     <div class="row">
-      <span class="tag">3.3</span>
+      <span class="tag">2.3</span>
       <div>
         <p class="focus"><i>Real Tone</i></p>
         <span class="when">Production Buyer, Set Designer</span>
@@ -285,7 +253,7 @@
       <span class="side">Google</span>
     </div>
     <div class="row">
-      <span class="tag">3.4</span>
+      <span class="tag">2.4</span>
       <div>
         <p class="focus"><i>Wave</i></p>
         <span class="when">Set Designer</span>
@@ -293,6 +261,34 @@
       <span class="side">Meta</span>
     </div>
     <p class="note-row">Full credits on <a href="https://www.imdb.com/name/nm11881226/" target="_blank" rel="noopener">IMDb</a> and in the <a href="/Nicholas_Griffo_Resume.pdf" target="_blank" rel="noopener">résumé</a>.</p>
+  </section>
+
+  <section id="ai">
+    <div class="sec-head"><h2>3. AI Work</h2></div>
+    <div class="row">
+      <span class="tag">3.1</span>
+      <div>
+        <p class="focus">Mercor</p>
+        <span class="when">Independent contractor</span>
+      </div>
+      <span class="side">Since May 2026</span>
+    </div>
+    <div class="row">
+      <span class="tag">3.2</span>
+      <div>
+        <p class="focus">Micro1</p>
+        <span class="when">Frontier model assessment</span>
+      </div>
+      <span class="side">Since Jul 2026</span>
+    </div>
+    <div class="row">
+      <span class="tag">3.3</span>
+      <div>
+        <p class="focus">Handshake AI</p>
+        <span class="when">Red teaming</span>
+      </div>
+      <span class="side">Since Oct 2026</span>
+    </div>
   </section>
 
   <section id="contact" class="contact">
