@@ -137,6 +137,19 @@
   }
   .note-row b { font-style: normal; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; font-size: 0.68rem; margin-right: 8px; color: var(--dim); }
 
+
+  /* click to expand */
+  details.more > summary { list-style: none; cursor: pointer; }
+  details.more > summary::-webkit-details-marker { display: none; }
+  details.more > summary .focus::after {
+    content: "+"; font-family: 'Times New Roman', Times, serif; font-style: normal;
+    font-size: 0.8rem; color: var(--faint); margin-left: 10px; transition: color .3s;
+  }
+  details.more[open] > summary .focus::after { content: "\2013"; }
+  details.more > summary:hover .focus::after { color: var(--fg); }
+  .reveal { font-size: 0.95rem; color: var(--body); margin-top: 6px; max-width: 520px; }
+  .note-row.lede { padding-top: 4px; padding-bottom: 6px; }
+
   /* contact */
   .contact .row { grid-template-columns: 90px 1fr; padding: 2px 0; }
   .contact a { font-size: 1.02rem; }
@@ -229,8 +242,9 @@
     <div class="row">
       <span class="tag">2.1</span>
       <div>
-        <p class="focus"><i>Indulgence</i></p>
-        <span class="when">Production Designer</span>
+        <details class="more"><summary><p class="focus"><i>Indulgence</i></p>
+        <span class="when">Production Designer</span></summary>
+        <p class="reveal">Built the film’s look with the writer-directors from pre-production, then ran sourcing, scheduling, set construction and continuity.</p></details>
         <p class="detail"><a href="https://www.youtube.com/watch?v=QPNSytJXnFk" target="_blank" rel="noopener">Trailer</a></p>
       </div>
       <span class="side">Feature</span>
@@ -238,16 +252,18 @@
     <div class="row">
       <span class="tag">2.2</span>
       <div>
-        <p class="focus"><i>Sinking Cities</i></p>
-        <span class="when">Production Designer</span>
+        <details class="more"><summary><p class="focus"><i>Sinking Cities</i></p>
+        <span class="when">Production Designer</span></summary>
+        <p class="reveal">A mystery drama inspired by the CIA’s Operation Midnight Climax, starring Henry Hopper. Led set design and fabrication across six to ten sets over an 18-month shoot.</p></details>
       </div>
       <span class="side">Feature · 16mm</span>
     </div>
     <div class="row">
       <span class="tag">2.3</span>
       <div>
-        <p class="focus"><i>Real Tone</i></p>
-        <span class="when">Production Buyer, Set Designer</span>
+        <details class="more"><summary><p class="focus"><i>Real Tone</i></p>
+        <span class="when">Production Buyer, Set Designer</span></summary>
+        <p class="reveal">A campaign for the Pixel camera. Bought for the art department and ran cost and timeline across departments.</p></details>
         <p class="detail"><a href="https://www.youtube.com/watch?v=bsYWQWj-dAM&amp;t=58s" target="_blank" rel="noopener">Spot</a></p>
       </div>
       <span class="side">Google</span>
@@ -255,8 +271,9 @@
     <div class="row">
       <span class="tag">2.4</span>
       <div>
-        <p class="focus"><i>Wave</i></p>
-        <span class="when">Set Designer</span>
+        <details class="more"><summary><p class="focus"><i>Wave</i></p>
+        <span class="when">Set Designer</span></summary>
+        <p class="reveal">Wrote the design reports and proposals, and took the builds through client and creative review.</p></details>
       </div>
       <span class="side">Meta</span>
     </div>
@@ -265,11 +282,13 @@
 
   <section id="ai">
     <div class="sec-head"><h2>3. AI Work</h2></div>
+    <p class="note-row lede">Contracted to three AI programs since May, stress testing and red teaming image and video models. The work is finding the exact point where a picture stops being believable.</p>
     <div class="row">
       <span class="tag">3.1</span>
       <div>
-        <p class="focus">Mercor</p>
-        <span class="when">Independent contractor</span>
+        <details class="more"><summary><p class="focus">Mercor</p>
+        <span class="when">Independent contractor</span></summary>
+        <p class="reveal">Independent contractor for Mercor Intelligence, providing creative and visual expertise to help improve generative AI models for a leading AI lab.</p></details>
       </div>
       <span class="side">Since May 2026</span>
     </div>
@@ -301,5 +320,6 @@
 
 
 </main>
+<script>addEventListener("beforeprint",()=>document.querySelectorAll("details.more").forEach(d=>d.open=true))</script>
 </body>
 </html>
